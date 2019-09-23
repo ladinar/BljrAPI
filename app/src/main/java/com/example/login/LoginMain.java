@@ -38,7 +38,6 @@ public class LoginMain extends AppCompatActivity {
     Button login;
     ProgressBar bola;
     String email2,password2;
-    private static String URL = "http://192.168.2.142/api/login";//wess
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,7 +89,7 @@ public class LoginMain extends AppCompatActivity {
         //bedone penggunaan jsonobject mbe stringrequest opo e syad?
         //kan maeng ndek postman nggwe json, cek iki iso pisan dikirim json e, nggwe jsonobjectreq
         //syad error, melbu ne error nde error reso
-        JsonObjectRequest strReq = new JsonObjectRequest(Request.Method.POST, URL, jsonBody, new Response.Listener<JSONObject>() {
+        JsonObjectRequest strReq = new JsonObjectRequest(Request.Method.POST, Server.URL, jsonBody, new Response.Listener<JSONObject>() {
 
             @Override
             public void onResponse(JSONObject response) {
