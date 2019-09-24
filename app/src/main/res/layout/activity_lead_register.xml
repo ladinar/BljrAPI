@@ -5,27 +5,62 @@
     android:padding="16dp"
     android:orientation="vertical">
 
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+
+                        <Button
+                            android:layout_width="180dp"
+                            android:layout_height="85dp"
+                            android:background="#00b3ff"
+                            android:text="44 Lead Register"
+                            android:textColor="@android:color/white"
+                            android:textSize="8dp" />
+
+                        <Button
+                            android:layout_width="180dp"
+                            android:layout_height="85dp"
+                            android:layout_marginLeft="10dp"
+                            android:background="#ffd117"
+                            android:text="34 Lead Register"
+                            android:textColor="@android:color/white"
+                            android:textSize="8dp" />
+
+                        <Button
+                            android:layout_width="180dp"
+                            android:layout_height="85dp"
+                            android:layout_marginLeft="10dp"
+                            android:background="#00b3ff"
+                            android:text="12 Lead Register"
+                            android:textColor="@android:color/white"
+                            android:textSize="8dp" />
+
+                        <Button
+                            android:layout_width="180dp"
+                            android:layout_height="85dp"
+                            android:layout_marginLeft="10dp"
+                            android:background="#ffd117"
+                            android:text="24 Lead Register"
+                            android:textColor="@android:color/white"
+                            android:textSize="8dp" />
+                </LinearLayout>
+
+
+        </HorizontalScrollView>
+
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal">
 
-                <Button
-                    android:layout_width="180dp"
-                    android:layout_height="85dp"
-                    android:text="12 Lead Register"
-                    android:textColor="@android:color/white"
-                    android:textSize="8dp"
-                    android:background="#00b3ff"/>
 
-                <Button
-                    android:layout_width="180dp"
-                    android:layout_height="85dp"
-                    android:text="24 Lead Register"
-                    android:layout_marginLeft="200dp"
-                    android:textColor="@android:color/white"
-                    android:textSize="8dp"
-                    android:background="#ffd117"/>
 
         </RelativeLayout>
 
@@ -35,23 +70,28 @@
             android:orientation="horizontal"
             android:layout_marginTop="20dp">
 
-                <Button
-                    android:layout_width="180dp"
-                    android:layout_height="85dp"
-                    android:text="44 Lead Register"
-                    android:textColor="@android:color/white"
-                    android:textSize="8dp"
-                    android:background="#00b3ff"/>
 
-                <Button
-                    android:layout_width="180dp"
-                    android:layout_height="85dp"
-                    android:text="34 Lead Register"
-                    android:layout_marginLeft="200dp"
-                    android:textColor="@android:color/white"
-                    android:textSize="8dp"
-                    android:background="#ffd117"/>
 
         </RelativeLayout>
 
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="16dp">
+
+                <TextView
+                    android:id="@+id/mNama"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="coba"></TextView>
+
+                <TextView
+                    android:id="@+id/mEmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="coba2">
+
+                </TextView>
+        </RelativeLayout>
 </LinearLayout>

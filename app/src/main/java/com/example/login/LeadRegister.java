@@ -1,13 +1,9 @@
 package com.example.login;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
-public class LeadRegister extends AppCompatActivity {
+public class LeadRegister extends LoginMain {
 
     TextView mName, mEmail;
 
@@ -16,6 +12,10 @@ public class LeadRegister extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lead_register);
 
+        mName = findViewById(R.id.mNama);
+        mEmail = findViewById(R.id.mEmail);
+
+        mName.setText("masih text biasa");
 
     }
 }
