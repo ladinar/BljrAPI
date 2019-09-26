@@ -1,7 +1,5 @@
 package com.example.login;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,6 +9,7 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.NetworkResponse;
@@ -19,17 +18,14 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import app.AppController;
 import util.Server;
 
 public class LoginMain extends AppCompatActivity {
@@ -65,16 +61,18 @@ public class LoginMain extends AppCompatActivity {
 
     }
 
-    private void doClick() {
-        Intent intent = new Intent(this, LeadRegister.class);
+    private void doClick(String name, String email) {
+        Intent intent = new Intent(LoginMain.this, LeadRegister.class);
+        intent.putExtra("name", name);
+        intent.putExtra("email", email);
         startActivity(intent);
     }
 
 
     public void handlekoneksilogin(final String email, final String password) {
 
-//        bola.setVisibility(View.VISIBLE);
-//        login.setVisibility(View.GONE);
+        bola.setVisibility(View.VISIBLE);
+        login.setVisibility(View.GONE);
 
         JSONObject jsonBody = new JSONObject();
         try {
@@ -106,7 +104,7 @@ public class LoginMain extends AppCompatActivity {
                         String password = user.getString("password");
 
                         Toast.makeText(LoginMain.this, "Hallo! " + name + " Loginmu bener :)", Toast.LENGTH_LONG).show();
-                        doClick();
+                        doClick(email, name);
                     } else {
                         Toast.makeText(LoginMain.this, "email atau password salah", Toast.LENGTH_LONG).show();
                     }

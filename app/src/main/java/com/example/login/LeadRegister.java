@@ -32,20 +32,17 @@ import java.util.Map;
 import util.Server;
 
 public class LeadRegister extends AppCompatActivity {
-
-    public List<Leads> lList;
-    TextView mName, mEmail, mlead, mopp;
+    public List<Leads> lList = new ArrayList<>();
     ProgressBar progresslead;
-    LeadRegisterAdapter mAdapter;
-    ArrayList<Leads> Leadlist = new ArrayList<>();
-    private RecyclerView recyclerView;
-    private RecyclerView.Adapter adapter;
+    TextView mName, mEmail, mlead, mopp, mcoba;
+    LeadRegisterAdapter leadsAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lead_register);
         mlead = findViewById(R.id.mlead);
+        mcoba = findViewById(R.id.mcobalead);
         mopp = findViewById(R.id.mopp);
         mName = findViewById(R.id.mNama);
         mEmail = findViewById(R.id.mEmail);
@@ -57,16 +54,10 @@ public class LeadRegister extends AppCompatActivity {
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
-        recyclerView = findViewById(R.id.recyclerView);
-        LinearLayoutManager manager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(manager);
-        recyclerView.setHasFixedSize(true);
-        adapter = new LeadRegisterAdapter(Leadlist);
-        recyclerView.setAdapter(adapter);
-
-        lList = new ArrayList<>();
         tampilkanlead();
 
+        leadsAdapter = new LeadRegisterAdapter(lList);
+        recyclerView.setAdapter(leadsAdapter);
     }
 
     private void tampilkanlead() {
@@ -90,7 +81,7 @@ public class LeadRegister extends AppCompatActivity {
                     String success = jObj.getString("success");
                     if (success.equals("1")) {
                         JSONObject leads = new JSONObject();
-                        JSONArray jray = response.getJSONArray("lead");
+                        JSONArray jray = jObj.getJSONArray("lead");
                         JSONObject lead = jray.getJSONObject(0);
                         String lead_id = lead.getString("lead_id");
                         String opt_name = lead.getString("opp_name");
@@ -108,16 +99,33 @@ public class LeadRegister extends AppCompatActivity {
                         mlead.setText(lead_id);
                         mopp.setText(opt_name);
 
-                        for (int i = 0; i < jray.length(); i++) {
-                            JSONObject o = jray.getJSONObject(i);
-                            Leads item = new Leads(
-                                    o.getString("lead_id"),
-                                    o.getString("opp_name")
-                            );
-                            lList.add(item);
+                        if (response.length() > 0) {
+                            for (int i = 0; i < jray.length(); i++) {
+                                JSONObject o = jray.getJSONObject(i);
+                                Leads item = new Leads();
+                                item.setLead_id(o.getString("lead_id"));
+                                item.setOpp_name(o.getString("opp_name"));
+                                Log.i("response", o.getString("opp_name"));
+                                lList.add(item);
+                            }
+                            leadsAdapter.notifyDataSetChanged();
+                            //wes,
+                            //ohh bedone construktor mbe getter setter ngono
+                            //ngko keroso nek project gede dan butuh variabel akeh
+                            //nek ngene iso gak kabeh variable mbuk isi
+                            //ngunu lah
+                            //method e post update delete ngno yo nggae getter setter syad?
+                            //sng ndi iku
+                            //urung nggae sih, iki sek view
+                            //iki gaono hubungane mbe api, cuman yoopo carane  nggwe dan nganggo model
+                            //oh brrti pokok model getter setter luwih better opo pun BE nd api ne
+                            //yo ngunu lah nek pahammu ngono
+                            //terus, asline ono cara luwih gampang maneh, dadi otomatis json mu dadi list
+                            //tapi kapan2 ae cek ruh basic e sek
+                            //oke syad, sipoke
+                            //uwes yo mene maneh nek kurang
+                            //tak tutup iki, oke
                         }
-                        mAdapter.notifyDataSetChanged();
-
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();

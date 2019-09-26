@@ -7,7 +7,7 @@
 
         <HorizontalScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -90,6 +90,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="coba3"></TextView>
+
+                <TextView
+                    android:id="@+id/mcobalead"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="coba4"></TextView>
         </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
