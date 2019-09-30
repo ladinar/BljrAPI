@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Input_lead">
+
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:columnCount="2"
+        android:orientation="horizontal"
+        android:padding="16dp"
+        android:rowCount="2">
+
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:paddingBottom="20dp"
+            android:text="Sales">
+
+        </TextView>
+
+
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:paddingBottom="20dp"
+            android:text="Customer">
+
+        </TextView>
+
+        <Spinner
+            android:id="@+id/customer"
+            android:layout_width="280dp"
+            android:layout_height="match_parent"
+            android:paddingBottom="20dp">
+
+        </Spinner>
+
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:paddingBottom="20dp"
+            android:text="Oty Name">
+
+        </TextView>
+
+        <EditText
+            android:id="@+id/opp_name"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:hint="Opportunity name">
+
+        </EditText>
+
+    </GridLayout>
+
+</FrameLayout>

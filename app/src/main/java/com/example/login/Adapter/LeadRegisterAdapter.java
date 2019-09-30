@@ -20,6 +20,7 @@ public class LeadRegisterAdapter extends RecyclerView.Adapter<LeadRegisterAdapte
     List<Leads> Leadlist;
     private Context context;
 
+
     public LeadRegisterAdapter(List<Leads> lList) {
         this.Leadlist = lList;
     }
@@ -59,17 +60,21 @@ public class LeadRegisterAdapter extends RecyclerView.Adapter<LeadRegisterAdapte
         //metu ws sesuai okespi, terus setter pisan diagnti
         holder.tvLead.setText(lead.getLead_id());
         holder.tvOpty.setText(lead.getOpp_name());
+        holder.tvSales.setText(lead.getNik());
+        holder.tvContact.setText(lead.getId_customer());
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView tvLead;
-        TextView tvOpty;
+        TextView tvLead, tvOpty, tvSales, tvContact;
 
         public ViewHolder(View itemView) {
             super(itemView);
 
             tvLead = itemView.findViewById(R.id.mlead);
             tvOpty = itemView.findViewById(R.id.mopty);
+            tvSales = itemView.findViewById(R.id.mSales);
+            tvContact = itemView.findViewById(R.id.mContact);
+
         }
     }
 }

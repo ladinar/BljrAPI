@@ -3,6 +3,9 @@ package com.example.login.model;
 public class Leads {
     private String lead_id;
     private String opp_name;
+    private String nik;
+    private String id_customer;
+
 
     public Leads() {
 
@@ -23,4 +26,22 @@ public class Leads {
     public void setOpp_name(String opp_name) {
         this.opp_name = opp_name;
     }
+
+    public String getNik() {
+        return nik;
+    }
+
+    public void setNik(String nik) {
+        this.nik = nik;
+    }
+
+    public String getId_customer() {
+        return id_customer;
+    }
+
+    public void setId_customer(String id_customer) {
+        this.id_customer = id_customer;
+    }
+
+
 }

@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="16dp"
+    android:id="@+id/container"
     android:orientation="vertical">
 
         <HorizontalScrollView
@@ -66,37 +67,71 @@
 
                 </ProgressBar>
 
-                <TextView
-                    android:id="@+id/mNama"
+                <GridLayout
+                    android:layout_height="match_parent"
+                    android:columnCount="2"
+                    android:orientation="horizontal"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="coba"></TextView>
+                    android:rowCount="2">
 
-                <TextView
-                    android:id="@+id/mEmail"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="coba2">
-                </TextView>
+                        <TextView
+                            android:paddingRight="90dp"
+                            android:paddingBottom="20dp"
+                            android:text="Sales">
 
-                <TextView
-                    android:id="@+id/mlead"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="coba3"></TextView>
+                        </TextView>
 
-                <TextView
-                    android:id="@+id/mopp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="coba3"></TextView>
+                        <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                            android:id="@+id/sales"
+                            android:layout_width="200dp"
+                            android:layout_height="wrap_content"
+                            android:paddingBottom="20dp" />
 
-                <TextView
-                    android:id="@+id/mcobalead"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="coba4"></TextView>
+                        <TextView
+                            android:paddingBottom="20dp"
+                            android:text="Customer">
+
+                        </TextView>
+
+                        <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                            android:id="@+id/contact"
+                            android:layout_width="200dp"
+                            android:layout_height="match_parent"
+                            android:paddingBottom="20dp">
+
+                        </com.toptoche.searchablespinnerlibrary.SearchableSpinner>
+
+                        <TextView
+                            android:paddingBottom="20dp"
+                            android:text="Opty Name">
+
+                        </TextView>
+
+                        <EditText
+                            android:id="@+id/opty_name"
+                            android:layout_width="200dp"
+                            android:layout_height="match_parent"></EditText>
+
+                        <TextView android:text="Closing Date" />
+
+                        <EditText
+                            android:id="@+id/closing_date"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:clickable="true"
+                            android:focusable="false"
+                            android:hint="Tanggal" />
+                </GridLayout>
         </LinearLayout>
+
+        <Button
+            android:id="@+id/addlead"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:background="@color/colorPrimary"
+            android:text="Add Lead Register"
+            android:textColor="@color/cardview_light_background"></Button>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"
@@ -108,4 +143,12 @@
             android:scrollbars="vertical">
 
         </androidx.recyclerview.widget.RecyclerView>
+
+        <FrameLayout
+            android:id="@+id/inputlead"
+            android:name="com.example.login.Input_lead"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </FrameLayout>
 </LinearLayout>
