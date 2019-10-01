@@ -18,13 +18,16 @@ import java.util.List;
 public class LeadRegisterAdapter extends RecyclerView.Adapter<LeadRegisterAdapter.ViewHolder> {
 
     List<Leads> Leadlist;
-    private Context context;
+    ILeadAdapter mILeadAdapter;
 
-
-    public LeadRegisterAdapter(List<Leads> lList) {
+    public LeadRegisterAdapter(Context context, List<Leads> lList) {
         this.Leadlist = lList;
+        mILeadAdapter = (ILeadAdapter) context;
     }
 
+    public interface ILeadAdapter {
+        void doClick(int pos);
+    }
 
     @NonNull
     @Override
@@ -69,6 +72,13 @@ public class LeadRegisterAdapter extends RecyclerView.Adapter<LeadRegisterAdapte
 
         public ViewHolder(View itemView) {
             super(itemView);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    mILeadAdapter.doClick(getAdapterPosition());
+                }
+            });
 
             tvLead = itemView.findViewById(R.id.mlead);
             tvOpty = itemView.findViewById(R.id.mopty);

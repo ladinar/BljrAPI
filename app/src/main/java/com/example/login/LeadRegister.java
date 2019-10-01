@@ -1,6 +1,7 @@
 package com.example.login;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -41,9 +42,13 @@ import java.util.Map;
 
 import util.Server;
 
-public class LeadRegister extends AppCompatActivity {
+public class LeadRegister extends AppCompatActivity implements LeadRegisterAdapter.ILeadAdapter {
+
+    public static final String LEADS1 = "leads";
     public List<Leads> lList = new ArrayList<>();
     public List<String> SalesName, ContactName;
+    public static String lead_id;
+    public static String name_sales;
     ProgressBar progresslead;
     Spinner spinContact, spinnSales;
     TextView mName, mEmail, mlead, mopp, mcoba;
@@ -66,7 +71,15 @@ public class LeadRegister extends AppCompatActivity {
         spinnSales = findViewById(R.id.sales);
         spinContact = findViewById(R.id.contact);
         closing_date = findViewById(R.id.closing_date);
+//        swipeRefreshLayout = findViewById(R.id.swiperefreshLayout);
+        tampilkanlead();
 
+        RecyclerView recyclerView = findViewById(R.id.recyclerView);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
+
+        leadsAdapter = new LeadRegisterAdapter(this, lList);
+        recyclerView.setAdapter(leadsAdapter);
 
         SalesName = new ArrayList<String>();
         ContactName = new ArrayList<String>();
@@ -107,14 +120,6 @@ public class LeadRegister extends AppCompatActivity {
         });
 
 
-        RecyclerView recyclerView = findViewById(R.id.recyclerView);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(layoutManager);
-
-        tampilkanlead();
-
-        leadsAdapter = new LeadRegisterAdapter(lList);
-        recyclerView.setAdapter(leadsAdapter);
     }
 
 
@@ -294,6 +299,15 @@ public class LeadRegister extends AppCompatActivity {
         requestQueue.add(strReq);
     }
 
+    @Override
+    public void doClick(int pos) {
+        Intent intent = new Intent(this, DetailActivity.class);
+        intent.putExtra(LEADS1, lList.get(pos));
+        startActivity(intent);
+
+    }
+
+//
 }
 
 

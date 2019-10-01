@@ -144,11 +144,5 @@
 
         </androidx.recyclerview.widget.RecyclerView>
 
-        <FrameLayout
-            android:id="@+id/inputlead"
-            android:name="com.example.login.Input_lead"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
 
-        </FrameLayout>
 </LinearLayout>

@@ -1,6 +1,8 @@
 package com.example.login.model;
 
-public class Leads {
+import java.io.Serializable;
+
+public class Leads implements Serializable {
     private String lead_id;
     private String opp_name;
     private String nik;
