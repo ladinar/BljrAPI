@@ -26,6 +26,32 @@
             android:layout_height="match_parent"
             android:text="Lead Id"
             android:textColor="@color/colorAccent" />
+
+        <EditText
+            android:id="@+id/edit_lead"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone" />
+
+        <EditText
+            android:id="@+id/edit_opp_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Edit Oopty Name" />
+
+        <EditText
+            android:id="@+id/edit_closing_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Edit Closing Date" />
+
+        <Button
+            android:id="@+id/btnEditLead"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorPrimaryDark"
+            android:text="Edit"
+            android:textColor="@color/cardview_light_background" />
     </LinearLayout>
 
 </androidx.core.widget.NestedScrollView>

@@ -15,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -46,9 +47,11 @@ public class LeadRegister extends AppCompatActivity implements LeadRegisterAdapt
 
     public static final String LEADS1 = "leads";
     public List<Leads> lList = new ArrayList<>();
+    public List<Leads> lListFilter = new ArrayList<>();
     public List<String> SalesName, ContactName;
     public static String lead_id;
     public static String name_sales;
+    SearchView searchView;
     ProgressBar progresslead;
     Spinner spinContact, spinnSales;
     TextView mName, mEmail, mlead, mopp, mcoba;
@@ -59,6 +62,7 @@ public class LeadRegister extends AppCompatActivity implements LeadRegisterAdapt
     Calendar myCalendar;
     EditText closing_date, opp_name;
     String sales2, contact2, opp_name2, tgl2;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,7 +75,8 @@ public class LeadRegister extends AppCompatActivity implements LeadRegisterAdapt
         spinnSales = findViewById(R.id.sales);
         spinContact = findViewById(R.id.contact);
         closing_date = findViewById(R.id.closing_date);
-//        swipeRefreshLayout = findViewById(R.id.swiperefreshLayout);
+        searchView = findViewById(R.id.search_view);
+//      swipeRefreshLayout = findViewById(R.id.swiperefreshLayout);
         tampilkanlead();
 
         RecyclerView recyclerView = findViewById(R.id.recyclerView);
@@ -119,9 +124,26 @@ public class LeadRegister extends AppCompatActivity implements LeadRegisterAdapt
             }
         });
 
+        searchView.setOnQueryTextListener(
+                new SearchView.OnQueryTextListener() {
+                    @Override
+                    public boolean onQueryTextSubmit(String query) {
+                        {
+                            leadsAdapter.getFilter().filter(query);
+                            return false;
+                        }
+                    }
+
+                    @Override
+                    public boolean onQueryTextChange(String query) {
+                        leadsAdapter.getFilter().filter(query);
+                        return true;
+                    }
+
+                });
+
 
     }
-
 
     private void updatelabel() {
         String myFormat = "yyyy-MM-dd";
@@ -183,7 +205,6 @@ public class LeadRegister extends AppCompatActivity implements LeadRegisterAdapt
 
     }
 
-
     private void tampilkanlead() {
         final JSONObject jobj = new JSONObject();
         final String lead_id = "null";
@@ -234,6 +255,7 @@ public class LeadRegister extends AppCompatActivity implements LeadRegisterAdapt
                                 item.setOpp_name(o.getString("opp_name"));
                                 item.setNik(o.getString("name"));
                                 item.setId_customer(o.getString("customer_legal_name"));
+                                item.setClosing_date(o.getString("closing_date"));
                                 Log.i("response", o.getString("opp_name"));
 //                                String sales = o.getString("lead_id");
                                 lList.add(item);
@@ -307,7 +329,6 @@ public class LeadRegister extends AppCompatActivity implements LeadRegisterAdapt
 
     }
 
-//
 }
 
 

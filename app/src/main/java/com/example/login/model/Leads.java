@@ -7,10 +7,14 @@ public class Leads implements Serializable {
     private String opp_name;
     private String nik;
     private String id_customer;
+    private String closing_date;
 
+    public String getClosing_date() {
+        return closing_date;
+    }
 
-    public Leads() {
-
+    public void setClosing_date(String closing_date) {
+        this.closing_date = closing_date;
     }
 
     public String getLead_id() {
@@ -44,6 +48,5 @@ public class Leads implements Serializable {
     public void setId_customer(String id_customer) {
         this.id_customer = id_customer;
     }
-
 
 }

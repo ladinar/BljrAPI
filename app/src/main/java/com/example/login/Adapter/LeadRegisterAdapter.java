@@ -5,6 +5,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -13,15 +15,18 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.login.R;
 import com.example.login.model.Leads;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class LeadRegisterAdapter extends RecyclerView.Adapter<LeadRegisterAdapter.ViewHolder> {
+public class LeadRegisterAdapter extends RecyclerView.Adapter<LeadRegisterAdapter.ViewHolder> implements Filterable {
 
     List<Leads> Leadlist;
+    List<Leads> filteredList;
     ILeadAdapter mILeadAdapter;
 
     public LeadRegisterAdapter(Context context, List<Leads> lList) {
         this.Leadlist = lList;
+        this.filteredList = lList;
         mILeadAdapter = (ILeadAdapter) context;
     }
 
@@ -65,10 +70,46 @@ public class LeadRegisterAdapter extends RecyclerView.Adapter<LeadRegisterAdapte
         holder.tvOpty.setText(lead.getOpp_name());
         holder.tvSales.setText(lead.getNik());
         holder.tvContact.setText(lead.getId_customer());
+        holder.etClosing_date.setText(lead.getClosing_date());
+    }
+
+    @Override
+    public Filter getFilter() {
+        return new Filter() {
+
+            @Override
+            protected FilterResults performFiltering(CharSequence constraint) {
+                String charSequenceString = constraint.toString();
+                if (charSequenceString.isEmpty()) {
+                    filteredList = Leadlist;
+                } else {
+                    List<Leads> filteredList2 = new ArrayList<>();
+                    for (Leads lead : Leadlist) {
+                        if (lead.getLead_id().toLowerCase().contains(charSequenceString.toLowerCase())) {
+                            filteredList2.add(lead);
+                        }
+                        filteredList = filteredList2;
+                    }
+
+                }
+                FilterResults results = new FilterResults();
+                results.values = filteredList;
+                return results;
+
+            }
+
+            @Override
+            protected void publishResults(CharSequence charSequence, FilterResults results) {
+                filteredList = (List<Leads>) results.values;
+                notifyDataSetChanged();
+            }
+
+
+        };
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView tvLead, tvOpty, tvSales, tvContact;
+        TextView tvLead, tvOpty, tvSales, tvContact, etClosing_date;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -84,6 +125,7 @@ public class LeadRegisterAdapter extends RecyclerView.Adapter<LeadRegisterAdapte
             tvOpty = itemView.findViewById(R.id.mopty);
             tvSales = itemView.findViewById(R.id.mSales);
             tvContact = itemView.findViewById(R.id.mContact);
+            etClosing_date = itemView.findViewById(R.id.mClosing_date);
 
         }
     }
