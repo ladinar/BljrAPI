@@ -2,6 +2,7 @@ package com.example.login;
 
 import android.app.DatePickerDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -54,7 +55,7 @@ public class AddLeadFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(final LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_add_lead, container, false);
         spinContact = view.findViewById(R.id.spinner_contact);
@@ -92,11 +93,14 @@ public class AddLeadFragment extends Fragment {
                 tgl2 = closingdate.getText().toString().trim();
                 amount2 = amount.getText().toString().trim();
                 info2 = info.getText().toString().trim();
-                if (!sales2.isEmpty() && !contact2.isEmpty() && !opp_name2.isEmpty() && !tgl2.isEmpty() && !info2.isEmpty() && !amount2.isEmpty()) {
-                    storeLead();
+                if (opp_name2.isEmpty() && tgl2.isEmpty() && info2.isEmpty() && amount2.isEmpty()) {
+                    opp_name.setError("Please Fill this field!");
+                    closingdate.setError("Please Fill this field!");
+                    amount.setError("Please Fill this field!");
+                    info.setError("Please Fill this field!");
+
                 } else {
-                    opp_name.setError("Please Insert Email!");
-                    closingdate.setError("Please insert Password!");
+                    storeLead();
                 }
             }
         });
@@ -130,7 +134,9 @@ public class AddLeadFragment extends Fragment {
                     String success = jObj.getString("success");
 
                     if (success.equals("1")) {
+                        Intent intent = new Intent(getActivity(), LeadRegister.class);
                         Toast.makeText(getActivity(), "Lead Id Created Successfully :)", Toast.LENGTH_LONG).show();
+                        startActivity(intent);
                     } else {
                         Toast.makeText(getActivity(), "email atau password salah", Toast.LENGTH_LONG).show();
                     }
