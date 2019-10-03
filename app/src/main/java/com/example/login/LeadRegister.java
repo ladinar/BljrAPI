@@ -2,6 +2,7 @@ package com.example.login;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -14,6 +15,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -48,20 +50,20 @@ public class LeadRegister extends AppCompatActivity implements LeadRegisterAdapt
     public static final String LEADS1 = "leads";
     public List<Leads> lList = new ArrayList<>();
     public List<Leads> lListFilter = new ArrayList<>();
-    public List<String> SalesName, ContactName;
+    public List<String> SalesName, ContactName, PresalesName;
     public static String lead_id;
     public static String name_sales;
     SearchView searchView;
     ProgressBar progresslead;
-    Spinner spinContact, spinnSales;
-    TextView mName, mEmail, mlead, mopp, mcoba;
+    Spinner spinContact, spinnSales, spinPresales;
+    TextView mName, mEmail, mlead, mopp, mcoba, mstatus;
     LeadRegisterAdapter leadsAdapter;
     Button btnAddlead;
     ArrayAdapter<String> SpinnerAdapter;
     DatePickerDialog.OnDateSetListener date;
     Calendar myCalendar;
     EditText closing_date, opp_name;
-    String sales2, contact2, opp_name2, tgl2;
+    String sales2, contact2, presales2, opp_name2, tgl2;
 
 
     @Override
@@ -70,10 +72,12 @@ public class LeadRegister extends AppCompatActivity implements LeadRegisterAdapt
         setContentView(R.layout.activity_lead_register);
 
         mopp = findViewById(R.id.opty_name);
+        mstatus = findViewById(R.id.mStatus);
         progresslead = findViewById(R.id.progresslead);
         btnAddlead = findViewById(R.id.addlead);
         spinnSales = findViewById(R.id.sales);
         spinContact = findViewById(R.id.contact);
+        spinPresales = findViewById(R.id.presales);
         closing_date = findViewById(R.id.closing_date);
         searchView = findViewById(R.id.search_view);
 //      swipeRefreshLayout = findViewById(R.id.swiperefreshLayout);
@@ -88,6 +92,7 @@ public class LeadRegister extends AppCompatActivity implements LeadRegisterAdapt
 
         SalesName = new ArrayList<String>();
         ContactName = new ArrayList<String>();
+        PresalesName = new ArrayList<String>();
 
         myCalendar = Calendar.getInstance();
         date = new DatePickerDialog.OnDateSetListener() {
@@ -112,6 +117,7 @@ public class LeadRegister extends AppCompatActivity implements LeadRegisterAdapt
             public void onClick(View view) {
                 sales2 = spinnSales.getSelectedItem().toString().trim();
                 contact2 = spinContact.getSelectedItem().toString().trim();
+                presales2 = spinPresales.getSelectedItem().toString().trim();
                 opp_name2 = mopp.getText().toString().trim();
                 tgl2 = closing_date.getText().toString().trim();
                 if (!sales2.isEmpty() && !contact2.isEmpty() && !opp_name2.isEmpty() && !tgl2.isEmpty()) {
@@ -211,21 +217,23 @@ public class LeadRegister extends AppCompatActivity implements LeadRegisterAdapt
         final String opp_name = "null";
         final String contact = "null";
         final String sales = "null";
+        final String status = "null";
         try {
             jobj.put("lead_id", lead_id);
             jobj.put("opp_name", opp_name);
             jobj.put("contact", contact);
             jobj.put("sales", sales);
+            jobj.put("status", status);
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
         final JsonObjectRequest strReq = new JsonObjectRequest(Request.Method.GET, Server.URL_Lead, jobj, new Response.Listener<JSONObject>() {
 
+            @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onResponse(JSONObject response) {
                 try {
-                    Log.i("response", response.toString());
                     JSONObject jObj = response;
                     String success = jObj.getString("success");
                     if (success.equals("1")) {
@@ -233,6 +241,7 @@ public class LeadRegister extends AppCompatActivity implements LeadRegisterAdapt
                         JSONArray jray = jObj.getJSONArray("lead");
                         JSONArray jray_user = jObj.getJSONArray("sales_list");
                         JSONArray jray_contact = jObj.getJSONArray("contact_list");
+                        JSONArray jray_presales = jObj.getJSONArray("presales_list");
 //                        JSONObject lead = jray.getJSONObject(0);
 //                        Intent intent = getIntent();
 //                        String extraName = intent.getStringExtra("name");
@@ -256,8 +265,7 @@ public class LeadRegister extends AppCompatActivity implements LeadRegisterAdapt
                                 item.setNik(o.getString("name"));
                                 item.setId_customer(o.getString("customer_legal_name"));
                                 item.setClosing_date(o.getString("closing_date"));
-                                Log.i("response", o.getString("opp_name"));
-//                                String sales = o.getString("lead_id");
+                                item.setResult(o.getString("results"));
                                 lList.add(item);
                             }
                             leadsAdapter.notifyDataSetChanged();
@@ -272,12 +280,20 @@ public class LeadRegister extends AppCompatActivity implements LeadRegisterAdapt
                                 JSONObject contact = jray_contact.getJSONObject(i);
                                 String contacts = contact.getString("brand_name");
                                 ContactName.add(contacts);
+                            }
+
+                            for (int i = 0; i < jray_presales.length(); i++) {
+                                JSONObject presales = jray_presales.getJSONObject(i);
+                                String presaleses = presales.getString("name");
+                                PresalesName.add(presaleses);
 
                             }
                             spinnSales.setAdapter(new ArrayAdapter<String>(LeadRegister.this, android.R.layout.simple_spinner_dropdown_item, SalesName));
 
                             spinContact.setAdapter(new ArrayAdapter<String>(LeadRegister.this, android.R.layout.simple_spinner_dropdown_item, ContactName)
                             );
+
+                            spinPresales.setAdapter(new ArrayAdapter<String>(LeadRegister.this, android.R.layout.simple_spinner_dropdown_item, PresalesName));
 
                             //wes,
                             //ohh bedone construktor mbe getter setter ngono

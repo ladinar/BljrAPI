@@ -8,6 +8,15 @@ public class Leads implements Serializable {
     private String nik;
     private String id_customer;
     private String closing_date;
+    private String result;
+
+    public String getResult() {
+        return result;
+    }
+
+    public void setResult(String result) {
+        this.result = result;
+    }
 
     public String getClosing_date() {
         return closing_date;

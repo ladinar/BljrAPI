@@ -5,55 +5,55 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:padding="16dp"
     android:id="@+id/container"
+    android:scrollbars="vertical"
     android:orientation="vertical">
 
-        <HorizontalScrollView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+        <!--        <HorizontalScrollView-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="wrap_content">-->
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal">
+        <!--                <LinearLayout-->
+        <!--                    android:layout_width="match_parent"-->
+        <!--                    android:layout_height="match_parent"-->
+        <!--                    android:orientation="horizontal">-->
 
+        <!--                        <Button-->
+        <!--                            android:layout_width="180dp"-->
+        <!--                            android:layout_height="85dp"-->
+        <!--                            android:background="#00b3ff"-->
+        <!--                            android:text="44 Lead Register"-->
+        <!--                            android:textColor="@android:color/white"-->
+        <!--                            android:textSize="8dp" />-->
 
-                        <Button
-                            android:layout_width="180dp"
-                            android:layout_height="85dp"
-                            android:background="#00b3ff"
-                            android:text="44 Lead Register"
-                            android:textColor="@android:color/white"
-                            android:textSize="8dp" />
+        <!--                        <Button-->
+        <!--                            android:layout_width="180dp"-->
+        <!--                            android:layout_height="85dp"-->
+        <!--                            android:layout_marginLeft="10dp"-->
+        <!--                            android:background="#ffd117"-->
+        <!--                            android:text="34 Lead Register"-->
+        <!--                            android:textColor="@android:color/white"-->
+        <!--                            android:textSize="8dp" />-->
 
-                        <Button
-                            android:layout_width="180dp"
-                            android:layout_height="85dp"
-                            android:layout_marginLeft="10dp"
-                            android:background="#ffd117"
-                            android:text="34 Lead Register"
-                            android:textColor="@android:color/white"
-                            android:textSize="8dp" />
+        <!--                        <Button-->
+        <!--                            android:layout_width="180dp"-->
+        <!--                            android:layout_height="85dp"-->
+        <!--                            android:layout_marginLeft="10dp"-->
+        <!--                            android:background="#00b3ff"-->
+        <!--                            android:text="12 Lead Register"-->
+        <!--                            android:textColor="@android:color/white"-->
+        <!--                            android:textSize="8dp" />-->
 
-                        <Button
-                            android:layout_width="180dp"
-                            android:layout_height="85dp"
-                            android:layout_marginLeft="10dp"
-                            android:background="#00b3ff"
-                            android:text="12 Lead Register"
-                            android:textColor="@android:color/white"
-                            android:textSize="8dp" />
+        <!--                        <Button-->
+        <!--                            android:layout_width="180dp"-->
+        <!--                            android:layout_height="85dp"-->
+        <!--                            android:layout_marginLeft="10dp"-->
+        <!--                            android:background="#ffd117"-->
+        <!--                            android:text="24 Lead Register"-->
+        <!--                            android:textColor="@android:color/white"-->
+        <!--                            android:textSize="8dp" />-->
+        <!--                </LinearLayout>-->
 
-                        <Button
-                            android:layout_width="180dp"
-                            android:layout_height="85dp"
-                            android:layout_marginLeft="10dp"
-                            android:background="#ffd117"
-                            android:text="24 Lead Register"
-                            android:textColor="@android:color/white"
-                            android:textSize="8dp" />
-                </LinearLayout>
-
-        </HorizontalScrollView>
+        <!--        </HorizontalScrollView>-->
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -69,6 +69,7 @@
                 </ProgressBar>
 
                 <GridLayout
+                    android:visibility="gone"
                     android:layout_height="match_parent"
                     android:columnCount="2"
                     android:orientation="horizontal"
@@ -122,6 +123,13 @@
                             android:clickable="true"
                             android:focusable="false"
                             android:hint="Tanggal" />
+
+                        <TextView android:text="Assign" />
+
+                        <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                            android:id="@+id/presales"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
                 </GridLayout>
         </LinearLayout>
 
@@ -158,6 +166,29 @@
             android:scrollbars="vertical">
 
         </androidx.recyclerview.widget.RecyclerView>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginTop="10dp">
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardView"
+                    android:layout_width="match_parent"
+                    android:layout_height="120dp" />
+
+                <TextView
+                    android:id="@+id/fab"
+                    android:layout_width="130dp"
+                    android:layout_height="40dp"
+                    android:layout_alignTop="@id/cardView"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginTop="60dp"
+                    android:layout_marginRight="20dp"
+                    android:background="@color/cardview_shadow_start_color"
+                    android:text="INITIAL" />
+
+        </RelativeLayout>
 
 
 </LinearLayout>
