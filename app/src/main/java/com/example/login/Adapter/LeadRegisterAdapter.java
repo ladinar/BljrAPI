@@ -1,5 +1,6 @@
 package com.example.login.Adapter;
 
+import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,8 +21,9 @@ public class LeadRegisterAdapter extends RecyclerView.Adapter<LeadRegisterAdapte
     ILeadAdapter mILeadAdapter;
 
 
-    public LeadRegisterAdapter(List<Leads> lList) {
+    public LeadRegisterAdapter(Context context, List<Leads> lList) {
         this.Leadlist = lList;
+        mILeadAdapter = (ILeadAdapter) context;
     }
 
     public interface ILeadAdapter {

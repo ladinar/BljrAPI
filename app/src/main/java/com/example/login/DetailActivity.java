@@ -1,8 +1,11 @@
 package com.example.login;
 
 import android.os.Bundle;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.login.model.Leads;
 
 public class DetailActivity extends AppCompatActivity {
 
@@ -11,12 +14,12 @@ public class DetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
 
-        /*Leads lead = (Leads) getIntent().getSerializableExtra(LeadRegister.LEADS1);
+        Leads lead = (Leads) getIntent().getSerializableExtra(LeadRegister.LEADS1);
         setTitle(lead.getLead_id());
         TextView tvLead = findViewById(R.id.lead_id);
         tvLead.setText(lead.getLead_id());
         TextView tvOppName = findViewById(R.id.opty_name);
-        tvOppName.setText(lead.getOpp_name());*/
+        tvOppName.setText(lead.getOpp_name());
 
 //        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 //

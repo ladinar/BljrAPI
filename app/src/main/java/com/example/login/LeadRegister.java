@@ -42,9 +42,12 @@ import java.util.Map;
 
 import util.Server;
 
-public class LeadRegister extends AppCompatActivity {
+public class LeadRegister extends AppCompatActivity implements LeadRegisterAdapter.ILeadAdapter {
     public List<Leads> lList = new ArrayList<>();
     public List<String> SalesName, ContactName;
+    public static final String LEADS1 = "leads";
+    public static String lead_id;
+    public static String name_sales;
     ProgressBar progresslead;
     Spinner spinContact, spinnSales;
     TextView mName, mEmail, mlead, mopp, mcoba;
@@ -68,6 +71,14 @@ public class LeadRegister extends AppCompatActivity {
         spinContact = findViewById(R.id.contact);
         closing_date = findViewById(R.id.closing_date);
 
+        tampilkanlead();
+
+        RecyclerView recyclerView = findViewById(R.id.recyclerView);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
+
+        leadsAdapter = new LeadRegisterAdapter(this, lList);
+        recyclerView.setAdapter(leadsAdapter);
 
         SalesName = new ArrayList<String>();
         ContactName = new ArrayList<String>();
@@ -108,16 +119,6 @@ public class LeadRegister extends AppCompatActivity {
 
             }
         });
-
-
-        RecyclerView recyclerView = findViewById(R.id.recyclerView);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(layoutManager);
-
-        tampilkanlead();
-
-        leadsAdapter = new LeadRegisterAdapter(lList);
-        recyclerView.setAdapter(leadsAdapter);
     }
 
     private void addlead() {
@@ -302,6 +303,12 @@ public class LeadRegister extends AppCompatActivity {
         requestQueue.add(strReq);
     }
 
+    @Override
+    public void doClick(int pos) {
+        Intent intent = new Intent(this, DetailActivity.class);
+        intent.putExtra(LEADS1, lList.get(pos));
+        startActivity(intent);
+    }
 }
 
 
