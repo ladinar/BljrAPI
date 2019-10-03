@@ -49,4 +49,26 @@
         android:maxLines="1"
         android:text="coba4"></TextView>
 
+    <TextView
+        android:id="@+id/maamount"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:text="coba4"></TextView>
+
+    <TextView
+        android:id="@+id/minfo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:text="coba4"></TextView>
+
 </LinearLayout>

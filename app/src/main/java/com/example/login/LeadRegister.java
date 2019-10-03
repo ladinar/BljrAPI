@@ -42,13 +42,9 @@ import java.util.Map;
 
 import util.Server;
 
-public class LeadRegister extends AppCompatActivity implements LeadRegisterAdapter.ILeadAdapter {
-
-    public static final String LEADS1 = "leads";
+public class LeadRegister extends AppCompatActivity {
     public List<Leads> lList = new ArrayList<>();
     public List<String> SalesName, ContactName;
-    public static String lead_id;
-    public static String name_sales;
     ProgressBar progresslead;
     Spinner spinContact, spinnSales;
     TextView mName, mEmail, mlead, mopp, mcoba;
@@ -71,15 +67,7 @@ public class LeadRegister extends AppCompatActivity implements LeadRegisterAdapt
         spinnSales = findViewById(R.id.sales);
         spinContact = findViewById(R.id.contact);
         closing_date = findViewById(R.id.closing_date);
-//        swipeRefreshLayout = findViewById(R.id.swiperefreshLayout);
-        tampilkanlead();
 
-        RecyclerView recyclerView = findViewById(R.id.recyclerView);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(layoutManager);
-
-        leadsAdapter = new LeadRegisterAdapter(this, lList);
-        recyclerView.setAdapter(leadsAdapter);
 
         SalesName = new ArrayList<String>();
         ContactName = new ArrayList<String>();
@@ -105,7 +93,7 @@ public class LeadRegister extends AppCompatActivity implements LeadRegisterAdapt
         btnAddlead.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                sales2 = spinnSales.getSelectedItem().toString().trim();
+                /*sales2 = spinnSales.getSelectedItem().toString().trim();
                 contact2 = spinContact.getSelectedItem().toString().trim();
                 opp_name2 = mopp.getText().toString().trim();
                 tgl2 = closing_date.getText().toString().trim();
@@ -114,12 +102,27 @@ public class LeadRegister extends AppCompatActivity implements LeadRegisterAdapt
                 } else {
                     mopp.setError("Please Insert Email!");
                     closing_date.setError("Please insert Password!");
-                }
+                }*/
+
+                addlead();
 
             }
         });
 
 
+        RecyclerView recyclerView = findViewById(R.id.recyclerView);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
+
+        tampilkanlead();
+
+        leadsAdapter = new LeadRegisterAdapter(lList);
+        recyclerView.setAdapter(leadsAdapter);
+    }
+
+    private void addlead() {
+        Intent intent = new Intent(LeadRegister.this, AddLeadActivity.class);
+        startActivity(intent);
     }
 
 
@@ -299,15 +302,6 @@ public class LeadRegister extends AppCompatActivity implements LeadRegisterAdapt
         requestQueue.add(strReq);
     }
 
-    @Override
-    public void doClick(int pos) {
-        Intent intent = new Intent(this, DetailActivity.class);
-        intent.putExtra(LEADS1, lList.get(pos));
-        startActivity(intent);
-
-    }
-
-//
 }
 
 

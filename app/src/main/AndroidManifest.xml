@@ -12,7 +12,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".DetailActivity"></activity>
+        <activity android:name=".AddLeadActivity"></activity>
+        <activity android:name=".DetailActivity" />
         <activity android:name=".LeadRegister" />
         <activity android:name=".LoginMain">
             <intent-filter>

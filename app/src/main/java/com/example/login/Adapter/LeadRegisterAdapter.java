@@ -1,6 +1,5 @@
 package com.example.login.Adapter;
 
-import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,9 +19,9 @@ public class LeadRegisterAdapter extends RecyclerView.Adapter<LeadRegisterAdapte
     List<Leads> Leadlist;
     ILeadAdapter mILeadAdapter;
 
-    public LeadRegisterAdapter(Context context, List<Leads> lList) {
+
+    public LeadRegisterAdapter(List<Leads> lList) {
         this.Leadlist = lList;
-        mILeadAdapter = (ILeadAdapter) context;
     }
 
     public interface ILeadAdapter {
@@ -65,10 +64,12 @@ public class LeadRegisterAdapter extends RecyclerView.Adapter<LeadRegisterAdapte
         holder.tvOpty.setText(lead.getOpp_name());
         holder.tvSales.setText(lead.getNik());
         holder.tvContact.setText(lead.getId_customer());
+        holder.tvamount.setText(lead.getAmount());
+        holder.tvinfo.setText(lead.getInfo());
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView tvLead, tvOpty, tvSales, tvContact;
+        TextView tvLead, tvOpty, tvSales, tvContact, tvamount, tvinfo;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -84,6 +85,8 @@ public class LeadRegisterAdapter extends RecyclerView.Adapter<LeadRegisterAdapte
             tvOpty = itemView.findViewById(R.id.mopty);
             tvSales = itemView.findViewById(R.id.mSales);
             tvContact = itemView.findViewById(R.id.mContact);
+            tvamount = itemView.findViewById(R.id.maamount);
+            tvinfo = itemView.findViewById(R.id.minfo);
 
         }
     }
