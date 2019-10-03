@@ -2,7 +2,6 @@ package com.example.login;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -115,17 +114,19 @@ public class LeadRegister extends AppCompatActivity implements LeadRegisterAdapt
         btnAddlead.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                sales2 = spinnSales.getSelectedItem().toString().trim();
-                contact2 = spinContact.getSelectedItem().toString().trim();
-                presales2 = spinPresales.getSelectedItem().toString().trim();
-                opp_name2 = mopp.getText().toString().trim();
-                tgl2 = closing_date.getText().toString().trim();
-                if (!sales2.isEmpty() && !contact2.isEmpty() && !opp_name2.isEmpty() && !tgl2.isEmpty()) {
-                    storeLead();
-                } else {
-                    mopp.setError("Please Insert Email!");
-                    closing_date.setError("Please insert Password!");
-                }
+//                sales2 = spinnSales.getSelectedItem().toString().trim();
+//                contact2 = spinContact.getSelectedItem().toString().trim();
+//                presales2 = spinPresales.getSelectedItem().toString().trim();
+//                opp_name2 = mopp.getText().toString().trim();
+//                tgl2 = closing_date.getText().toString().trim();
+//                if (!sales2.isEmpty() && !contact2.isEmpty() && !opp_name2.isEmpty() && !tgl2.isEmpty()) {
+//                    storeLead();
+//                } else {
+//                    mopp.setError("Please Insert Email!");
+//                    closing_date.setError("Please insert Password!");
+//                }
+                addlead();
+
 
             }
         });
@@ -146,9 +147,15 @@ public class LeadRegister extends AppCompatActivity implements LeadRegisterAdapt
                         return true;
                     }
 
+
                 });
 
 
+    }
+
+    private void addlead() {
+        Intent intent = new Intent(LeadRegister.this, AddLeadActivity.class);
+        startActivity(intent);
     }
 
     private void updatelabel() {
@@ -211,6 +218,7 @@ public class LeadRegister extends AppCompatActivity implements LeadRegisterAdapt
 
     }
 
+
     private void tampilkanlead() {
         final JSONObject jobj = new JSONObject();
         final String lead_id = "null";
@@ -230,10 +238,10 @@ public class LeadRegister extends AppCompatActivity implements LeadRegisterAdapt
 
         final JsonObjectRequest strReq = new JsonObjectRequest(Request.Method.GET, Server.URL_Lead, jobj, new Response.Listener<JSONObject>() {
 
-            @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onResponse(JSONObject response) {
                 try {
+                    Log.i("response", response.toString());
                     JSONObject jObj = response;
                     String success = jObj.getString("success");
                     if (success.equals("1")) {
@@ -345,6 +353,7 @@ public class LeadRegister extends AppCompatActivity implements LeadRegisterAdapt
 
     }
 
+//
 }
 
 

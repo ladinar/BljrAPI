@@ -9,6 +9,8 @@ public class Leads implements Serializable {
     private String id_customer;
     private String closing_date;
     private String result;
+    private String amount;
+    private String info;
 
     public String getResult() {
         return result;
@@ -57,5 +59,22 @@ public class Leads implements Serializable {
     public void setId_customer(String id_customer) {
         this.id_customer = id_customer;
     }
+
+    public String getAmount() {
+        return amount;
+    }
+
+    public void setAmount(String amount) {
+        this.amount = amount;
+    }
+
+    public String getInfo() {
+        return info;
+    }
+
+    public void setInfo(String info) {
+        this.info = info;
+    }
+
 
 }

@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F3F3F3"
+    android:gravity="center"
+    tools:context=".AddLeadFragment">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/bg_lead"
+        android:gravity="center_horizontal">
+
+        <TextView
+            android:id="@+id/textview_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="13dp"
+            android:text="Add Lead Register"
+            android:textColor="@android:color/black"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/imageview_sales"
+            android:layout_width="330dp"
+            android:layout_height="45dp"
+            android:layout_marginTop="60dp"
+            android:background="@drawable/bg_item" />
+
+        <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+            android:id="@+id/spinner_sales"
+            android:layout_width="300dp"
+            android:layout_height="55dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="64dp"
+            android:paddingBottom="20dp" />
+
+        <TextView
+            android:id="@+id/textview_owner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="0dp"
+            android:layout_marginTop="45dp"
+            android:text="Owner"
+            android:textColor="#60CEFF"
+            android:textSize="10dp" />
+
+
+        <ImageView
+            android:id="@+id/imageview_customer"
+            android:layout_width="330dp"
+            android:layout_height="45dp"
+            android:layout_marginTop="130dp"
+            android:background="@drawable/bg_item" />
+
+        <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+            android:id="@+id/spinner_contact"
+            android:layout_width="300dp"
+            android:layout_height="55dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="134dp"
+            android:paddingBottom="20dp" />
+
+
+        <TextView
+            android:id="@+id/textview_customer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="0dp"
+            android:layout_marginTop="115dp"
+            android:text="Customer (Brand Name)"
+            android:textColor="#60CEFF"
+            android:textSize="10dp" />
+
+        <ImageView
+            android:id="@+id/imageview_oppty"
+            android:layout_width="330dp"
+            android:layout_height="45dp"
+            android:layout_marginTop="200dp"
+            android:background="@drawable/bg_item" />
+
+        <TextView
+            android:id="@+id/textview_oppty"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="0dp"
+            android:layout_marginTop="184dp"
+            android:text="Opportunity Name"
+            android:textColor="#60CEFF"
+            android:textSize="10dp" />
+
+        <EditText
+            android:id="@+id/textview_enter_oppty"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="208dp"
+            android:hint="Enter opportunity name"
+            android:textColor="#A1A1A1"
+            android:textSize="13dp" />
+
+
+        <ImageView
+            android:id="@+id/imageview_amount"
+            android:layout_width="330dp"
+            android:layout_height="45dp"
+            android:layout_marginTop="275dp"
+            android:background="@drawable/bg_amount" />
+
+        <TextView
+            android:id="@+id/textview_amount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="0dp"
+            android:layout_marginTop="258dp"
+            android:text="Amount"
+            android:textColor="#60CEFF"
+            android:textSize="10dp" />
+
+        <EditText
+            android:id="@+id/edittext_enter_amount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="42dp"
+            android:layout_marginTop="284dp"
+            android:hint="Enter amount"
+            android:textColor="#A1A1A1"
+            android:textSize="13dp" />
+
+        <TextView
+            android:id="@+id/textview_rp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="288dp"
+            android:text="Rp."
+            android:textColor="#A1A1A1"
+            android:textSize="13dp" />
+
+
+        <ImageView
+            android:id="@+id/imageview_date"
+            android:layout_width="330dp"
+            android:layout_height="45dp"
+            android:layout_marginTop="350dp"
+            android:background="@drawable/bg_amount" />
+
+        <TextView
+            android:id="@+id/textview_close_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="0dp"
+            android:layout_marginTop="333dp"
+            android:text="Close Date"
+            android:textColor="#60CEFF"
+            android:textSize="10dp" />
+
+        <EditText
+            android:id="@+id/edittext_select_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="45dp"
+            android:layout_marginTop="351dp"
+            android:clickable="true"
+            android:focusable="false"
+            android:hint="Select date"
+            android:textColor="#A1A1A1" />
+
+        <ImageView
+            android:id="@+id/imageview_calendar"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="364dp"
+            app:srcCompat="@drawable/calendar_img" />
+
+
+        <ImageView
+            android:id="@+id/imageview_info"
+            android:layout_width="330dp"
+            android:layout_height="45dp"
+            android:layout_marginTop="425dp"
+            android:background="@drawable/bg_item" />
+
+        <TextView
+            android:id="@+id/textview_optional"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="0dp"
+            android:layout_marginTop="411dp"
+            android:text="*optional"
+            android:textColor="#A1A1A1"
+            android:textSize="8dp" />
+
+        <EditText
+            android:id="@+id/edittext_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="434dp"
+            android:hint="Enter information"
+            android:textColor="#A1A1A1"
+            android:textSize="13dp" />
+
+
+        <Button
+            android:id="@+id/btn_cancel"
+            android:layout_width="86dp"
+            android:layout_height="32dp"
+            android:layout_marginTop="495dp"
+            android:background="@drawable/button_cancel"
+            android:hint="Cancel" />
+
+
+        <Button
+            android:id="@+id/btn_submit"
+            android:layout_width="86dp"
+            android:layout_height="32dp"
+            android:layout_marginLeft="242dp"
+            android:layout_marginTop="495dp"
+            android:background="@drawable/button_submit"
+            android:hint="Submit"
+            android:textColorHint="@android:color/white" />
+
+    </RelativeLayout>
+
+</FrameLayout>

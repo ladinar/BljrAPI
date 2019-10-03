@@ -72,6 +72,8 @@ public class LeadRegisterAdapter extends RecyclerView.Adapter<LeadRegisterAdapte
         holder.tvContact.setText(lead.getId_customer());
         holder.etClosing_date.setText(lead.getClosing_date());
         holder.tvStatus.setText(lead.getResult());
+        holder.tvamount.setText(lead.getAmount());
+        holder.tvinfo.setText(lead.getInfo());
 
     }
 
@@ -108,10 +110,11 @@ public class LeadRegisterAdapter extends RecyclerView.Adapter<LeadRegisterAdapte
 
 
         };
+
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView tvLead, tvOpty, tvSales, tvContact, etClosing_date, tvStatus;
+        TextView tvLead, tvOpty, tvSales, tvContact, etClosing_date, tvStatus, tvamount, tvinfo;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -129,6 +132,8 @@ public class LeadRegisterAdapter extends RecyclerView.Adapter<LeadRegisterAdapte
             tvContact = itemView.findViewById(R.id.mContact);
             etClosing_date = itemView.findViewById(R.id.mClosing_date);
             tvStatus = itemView.findViewById(R.id.mStatus);
+            tvamount = itemView.findViewById(R.id.maamount);
+            tvinfo = itemView.findViewById(R.id.minfo);
 
         }
     }
