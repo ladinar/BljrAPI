@@ -1,7 +1,6 @@
 package com.example.login.Adapter;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,18 +14,26 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.login.R;
 import com.example.login.model.Leads;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class LeadRegisterAdapter extends RecyclerView.Adapter<LeadRegisterAdapter.ViewHolder> implements Filterable {
 
     List<Leads> Leadlist;
-    List<Leads> filteredList;
+    List<Leads> filteredNameList;
     ILeadAdapter mILeadAdapter;
+    Locale localeID = new Locale("in", "ID");
+    NumberFormat formatRupiah = NumberFormat.getCurrencyInstance(localeID);
+    private Context context;
+
 
     public LeadRegisterAdapter(Context context, List<Leads> lList) {
+        super();
+        this.context = context;
         this.Leadlist = lList;
-        this.filteredList = lList;
+        this.filteredNameList = lList;
         mILeadAdapter = (ILeadAdapter) context;
     }
 
@@ -36,24 +43,21 @@ public class LeadRegisterAdapter extends RecyclerView.Adapter<LeadRegisterAdapte
 
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_list, parent, false);
-        ViewHolder vh = new ViewHolder(v);
-        return vh;
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+        View view = LayoutInflater.from(context).inflate(R.layout.item_list, viewGroup, false);
+        return new ViewHolder(view);
     }
 
     @Override
     public int getItemCount() {
-
-        if (Leadlist != null)
-            return Leadlist.size();
-        return 0;
+        return filteredNameList.size();
     }
+
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         final Leads lead = Leadlist.get(position);
-        Log.i("lead", lead.getOpp_name());
+
         //healah salah iki lo
         //oalah iku sg nde settext uduk teko model?
         //yoteko model tapi kan sng di celuk variabel e
@@ -72,7 +76,12 @@ public class LeadRegisterAdapter extends RecyclerView.Adapter<LeadRegisterAdapte
         holder.tvContact.setText(lead.getId_customer());
         holder.etClosing_date.setText(lead.getClosing_date());
         holder.tvStatus.setText(lead.getResult());
-        holder.tvamount.setText(lead.getAmount());
+        if (!lead.getAmount().isEmpty()) {
+            holder.tvamount.setText(formatRupiah.format(Integer.parseInt(lead.getAmount())));
+        } else {
+            holder.tvamount.setText(formatRupiah.format(Integer.parseInt(lead.getAmount())));
+        }
+
         holder.tvinfo.setText(lead.getInfo());
 
     }
@@ -80,31 +89,30 @@ public class LeadRegisterAdapter extends RecyclerView.Adapter<LeadRegisterAdapte
     @Override
     public Filter getFilter() {
         return new Filter() {
-
             @Override
             protected FilterResults performFiltering(CharSequence constraint) {
                 String charSequenceString = constraint.toString();
                 if (charSequenceString.isEmpty()) {
-                    filteredList = Leadlist;
+                    filteredNameList = Leadlist;
                 } else {
-                    List<Leads> filteredList2 = new ArrayList<>();
+                    List<Leads> filteredList = new ArrayList<>();
                     for (Leads lead : Leadlist) {
                         if (lead.getLead_id().toLowerCase().contains(charSequenceString.toLowerCase())) {
-                            filteredList2.add(lead);
+                            filteredList.add(lead);
                         }
-                        filteredList = filteredList2;
+                        filteredNameList = filteredList;
                     }
 
                 }
                 FilterResults results = new FilterResults();
-                results.values = filteredList;
+                results.values = filteredNameList;
                 return results;
 
             }
 
             @Override
             protected void publishResults(CharSequence charSequence, FilterResults results) {
-                filteredList = (List<Leads>) results.values;
+                filteredNameList = (List<Leads>) results.values;
                 notifyDataSetChanged();
             }
 

@@ -14,7 +14,6 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -55,14 +54,14 @@ public class LeadRegister extends AppCompatActivity implements LeadRegisterAdapt
     SearchView searchView;
     ProgressBar progresslead;
     Spinner spinContact, spinnSales, spinPresales;
-    TextView mName, mEmail, mlead, mopp, mcoba, mstatus;
+    TextView mName, mEmail, mlead, mopp, mcoba, mstatus, mAmount;
     LeadRegisterAdapter leadsAdapter;
     Button btnAddlead;
     ArrayAdapter<String> SpinnerAdapter;
     DatePickerDialog.OnDateSetListener date;
     Calendar myCalendar;
     EditText closing_date, opp_name;
-    String sales2, contact2, presales2, opp_name2, tgl2;
+    String sales2, contact2, presales2, opp_name2, tgl2, amounts;
 
 
     @Override
@@ -79,6 +78,8 @@ public class LeadRegister extends AppCompatActivity implements LeadRegisterAdapt
         spinPresales = findViewById(R.id.presales);
         closing_date = findViewById(R.id.closing_date);
         searchView = findViewById(R.id.search_view);
+        mAmount = findViewById(R.id.maamount);
+
 //      swipeRefreshLayout = findViewById(R.id.swiperefreshLayout);
         tampilkanlead();
 
@@ -92,6 +93,8 @@ public class LeadRegister extends AppCompatActivity implements LeadRegisterAdapt
         SalesName = new ArrayList<String>();
         ContactName = new ArrayList<String>();
         PresalesName = new ArrayList<String>();
+
+//        mAmount.addTextChangedListener(watch);
 
         myCalendar = Calendar.getInstance();
         date = new DatePickerDialog.OnDateSetListener() {
@@ -131,27 +134,26 @@ public class LeadRegister extends AppCompatActivity implements LeadRegisterAdapt
             }
         });
 
-        searchView.setOnQueryTextListener(
-                new SearchView.OnQueryTextListener() {
-                    @Override
-                    public boolean onQueryTextSubmit(String query) {
-                        {
-                            leadsAdapter.getFilter().filter(query);
-                            return false;
-                        }
-                    }
-
-                    @Override
-                    public boolean onQueryTextChange(String query) {
-                        leadsAdapter.getFilter().filter(query);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String queryString) {
+                {
+                    leadsAdapter.getFilter().filter(queryString);
+                    Log.i(queryString, "onQueryTextSubmit: ");
                         return true;
                     }
+            }
 
-
-                });
-
+            @Override
+            public boolean onQueryTextChange(String queryString) {
+                leadsAdapter.getFilter().filter(queryString);
+                Log.i(queryString, "onQueryTextSubmit: ");
+                return false;
+            }
+        });
 
     }
+
 
     private void addlead() {
         Intent intent = new Intent(LeadRegister.this, AddLeadActivity.class);
@@ -226,12 +228,14 @@ public class LeadRegister extends AppCompatActivity implements LeadRegisterAdapt
         final String contact = "null";
         final String sales = "null";
         final String status = "null";
+        final String amount = "null";
         try {
             jobj.put("lead_id", lead_id);
             jobj.put("opp_name", opp_name);
             jobj.put("contact", contact);
             jobj.put("sales", sales);
             jobj.put("status", status);
+            jobj.put("amounts", amount);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -272,9 +276,11 @@ public class LeadRegister extends AppCompatActivity implements LeadRegisterAdapt
                                 item.setOpp_name(o.getString("opp_name"));
                                 item.setNik(o.getString("name"));
                                 item.setId_customer(o.getString("customer_legal_name"));
-                                item.setClosing_date(o.getString("closing_date"));
+                                item.setClosing_date(o.getString("closing_dates"));
                                 item.setResult(o.getString("results"));
+                                item.setAmount(o.getString("amounts"));
                                 lList.add(item);
+                                Log.i(item.getResult(), "onResponse: ");
                             }
                             leadsAdapter.notifyDataSetChanged();
 

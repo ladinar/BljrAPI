@@ -16,8 +16,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-
             <TextView
+                android:textSize="10pt"
+                android:textStyle="bold"
                 android:id="@+id/mlead"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -30,7 +31,7 @@
 
             <TextView
                 android:id="@+id/mopty"
-                android:layout_width="match_parent"
+                android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:layout_marginStart="8dp"
@@ -38,6 +39,17 @@
                 android:ellipsize="end"
                 android:maxLines="1"
                 android:text="coba2"></TextView>
+
+            <TextView
+                android:id="@+id/mContact"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="coba4"></TextView>
 
             <TextView
                 android:id="@+id/mSales"
@@ -50,24 +62,12 @@
                 android:maxLines="1"
                 android:text="coba3"></TextView>
 
-            <TextView
-                android:id="@+id/mContact"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_marginStart="8dp"
-                android:layout_marginLeft="8dp"
-                android:ellipsize="end"
-                android:maxLines="1"
-                android:text="coba4"></TextView>
 
             <TextView
-                android:id="@+id/mClosing_date"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_marginStart="8dp"
                 android:layout_marginLeft="8dp"
+                android:id="@+id/mClosing_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:ellipsize="end"
                 android:maxLines="1"
                 android:text="coba4"></TextView>
@@ -94,10 +94,23 @@
                 android:maxLines="1"
                 android:text="coba4"></TextView>
 
-</LinearLayout>
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            </ImageView>
+
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="0dp"
+            android:src="@drawable/ic_create_black_24dp" />
 
 
     </androidx.cardview.widget.CardView>
+
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView2"
@@ -107,6 +120,7 @@
         android:layout_alignParentRight="true"
         android:layout_marginRight="0dp"
         app:cardBackgroundColor="@color/colorAccent">
+
 
         <TextView
             android:id="@+id/mStatus"

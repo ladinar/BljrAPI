@@ -7,25 +7,25 @@ public class Leads implements Serializable {
     private String opp_name;
     private String nik;
     private String id_customer;
-    private String closing_date;
-    private String result;
-    private String amount;
+    private String closing_dates;
+    private String results;
+    private String amounts;
     private String info;
 
     public String getResult() {
-        return result;
+        return results;
     }
 
     public void setResult(String result) {
-        this.result = result;
+        this.results = result;
     }
 
     public String getClosing_date() {
-        return closing_date;
+        return closing_dates;
     }
 
     public void setClosing_date(String closing_date) {
-        this.closing_date = closing_date;
+        this.closing_dates = closing_date;
     }
 
     public String getLead_id() {
@@ -61,11 +61,11 @@ public class Leads implements Serializable {
     }
 
     public String getAmount() {
-        return amount;
+        return amounts;
     }
 
     public void setAmount(String amount) {
-        this.amount = amount;
+        this.amounts = amount;
     }
 
     public String getInfo() {

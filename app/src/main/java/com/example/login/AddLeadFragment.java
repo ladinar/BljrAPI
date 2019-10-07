@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,6 +32,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -66,6 +70,8 @@ public class AddLeadFragment extends Fragment {
         amount = view.findViewById(R.id.edittext_enter_amount);
         info = view.findViewById(R.id.edittext_info);
 
+        amount.addTextChangedListener(onTextChangedListener());
+
         myCalendar = Calendar.getInstance();
         date = new DatePickerDialog.OnDateSetListener() {
             @Override
@@ -91,7 +97,7 @@ public class AddLeadFragment extends Fragment {
                 contact2 = spinContact.getSelectedItem().toString().trim();
                 opp_name2 = opp_name.getText().toString().trim();
                 tgl2 = closingdate.getText().toString().trim();
-                amount2 = amount.getText().toString().trim();
+                amount2 = amount.getText().toString().trim().replaceAll(",", "");
                 info2 = info.getText().toString().trim();
                 if (opp_name2.isEmpty() && tgl2.isEmpty() && info2.isEmpty() && amount2.isEmpty()) {
                     opp_name.setError("Please Fill this field!");
@@ -269,4 +275,47 @@ public class AddLeadFragment extends Fragment {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
+
+    private TextWatcher onTextChangedListener() {
+        return new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                amount.removeTextChangedListener(this);
+
+                try {
+                    String originalString = s.toString();
+
+                    Long longval;
+                    if (originalString.contains(",")) {
+                        originalString = originalString.replaceAll(",", "");
+                    }
+
+                    longval = Long.parseLong(originalString);
+
+                    DecimalFormat formatter = (DecimalFormat) NumberFormat.getInstance(Locale.US);
+                    formatter.applyPattern("#,###,###,###");
+                    String formattedString = formatter.format(longval);
+
+                    //setting text after format to EditText
+                    amount.setText(formattedString);
+                    amount.setSelection(amount.getText().length());
+                } catch (NumberFormatException nfe) {
+                    nfe.printStackTrace();
+                }
+
+                amount.addTextChangedListener(this);
+            }
+        };
+    }
+
 }
