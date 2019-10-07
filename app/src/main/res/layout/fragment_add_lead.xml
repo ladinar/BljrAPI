@@ -1,44 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#F3F3F3"
-    android:gravity="center"
     android:orientation="vertical"
     tools:context=".AddLeadFragment">
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/bg_lead"
-        android:gravity="center_horizontal">
+        android:orientation="vertical"
+        android:paddingLeft="16dp"
+        android:paddingTop="16dp"
+        android:paddingRight="16dp">
 
         <TextView
             android:id="@+id/textview_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="0dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="0dp"
             android:text="Add Lead Register"
             android:textSize="20dp"
             android:textStyle="bold" />
 
+        <EditText
+            android:id="@+id/edit_lead"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="200dp"
+            android:layout_marginTop="30dp"
+            android:text="Lead"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:visibility="gone" />
+
         <TextView
-            android:id="@+id/textview_owner"
+            android:id="@+id/view_sales"
+            android:layout_marginTop="20dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="0dp"
-            android:layout_marginTop="60dp"
+            android:maxLines="1"
             android:text="Owner"
             android:textColor="#60CEFF"
             android:textSize="10dp" />
 
+
         <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+            android:layout_marginTop="0dp"
             android:id="@+id/spinner_sales"
             android:layout_marginLeft="0dp"
-            android:layout_marginTop="80dp"
+            android:padding="10dp"
             android:background="@drawable/back"
             android:layout_width="300dp"
             android:layout_height="55dp"
@@ -46,21 +61,23 @@
             app:hintText="Select Owner" />
 
         <TextView
-            android:id="@+id/textview_customer"
-            android:layout_width="wrap_content"
+            android:id="@+id/view_contact"
+            android:layout_width="300dp"
+            android:layout_marginTop="10dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="0dp"
-            android:layout_marginTop="150dp"
+            android:maxLines="1"
             android:text="Customer (Brand Name)"
             android:textColor="#60CEFF"
             android:textSize="10dp" />
 
         <com.toptoche.searchablespinnerlibrary.SearchableSpinner
             android:id="@+id/spinner_contact"
+            android:layout_marginTop="0dp"
             android:layout_width="300dp"
             android:layout_height="55dp"
             android:layout_marginLeft="0dp"
-            android:layout_marginTop="170dp"
+            android:padding="10dp"
             android:background="@drawable/back"
             app:hintText="Select Customer" />
 
@@ -69,7 +86,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="0dp"
-            android:layout_marginTop="240dp"
+            android:layout_marginTop="10dp"
             android:text="Opportunity Name"
             android:textColor="#60CEFF"
             android:textSize="10dp" />
@@ -79,7 +96,7 @@
             android:id="@+id/textview_enter_oppty"
             android:layout_height="70dp"
             android:layout_marginLeft="0dp"
-            android:layout_marginTop="260dp"
+            android:layout_marginTop="0dp"
             android:background="@drawable/back"
             android:padding="15dp"
             android:hint="Enter opportunity name"
@@ -91,7 +108,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="0dp"
-            android:layout_marginTop="340dp"
+            android:layout_marginTop="10dp"
             android:text="Amount"
             android:textColor="#60CEFF"
             android:textSize="10dp" />
@@ -102,7 +119,7 @@
             android:layout_height="55dp"
             android:layout_marginLeft="0dp"
             android:id="@+id/edittext_enter_amount"
-            android:layout_marginTop="355dp"
+            android:layout_marginTop="0dp"
             android:background="@drawable/back"
             android:drawableLeft="@drawable/rp"
             android:drawablePadding="5dp"
@@ -116,7 +133,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="0dp"
-            android:layout_marginTop="420dp"
+            android:layout_marginTop="10dp"
             android:text="Close Date"
             android:textColor="#60CEFF"
             android:textSize="10dp" />
@@ -126,7 +143,7 @@
             android:layout_height="55dp"
             android:id="@+id/edittext_select_date"
             android:layout_marginLeft="0dp"
-            android:layout_marginTop="435dp"
+            android:layout_marginTop="0dp"
             android:background="@drawable/back"
             android:drawableLeft="@drawable/calendar_img"
             android:clickable="true"
@@ -142,7 +159,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="0dp"
-            android:layout_marginTop="500dp"
+            android:layout_marginTop="10dp"
             android:text="*optional"
             android:textColor="#A1A1A1"
             android:textSize="8dp" />
@@ -152,7 +169,7 @@
             android:id="@+id/edittext_info"
             android:layout_height="70dp"
             android:layout_marginLeft="0dp"
-            android:layout_marginTop="520dp"
+            android:layout_marginTop="0dp"
             android:background="@drawable/back"
             android:hint="Enter information"
             android:padding="15dp"
@@ -161,25 +178,217 @@
             android:textSize="13dp" />
 
         <Button
-            android:id="@+id/btn_cancel"
-            android:layout_width="86dp"
-            android:layout_height="32dp"
-            android:layout_marginLeft="0dp"
-            android:layout_marginTop="600dp"
-            android:textColor="@color/cardview_light_background"
-            android:background="@drawable/button_cancel"
-            android:hint="Cancel" />
-
-        <Button
             android:id="@+id/btn_submit"
-            android:layout_width="86dp"
-            android:layout_height="32dp"
-            android:layout_marginLeft="215dp"
-            android:layout_marginTop="600dp"
+            android:layout_width="300dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="0dp"
+            android:layout_marginTop="10dp"
             android:background="@drawable/button_submit"
             android:hint="Submit"
             android:textColorHint="@android:color/white" />
 
-    </RelativeLayout>
+        <Button
+            android:id="@+id/btn_edit"
+            android:layout_width="300dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="0dp"
+            android:layout_marginTop="10dp"
+            android:background="#f7e127"
+            android:hint="Update"
+            android:textColorHint="@android:color/white"
+            android:visibility="gone" />
 
-</FrameLayout>
+
+    </LinearLayout>
+
+    <!--    <RelativeLayout-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="match_parent"-->
+    <!--        android:gravity="center_horizontal">-->
+
+    <!--        <TextView-->
+    <!--            android:id="@+id/textview_title"-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_marginLeft="0dp"-->
+    <!--            android:layout_marginTop="20dp"-->
+    <!--            android:text="Add Lead Register"-->
+    <!--            android:textSize="20dp"-->
+    <!--            android:textStyle="bold" />-->
+
+    <!--        <EditText-->
+    <!--            android:id="@+id/edit_lead"-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_marginLeft="200dp"-->
+    <!--            android:layout_marginTop="30dp"-->
+    <!--            android:text="Lead"-->
+    <!--            android:textSize="20dp"-->
+    <!--            android:textStyle="bold" />-->
+
+    <!--        <TextView-->
+    <!--            android:maxLines="1"-->
+    <!--            android:id="@+id/view_sales"-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_marginLeft="0dp"-->
+    <!--            android:layout_marginTop="60dp"-->
+    <!--            android:text="Owner"-->
+    <!--            android:textColor="#60CEFF"-->
+    <!--            android:textSize="10dp" />-->
+
+
+    <!--        <com.toptoche.searchablespinnerlibrary.SearchableSpinner-->
+    <!--            android:padding="10dp"-->
+    <!--            android:id="@+id/spinner_sales"-->
+    <!--            android:layout_marginLeft="0dp"-->
+    <!--            android:layout_marginTop="80dp"-->
+    <!--            android:background="@drawable/back"-->
+    <!--            android:layout_width="300dp"-->
+    <!--            android:layout_height="55dp"-->
+    <!--            android:pointerIcon="arrow"-->
+    <!--            app:hintText="Select Owner" />-->
+
+
+    <!--        <TextView-->
+    <!--            android:maxLines="1"-->
+    <!--            android:id="@+id/view_contact"-->
+    <!--            android:layout_width="300dp"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_marginLeft="0dp"-->
+    <!--            android:layout_marginTop="150dp"-->
+    <!--            android:text="Customer (Brand Name)"-->
+    <!--            android:textColor="#60CEFF"-->
+    <!--            android:textSize="10dp" />-->
+
+    <!--        <com.toptoche.searchablespinnerlibrary.SearchableSpinner-->
+    <!--            android:id="@+id/spinner_contact"-->
+    <!--            android:padding="10dp"-->
+    <!--            android:layout_width="300dp"-->
+    <!--            android:layout_height="55dp"-->
+    <!--            android:layout_marginLeft="0dp"-->
+    <!--            android:layout_marginTop="170dp"-->
+    <!--            android:background="@drawable/back"-->
+    <!--            app:hintText="Select Customer" />-->
+
+    <!--        <TextView-->
+    <!--            android:id="@+id/textview_oppty"-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_marginLeft="0dp"-->
+    <!--            android:layout_marginTop="240dp"-->
+    <!--            android:text="Opportunity Name"-->
+    <!--            android:textColor="#60CEFF"-->
+    <!--            android:textSize="10dp" />-->
+
+    <!--        <EditText-->
+    <!--            android:layout_width="300dp"-->
+    <!--            android:id="@+id/textview_enter_oppty"-->
+    <!--            android:layout_height="70dp"-->
+    <!--            android:layout_marginLeft="0dp"-->
+    <!--            android:layout_marginTop="260dp"-->
+    <!--            android:background="@drawable/back"-->
+    <!--            android:padding="15dp"-->
+    <!--            android:hint="Enter opportunity name"-->
+    <!--            android:textColor="#A1A1A1"-->
+    <!--            android:textSize="13dp" />-->
+
+    <!--        <TextView-->
+    <!--            android:id="@+id/textview_amount"-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_marginLeft="0dp"-->
+    <!--            android:layout_marginTop="340dp"-->
+    <!--            android:text="Amount"-->
+    <!--            android:textColor="#60CEFF"-->
+    <!--            android:textSize="10dp" />-->
+
+    <!--        <EditText-->
+    <!--            android:inputType="numberDecimal"-->
+    <!--            android:layout_width="300dp"-->
+    <!--            android:layout_height="55dp"-->
+    <!--            android:layout_marginLeft="0dp"-->
+    <!--            android:id="@+id/edittext_enter_amount"-->
+    <!--            android:layout_marginTop="355dp"-->
+    <!--            android:background="@drawable/back"-->
+    <!--            android:drawableLeft="@drawable/rp"-->
+    <!--            android:drawablePadding="5dp"-->
+    <!--            android:paddingLeft="15dp"-->
+    <!--            android:hint="Enter amount"-->
+    <!--            android:textColor="#A1A1A1"-->
+    <!--            android:textSize="13dp" />-->
+
+    <!--        <TextView-->
+    <!--            android:id="@+id/textview_close_date"-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_marginLeft="0dp"-->
+    <!--            android:layout_marginTop="420dp"-->
+    <!--            android:text="Close Date"-->
+    <!--            android:textColor="#60CEFF"-->
+    <!--            android:textSize="10dp" />-->
+
+    <!--        <EditText-->
+    <!--            android:layout_width="300dp"-->
+    <!--            android:layout_height="55dp"-->
+    <!--            android:id="@+id/edittext_select_date"-->
+    <!--            android:layout_marginLeft="0dp"-->
+    <!--            android:layout_marginTop="435dp"-->
+    <!--            android:background="@drawable/back"-->
+    <!--            android:drawableLeft="@drawable/calendar_img"-->
+    <!--            android:clickable="true"-->
+    <!--            android:drawablePadding="5dp"-->
+    <!--            android:focusable="false"-->
+    <!--            android:paddingLeft="15dp"-->
+    <!--            android:hint="Select date"-->
+    <!--            android:textSize="13dp"-->
+    <!--            android:textColor="#A1A1A1" />-->
+
+    <!--        <TextView-->
+    <!--            android:id="@+id/textview_optional"-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_marginLeft="0dp"-->
+    <!--            android:layout_marginTop="500dp"-->
+    <!--            android:text="*optional"-->
+    <!--            android:textColor="#A1A1A1"-->
+    <!--            android:textSize="8dp" />-->
+
+    <!--        <EditText-->
+    <!--            android:layout_width="300dp"-->
+    <!--            android:id="@+id/edittext_info"-->
+    <!--            android:layout_height="70dp"-->
+    <!--            android:layout_marginLeft="0dp"-->
+    <!--            android:layout_marginTop="520dp"-->
+    <!--            android:background="@drawable/back"-->
+    <!--            android:hint="Enter information"-->
+    <!--            android:padding="15dp"-->
+    <!--            android:textColor="#A1A1A1"-->
+    <!--            android:inputType="text"-->
+    <!--            android:textSize="13dp" />-->
+
+    <!--        <Button-->
+    <!--            android:id="@+id/btn_submit"-->
+    <!--            android:layout_width="300dp"-->
+    <!--            android:layout_height="40dp"-->
+    <!--            android:layout_marginLeft="0dp"-->
+    <!--            android:layout_marginTop="600dp"-->
+    <!--            android:background="@drawable/button_submit"-->
+    <!--            android:hint="Submit"-->
+    <!--            android:textColorHint="@android:color/white" />-->
+
+    <!--        <Button-->
+    <!--            android:visibility="gone"-->
+    <!--            android:id="@+id/btn_edit"-->
+    <!--            android:layout_width="300dp"-->
+    <!--            android:layout_height="40dp"-->
+    <!--            android:layout_marginLeft="0dp"-->
+    <!--            android:layout_marginTop="600dp"-->
+    <!--            android:background="#f7e127"-->
+    <!--            android:hint="Update"-->
+    <!--            android:textColorHint="@android:color/white" />-->
+
+    <!--    </RelativeLayout>-->
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

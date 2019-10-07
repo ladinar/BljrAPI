@@ -16,6 +16,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
@@ -27,6 +28,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.login.model.Leads;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -42,6 +44,8 @@ import java.util.Locale;
 
 import util.Server;
 
+import static android.view.View.GONE;
+
 
 public class AddLeadFragment extends Fragment {
 
@@ -50,13 +54,12 @@ public class AddLeadFragment extends Fragment {
     Spinner spinContact, spinnSales;
     DatePickerDialog.OnDateSetListener date;
     Calendar myCalendar;
-    EditText closingdate, opp_name, amount, info;
-    Button btn_submit;
-    String sales2, contact2, opp_name2, tgl2, amount2, info2;
+    EditText closingdate, opp_name, amount, info, lead_edit;
+    Button btn_submit, btn_edit;
+    String sales2, contact2, opp_name2, tgl2, amount2, info2, lead_edit2;
+    TextView title, viewSales, viewContact;
+    Leads lead;
 
-    public AddLeadFragment() {
-        // Required empty public constructor
-    }
 
     @Override
     public View onCreateView(final LayoutInflater inflater, ViewGroup container,
@@ -66,9 +69,14 @@ public class AddLeadFragment extends Fragment {
         spinnSales = view.findViewById(R.id.spinner_sales);
         closingdate = view.findViewById(R.id.edittext_select_date);
         btn_submit = view.findViewById(R.id.btn_submit);
+        btn_edit = view.findViewById(R.id.btn_edit);
         opp_name = view.findViewById(R.id.textview_enter_oppty);
         amount = view.findViewById(R.id.edittext_enter_amount);
         info = view.findViewById(R.id.edittext_info);
+        title = view.findViewById(R.id.textview_title);
+        viewSales = view.findViewById(R.id.view_sales);
+        viewContact = view.findViewById(R.id.view_contact);
+        lead_edit = view.findViewById(R.id.edit_lead);
 
         amount.addTextChangedListener(onTextChangedListener());
 
@@ -110,9 +118,112 @@ public class AddLeadFragment extends Fragment {
                 }
             }
         });
+
+        btn_edit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                opp_name2 = opp_name.getText().toString().trim();
+                tgl2 = closingdate.getText().toString().trim();
+                amount2 = amount.getText().toString().trim().replaceAll(",", "");
+                info2 = info.getText().toString().trim();
+                lead_edit2 = lead_edit.getText().toString().trim();
+                if (opp_name2.isEmpty() && tgl2.isEmpty() && info2.isEmpty() && amount2.isEmpty()) {
+                    opp_name.setError("Please Fill this field!");
+                    closingdate.setError("Please Fill this field!");
+                    amount.setError("Please Fill this field!");
+                    info.setError("Please Fill this field!");
+
+                } else {
+                    updateLead();
+                }
+            }
+        });
+
+
+        lead = (Leads) getActivity().getIntent().getSerializableExtra(LeadRegister.LEADS1);
+        if (lead != null) {
+            spinContact.setVisibility(GONE);
+            spinnSales.setVisibility(GONE);
+            viewSales.setVisibility(GONE);
+            viewContact.setVisibility(GONE);
+            btn_edit.setVisibility(View.VISIBLE);
+            btn_submit.setVisibility(GONE);
+            fillData();
+        }
+
         return view;
 
 
+    }
+
+    private void fillData() {
+        title.setText("Edit " + lead.getLead_id());
+        opp_name.setText(lead.getOpp_name());
+        amount.setText(lead.getAmount());
+        viewSales.setText("Current Owner " + lead.getNik());
+        viewContact.setText("Current Customer " + lead.getId_customer());
+        closingdate.setText(lead.getClosing_date());
+        lead_edit.setText(lead.getLead_id());
+
+    }
+
+    private void updateLead() {
+        final JSONObject jobj = new JSONObject();
+        try {
+            jobj.put("spinContact", contact2);
+            jobj.put("mopp", opp_name2);
+            jobj.put("spinnSales", sales2);
+            jobj.put("closing_date", tgl2);
+            jobj.put("amount", amount2);
+            jobj.put("info", info2);
+            jobj.put("lead_edit", lead_edit2);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        final JsonObjectRequest strReq = new JsonObjectRequest(Request.Method.POST, Server.URL_updateLead, jobj, new Response.Listener<JSONObject>() {
+
+            @Override
+            public void onResponse(JSONObject response) {
+                Log.i("response", response.toString());
+                JSONObject jObj = response;
+                String success = null;
+                try {
+                    success = jObj.getString("success");
+
+                    if (success.equals("1")) {
+                        Intent intent = new Intent(getActivity(), LeadRegister.class);
+                        Toast.makeText(getActivity(), "Lead Id Updated Successfully :)", Toast.LENGTH_LONG).show();
+                        startActivity(intent);
+
+                    } else {
+                        Toast.makeText(getActivity(), "salah!", Toast.LENGTH_LONG).show();
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+
+                    Toast.makeText(getActivity(), "Ora oleh data", Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        error.printStackTrace();
+                        NetworkResponse response = error.networkResponse;
+                        String errorMsg = "";
+                        if (response != null && response.data != null) {
+                            String errorString = new String(response.data);
+                            Log.i("log error", errorString);
+                        }
+                        Toast.makeText(getActivity(), "Error" + error.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+        RequestQueue requestQueue = Volley.newRequestQueue(getContext());
+        requestQueue.add(strReq);
     }
 
     private void storeLead() {

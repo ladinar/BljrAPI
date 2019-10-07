@@ -47,6 +47,7 @@ import util.Server;
 public class LeadRegister extends AppCompatActivity implements LeadRegisterAdapter.ILeadAdapter {
 
     public static final String LEADS1 = "leads";
+    public static final int REQUEST_CODE_EDIT = 99;
     public List<Leads> lList = new ArrayList<>();
     public List<String> SalesName, ContactName, PresalesName;
     public static String lead_id;
@@ -62,6 +63,7 @@ public class LeadRegister extends AppCompatActivity implements LeadRegisterAdapt
     Calendar myCalendar;
     EditText closing_date, opp_name, searchText;
     String sales2, contact2, presales2, opp_name2, tgl2, amounts;
+    int itemPos;
 
 
     @Override
@@ -385,6 +387,27 @@ public class LeadRegister extends AppCompatActivity implements LeadRegisterAdapt
         intent.putExtra(LEADS1, lList.get(pos));
         startActivity(intent);
 
+    }
+
+    @Override
+    public void doEdit(int pos) {
+        itemPos = pos;
+        Intent intent = new Intent(LeadRegister.this, AddLeadActivity.class);
+        intent.putExtra(LEADS1, lList.get(pos));
+        startActivityForResult(intent, REQUEST_CODE_EDIT);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_CODE_EDIT && resultCode == RESULT_OK) {
+            Leads lead = (Leads) data.getSerializableExtra(LEADS1);
+            lList.remove(itemPos);
+            lList.add(itemPos, lead);
+            leadsAdapter.notifyDataSetChanged();
+
+        }
     }
 
 //

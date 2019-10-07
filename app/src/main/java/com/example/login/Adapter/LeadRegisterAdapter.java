@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -37,6 +38,8 @@ public class LeadRegisterAdapter extends RecyclerView.Adapter<LeadRegisterAdapte
 
     public interface ILeadAdapter {
         void doClick(int pos);
+
+        void doEdit(int pos);
     }
 
     @NonNull
@@ -84,51 +87,24 @@ public class LeadRegisterAdapter extends RecyclerView.Adapter<LeadRegisterAdapte
 
     }
 
-//    @Override
-//    public Filter getFilter() {
-//        return new Filter() {
-//            @Override
-//            protected FilterResults performFiltering(CharSequence constraint) {
-//                String charSequenceString = constraint.toString();
-//
-//                if (charSequenceString.isEmpty()){
-//                    filteredNameList = Leadlist;
-//                }else {
-//                    List<Leads> filteredList = new ArrayList<>();
-//                    for (Leads lead : Leadlist){
-//                        if (lead.getLead_id().toLowerCase().contains(charSequenceString.toLowerCase())){
-//                            filteredList.add(lead);
-//                        }
-//                        filteredNameList = filteredList;
-//                    }
-//                }
-//                FilterResults results = new FilterResults();
-//                results.values = filteredNameList;
-//                return  results;
-//
-//            }
-//
-//            @Override
-//            protected void publishResults(CharSequence charSequence, FilterResults results) {
-//                filteredNameList = (List<Leads>) results.values;
-//                notifyDataSetChanged();
-//            }
-//
-//
-//        };
-//
-//    }
-
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView tvLead, tvOpty, tvSales, tvContact, etClosing_date, tvStatus, tvamount, tvinfo;
+        ImageView ivEdit;
 
         public ViewHolder(View itemView) {
             super(itemView);
-
+            ivEdit = itemView.findViewById(R.id.iv_edit);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     mILeadAdapter.doClick(getAdapterPosition());
+                }
+            });
+
+            ivEdit.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    mILeadAdapter.doEdit(getAdapterPosition());
                 }
             });
 
