@@ -2,7 +2,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:padding="16dp"
     android:id="@+id/container"
     android:scrollbars="vertical"
@@ -142,19 +141,26 @@
             android:text="Add Lead Register"
             android:textColor="@color/cardview_light_background"></Button>
 
-        <androidx.appcompat.widget.SearchView
+    <!--        <androidx.appcompat.widget.SearchView-->
+    <!--            android:id="@+id/search_view"-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_marginStart="8dp"-->
+    <!--            android:layout_marginTop="8dp"-->
+    <!--            android:layout_marginEnd="8dp"-->
+    <!--            app:layout_constraintEnd_toEndOf="parent"-->
+    <!--            app:layout_constraintStart_toStartOf="parent"-->
+    <!--            app:layout_constraintTop_toTopOf="parent"-->
+    <!--            app:queryHint="Enter Lead">-->
+
+    <!--        </androidx.appcompat.widget.SearchView>-->
+    <EditText
+        android:layout_height="match_parent"
+        android:drawableLeft="@android:drawable/ic_search_category_default"
             android:id="@+id/search_view"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:queryHint="Enter Lead">
-
-        </androidx.appcompat.widget.SearchView>
+        android:hint="Search Lead"
+        android:padding="16dp" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"

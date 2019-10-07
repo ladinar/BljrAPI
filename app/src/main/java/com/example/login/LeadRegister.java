@@ -3,6 +3,8 @@ package com.example.login;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -15,7 +17,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -47,11 +48,10 @@ public class LeadRegister extends AppCompatActivity implements LeadRegisterAdapt
 
     public static final String LEADS1 = "leads";
     public List<Leads> lList = new ArrayList<>();
-    public List<Leads> lListFilter = new ArrayList<>();
     public List<String> SalesName, ContactName, PresalesName;
     public static String lead_id;
     public static String name_sales;
-    SearchView searchView;
+    //    SearchView searchView;
     ProgressBar progresslead;
     Spinner spinContact, spinnSales, spinPresales;
     TextView mName, mEmail, mlead, mopp, mcoba, mstatus, mAmount;
@@ -60,7 +60,7 @@ public class LeadRegister extends AppCompatActivity implements LeadRegisterAdapt
     ArrayAdapter<String> SpinnerAdapter;
     DatePickerDialog.OnDateSetListener date;
     Calendar myCalendar;
-    EditText closing_date, opp_name;
+    EditText closing_date, opp_name, searchText;
     String sales2, contact2, presales2, opp_name2, tgl2, amounts;
 
 
@@ -77,7 +77,7 @@ public class LeadRegister extends AppCompatActivity implements LeadRegisterAdapt
         spinContact = findViewById(R.id.contact);
         spinPresales = findViewById(R.id.presales);
         closing_date = findViewById(R.id.closing_date);
-        searchView = findViewById(R.id.search_view);
+        searchText = findViewById(R.id.search_view);
         mAmount = findViewById(R.id.maamount);
 
 //      swipeRefreshLayout = findViewById(R.id.swiperefreshLayout);
@@ -134,24 +134,52 @@ public class LeadRegister extends AppCompatActivity implements LeadRegisterAdapt
             }
         });
 
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+//        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+//            @Override
+//            public boolean onQueryTextSubmit(String queryString) {
+//                {
+//                    return false;
+//                }
+//            }
+//
+//            @Override
+//            public boolean onQueryTextChange(String queryString) {
+//                leadsAdapter.getFilter().filter(queryString);
+//                Log.i(queryString, "onQueryTextSubmit: ");
+//                return false;
+//            }
+//        });
+
+        searchText.addTextChangedListener(new TextWatcher() {
+
             @Override
-            public boolean onQueryTextSubmit(String queryString) {
-                {
-                    leadsAdapter.getFilter().filter(queryString);
-                    Log.i(queryString, "onQueryTextSubmit: ");
-                        return true;
-                    }
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
             }
 
             @Override
-            public boolean onQueryTextChange(String queryString) {
-                leadsAdapter.getFilter().filter(queryString);
-                Log.i(queryString, "onQueryTextSubmit: ");
-                return false;
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                filter(s.toString());
             }
         });
 
+    }
+
+    private void filter(String s) {
+        ArrayList<Leads> filteredList = new ArrayList<>();
+
+        for (Leads item : lList) {
+            if (item.getLead_id().toLowerCase().contains(s.toLowerCase())) {
+                filteredList.add(item);
+            }
+        }
+
+        leadsAdapter.filterList(filteredList);
     }
 
 

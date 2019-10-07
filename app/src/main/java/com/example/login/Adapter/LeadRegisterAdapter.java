@@ -4,8 +4,6 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Filter;
-import android.widget.Filterable;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -19,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-public class LeadRegisterAdapter extends RecyclerView.Adapter<LeadRegisterAdapter.ViewHolder> implements Filterable {
+public class LeadRegisterAdapter extends RecyclerView.Adapter<LeadRegisterAdapter.ViewHolder> {
 
     List<Leads> Leadlist;
     List<Leads> filteredNameList;
@@ -43,14 +41,14 @@ public class LeadRegisterAdapter extends RecyclerView.Adapter<LeadRegisterAdapte
 
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View view = LayoutInflater.from(context).inflate(R.layout.item_list, viewGroup, false);
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_list, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
     public int getItemCount() {
-        return filteredNameList.size();
+        return Leadlist.size();
     }
 
 
@@ -86,40 +84,40 @@ public class LeadRegisterAdapter extends RecyclerView.Adapter<LeadRegisterAdapte
 
     }
 
-    @Override
-    public Filter getFilter() {
-        return new Filter() {
-            @Override
-            protected FilterResults performFiltering(CharSequence constraint) {
-                String charSequenceString = constraint.toString();
-                if (charSequenceString.isEmpty()) {
-                    filteredNameList = Leadlist;
-                } else {
-                    List<Leads> filteredList = new ArrayList<>();
-                    for (Leads lead : Leadlist) {
-                        if (lead.getLead_id().toLowerCase().contains(charSequenceString.toLowerCase())) {
-                            filteredList.add(lead);
-                        }
-                        filteredNameList = filteredList;
-                    }
-
-                }
-                FilterResults results = new FilterResults();
-                results.values = filteredNameList;
-                return results;
-
-            }
-
-            @Override
-            protected void publishResults(CharSequence charSequence, FilterResults results) {
-                filteredNameList = (List<Leads>) results.values;
-                notifyDataSetChanged();
-            }
-
-
-        };
-
-    }
+//    @Override
+//    public Filter getFilter() {
+//        return new Filter() {
+//            @Override
+//            protected FilterResults performFiltering(CharSequence constraint) {
+//                String charSequenceString = constraint.toString();
+//
+//                if (charSequenceString.isEmpty()){
+//                    filteredNameList = Leadlist;
+//                }else {
+//                    List<Leads> filteredList = new ArrayList<>();
+//                    for (Leads lead : Leadlist){
+//                        if (lead.getLead_id().toLowerCase().contains(charSequenceString.toLowerCase())){
+//                            filteredList.add(lead);
+//                        }
+//                        filteredNameList = filteredList;
+//                    }
+//                }
+//                FilterResults results = new FilterResults();
+//                results.values = filteredNameList;
+//                return  results;
+//
+//            }
+//
+//            @Override
+//            protected void publishResults(CharSequence charSequence, FilterResults results) {
+//                filteredNameList = (List<Leads>) results.values;
+//                notifyDataSetChanged();
+//            }
+//
+//
+//        };
+//
+//    }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView tvLead, tvOpty, tvSales, tvContact, etClosing_date, tvStatus, tvamount, tvinfo;
@@ -144,5 +142,10 @@ public class LeadRegisterAdapter extends RecyclerView.Adapter<LeadRegisterAdapte
             tvinfo = itemView.findViewById(R.id.minfo);
 
         }
+    }
+
+    public void filterList(ArrayList<Leads> filteredList) {
+        Leadlist = filteredList;
+        notifyDataSetChanged();
     }
 }
