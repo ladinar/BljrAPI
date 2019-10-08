@@ -4,7 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -36,25 +36,6 @@ public class LeadRegisterAdapter extends RecyclerView.Adapter<LeadRegisterAdapte
         mILeadAdapter = (ILeadAdapter) context;
     }
 
-    public interface ILeadAdapter {
-        void doClick(int pos);
-
-        void doEdit(int pos);
-    }
-
-    @NonNull
-    @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_list, parent, false);
-        return new ViewHolder(view);
-    }
-
-    @Override
-    public int getItemCount() {
-        return Leadlist.size();
-    }
-
-
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         final Leads lead = Leadlist.get(position);
@@ -84,16 +65,39 @@ public class LeadRegisterAdapter extends RecyclerView.Adapter<LeadRegisterAdapte
         }
 
         holder.tvinfo.setText(lead.getInfo());
+        holder.eLead.setText(lead.getLead_id());
 
     }
 
+    @NonNull
+    @Override
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_list, parent, false);
+        return new ViewHolder(view);
+    }
+
+    @Override
+    public int getItemCount() {
+        return Leadlist.size();
+    }
+
+
+    public interface ILeadAdapter {
+        void doClick(int pos);
+
+        void doEdit(int pos);
+
+        void doAssign(int pos);
+    }
+
     public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView tvLead, tvOpty, tvSales, tvContact, etClosing_date, tvStatus, tvamount, tvinfo;
-        ImageView ivEdit;
+        TextView tvLead, tvOpty, tvSales, tvContact, etClosing_date, tvStatus, tvamount, tvinfo, ivEdit, ivAssign;
+        EditText eLead;
 
         public ViewHolder(View itemView) {
             super(itemView);
             ivEdit = itemView.findViewById(R.id.iv_edit);
+            ivAssign = itemView.findViewById(R.id.iv_assign);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -108,6 +112,14 @@ public class LeadRegisterAdapter extends RecyclerView.Adapter<LeadRegisterAdapte
                 }
             });
 
+            ivAssign.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    mILeadAdapter.doAssign(getAdapterPosition());
+                }
+            });
+
+
             tvLead = itemView.findViewById(R.id.mlead);
             tvOpty = itemView.findViewById(R.id.mopty);
             tvSales = itemView.findViewById(R.id.mSales);
@@ -116,6 +128,7 @@ public class LeadRegisterAdapter extends RecyclerView.Adapter<LeadRegisterAdapte
             tvStatus = itemView.findViewById(R.id.mStatus);
             tvamount = itemView.findViewById(R.id.maamount);
             tvinfo = itemView.findViewById(R.id.minfo);
+            eLead = itemView.findViewById(R.id.eLead);
 
         }
     }
