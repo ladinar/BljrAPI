@@ -119,38 +119,12 @@ public class LeadRegister extends AppCompatActivity implements LeadRegisterAdapt
         btnAddlead.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                sales2 = spinnSales.getSelectedItem().toString().trim();
-//                contact2 = spinContact.getSelectedItem().toString().trim();
-//                presales2 = spinPresales.getSelectedItem().toString().trim();
-//                opp_name2 = mopp.getText().toString().trim();
-//                tgl2 = closing_date.getText().toString().trim();
-//                if (!sales2.isEmpty() && !contact2.isEmpty() && !opp_name2.isEmpty() && !tgl2.isEmpty()) {
-//                    storeLead();
-//                } else {
-//                    mopp.setError("Please Insert Email!");
-//                    closing_date.setError("Please insert Password!");
-//                }
-                addlead();
-
-
+                Intent intent = new Intent(LeadRegister.this, AddLeadActivity.class);
+                intent.putExtra("addlead", "coba");
+                startActivity(intent);
             }
         });
 
-//        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-//            @Override
-//            public boolean onQueryTextSubmit(String queryString) {
-//                {
-//                    return false;
-//                }
-//            }
-//
-//            @Override
-//            public boolean onQueryTextChange(String queryString) {
-//                leadsAdapter.getFilter().filter(queryString);
-//                Log.i(queryString, "onQueryTextSubmit: ");
-//                return false;
-//            }
-//        });
 
         searchText.addTextChangedListener(new TextWatcher() {
 
@@ -184,11 +158,6 @@ public class LeadRegister extends AppCompatActivity implements LeadRegisterAdapt
         leadsAdapter.filterList(filteredList);
     }
 
-
-    private void addlead() {
-        Intent intent = new Intent(LeadRegister.this, AddLeadActivity.class);
-        startActivity(intent);
-    }
 
     private void updatelabel() {
         String myFormat = "yyyy-MM-dd";
@@ -279,24 +248,13 @@ public class LeadRegister extends AppCompatActivity implements LeadRegisterAdapt
                     JSONObject jObj = response;
                     String success = jObj.getString("success");
                     if (success.equals("1")) {
-//                        JSONObject leads = new JSONObject();
                         JSONArray jray = jObj.getJSONArray("lead");
                         JSONArray jray_user = jObj.getJSONArray("sales_list");
                         JSONArray jray_contact = jObj.getJSONArray("contact_list");
                         JSONArray jray_presales = jObj.getJSONArray("presales_list");
-//                        JSONObject lead = jray.getJSONObject(0);
-//                        Intent intent = getIntent();
-//                        String extraName = intent.getStringExtra("name");
-//                        String extraEmail = intent.getStringExtra("email");
-
-//                        mName.setText(extraName);
-//                        mEmail.setText(extraEmail);
 
                         progresslead.setVisibility(View.GONE);
                         Log.i("response", String.valueOf(jray.length()));
-//                        mlead.setVisibility(View.VISIBLE);
-//                        mlead.setText(lead_id);
-//                        mopp.setText(opt_name);
 
                         if (response.length() > 0) {
                             for (int i = 0; i < jray.length(); i++) {
@@ -383,10 +341,10 @@ public class LeadRegister extends AppCompatActivity implements LeadRegisterAdapt
 
     @Override
     public void doClick(int pos) {
-        Intent intent = new Intent(this, DetailActivity.class);
+        Intent intent = new Intent(this, AddLeadActivity.class);
         intent.putExtra(LEADS1, lList.get(pos));
+        intent.putExtra("detail_lead", "coba");
         startActivity(intent);
-
     }
 
     @Override
