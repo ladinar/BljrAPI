@@ -10,7 +10,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
@@ -21,7 +20,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.android.volley.NetworkResponse;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -36,12 +34,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 
 import util.Server;
@@ -93,14 +88,6 @@ public class LeadRegister extends AppCompatActivity implements LeadRegisterAdapt
         SalesName = new ArrayList<String>();
         ContactName = new ArrayList<String>();
         PresalesName = new ArrayList<String>();
-
-        btnAddlead.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                addlead();
-            }
-        });
-
 
         searchText.addTextChangedListener(new TextWatcher() {
 
@@ -188,7 +175,6 @@ public class LeadRegister extends AppCompatActivity implements LeadRegisterAdapt
 //                        mName.setText(extraName);
 //                        mEmail.setText(extraEmail);
 
-                        progresslead.setVisibility(View.GONE);
                         Log.i("response", String.valueOf(jray.length()));
 //                        mlead.setVisibility(View.VISIBLE);
 //                        mlead.setText(lead_id);
@@ -257,6 +243,7 @@ public class LeadRegister extends AppCompatActivity implements LeadRegisterAdapt
         Intent intent = new Intent(this, DetailActivity.class);
         intent.putExtra(LEADS1, leadsAdapter.getItem(pos));
         startActivity(intent);
+
     }
 
     @Override
