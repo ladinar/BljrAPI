@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
@@ -20,6 +21,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.android.volley.NetworkResponse;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -34,9 +36,12 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import util.Server;
@@ -75,6 +80,7 @@ public class LeadRegister extends AppCompatActivity implements LeadRegisterAdapt
         btnPresales = findViewById(R.id.btn_presales);
         ivAssign = findViewById(R.id.iv_assign);
 
+//      swipeRefreshLayout = findViewById(R.id.swiperefreshLayout);
         tampilkanlead();
 
         RecyclerView recyclerView = findViewById(R.id.recyclerView);
@@ -84,9 +90,17 @@ public class LeadRegister extends AppCompatActivity implements LeadRegisterAdapt
         leadsAdapter = new LeadRegisterAdapter(this, lList);
         recyclerView.setAdapter(leadsAdapter);
 
-
         SalesName = new ArrayList<String>();
         ContactName = new ArrayList<String>();
+        PresalesName = new ArrayList<String>();
+
+        btnAddlead.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                addlead();
+            }
+        });
+
 
         searchText.addTextChangedListener(new TextWatcher() {
 
@@ -174,6 +188,7 @@ public class LeadRegister extends AppCompatActivity implements LeadRegisterAdapt
 //                        mName.setText(extraName);
 //                        mEmail.setText(extraEmail);
 
+                        progresslead.setVisibility(View.GONE);
                         Log.i("response", String.valueOf(jray.length()));
 //                        mlead.setVisibility(View.VISIBLE);
 //                        mlead.setText(lead_id);
@@ -194,31 +209,6 @@ public class LeadRegister extends AppCompatActivity implements LeadRegisterAdapt
                                 Log.i(item.getResult(), "onResponse: ");
                             }
                             leadsAdapter.notifyDataSetChanged();
-
-//                            for (int i = 0; i < jray_user.length(); i++) {
-//                                JSONObject users = jray_user.getJSONObject(i);
-//                                String sales = users.getString("name");
-//                                SalesName.add(sales);
-//                            }
-//
-//                            for (int i = 0; i < jray_contact.length(); i++) {
-//                                JSONObject contact = jray_contact.getJSONObject(i);
-//                                String contacts = contact.getString("brand_name");
-//                                ContactName.add(contacts);
-//                            }
-//
-//                            for (int i = 0; i < jray_presales.length(); i++) {
-//                                JSONObject presales = jray_presales.getJSONObject(i);
-//                                String presaleses = presales.getString("name");
-//                                PresalesName.add(presaleses);
-//
-//                            }
-//                            spinnSales.setAdapter(new ArrayAdapter<String>(LeadRegister.this, android.R.layout.simple_spinner_dropdown_item, SalesName));
-//
-//                            spinContact.setAdapter(new ArrayAdapter<String>(LeadRegister.this, android.R.layout.simple_spinner_dropdown_item, ContactName)
-//                            );
-//
-//                            spinPresales.setAdapter(new ArrayAdapter<String>(LeadRegister.this, android.R.layout.simple_spinner_dropdown_item, PresalesName));
 
                             //wes,
                             //ohh bedone construktor mbe getter setter ngono
@@ -267,7 +257,6 @@ public class LeadRegister extends AppCompatActivity implements LeadRegisterAdapt
         Intent intent = new Intent(this, DetailActivity.class);
         intent.putExtra(LEADS1, leadsAdapter.getItem(pos));
         startActivity(intent);
-
     }
 
     @Override
