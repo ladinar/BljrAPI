@@ -1,5 +1,6 @@
 package com.example.login;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -29,6 +30,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.login.Adapter.LeadRegisterAdapter;
 import com.example.login.model.Leads;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -55,14 +57,14 @@ public class LeadRegister extends AppCompatActivity implements LeadRegisterAdapt
     //    SearchView searchView;
     ProgressBar progresslead;
     Spinner spinContact, spinnSales, spinPresales;
-    TextView mName, mEmail, mlead, mopp, mcoba, mstatus, mAmount;
+    TextView mName, mEmail, mlead, mopp, mcoba, mstatus, mAmount, tvLead, ivAssign;
     LeadRegisterAdapter leadsAdapter;
-    Button btnAddlead;
+    Button btnAddlead, btnPresales;
     ArrayAdapter<String> SpinnerAdapter;
     DatePickerDialog.OnDateSetListener date;
-    Calendar myCalendar;
-    EditText closing_date, opp_name, searchText;
-    String sales2, contact2, presales2, opp_name2, tgl2, amounts;
+    EditText searchText, eLead;
+    FloatingActionButton fabutton;
+    String cek_status;
     int itemPos;
 
 
@@ -73,14 +75,10 @@ public class LeadRegister extends AppCompatActivity implements LeadRegisterAdapt
 
         mopp = findViewById(R.id.opty_name);
         mstatus = findViewById(R.id.mStatus);
-        progresslead = findViewById(R.id.progresslead);
-        btnAddlead = findViewById(R.id.addlead);
-        spinnSales = findViewById(R.id.sales);
-        spinContact = findViewById(R.id.contact);
-        spinPresales = findViewById(R.id.presales);
-        closing_date = findViewById(R.id.closing_date);
         searchText = findViewById(R.id.search_view);
         mAmount = findViewById(R.id.maamount);
+        btnPresales = findViewById(R.id.btn_presales);
+        ivAssign = findViewById(R.id.iv_assign);
 
 //      swipeRefreshLayout = findViewById(R.id.swiperefreshLayout);
         tampilkanlead();
@@ -96,32 +94,10 @@ public class LeadRegister extends AppCompatActivity implements LeadRegisterAdapt
         ContactName = new ArrayList<String>();
         PresalesName = new ArrayList<String>();
 
-//        mAmount.addTextChangedListener(watch);
-
-        myCalendar = Calendar.getInstance();
-        date = new DatePickerDialog.OnDateSetListener() {
-            @Override
-            public void onDateSet(DatePicker datePicker, int year, int monthOfYear, int dayOfMonth) {
-                myCalendar.set(Calendar.YEAR, year);
-                myCalendar.set(Calendar.MONTH, monthOfYear);
-                myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-                updatelabel();
-            }
-        };
-
-        closing_date.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                new DatePickerDialog(LeadRegister.this, date, myCalendar.get(Calendar.YEAR), myCalendar.get(Calendar.MONTH), myCalendar.get(Calendar.DAY_OF_MONTH)).show();
-            }
-        });
-
         btnAddlead.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(LeadRegister.this, AddLeadActivity.class);
-                intent.putExtra("addlead", "coba");
-                startActivity(intent);
+                addlead();
             }
         });
 
@@ -144,6 +120,14 @@ public class LeadRegister extends AppCompatActivity implements LeadRegisterAdapt
             }
         });
 
+        fabutton = findViewById(R.id.fab);
+        fabutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                addlead();
+            }
+        });
+
     }
 
     private void filter(String s) {
@@ -158,67 +142,10 @@ public class LeadRegister extends AppCompatActivity implements LeadRegisterAdapt
         leadsAdapter.filterList(filteredList);
     }
 
-
-    private void updatelabel() {
-        String myFormat = "yyyy-MM-dd";
-        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
-        closing_date.setText(sdf.format(myCalendar.getTime()));
+    private void addlead() {
+        Intent intent = new Intent(LeadRegister.this, AddLeadActivity.class);
+        startActivity(intent);
     }
-
-    private void storeLead() {
-        final JSONObject jobj = new JSONObject();
-        try {
-            jobj.put("spinContact", contact2);
-            jobj.put("mopp", opp_name2);
-            jobj.put("spinnSales", sales2);
-            jobj.put("closing_date", tgl2);
-
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-        final JsonObjectRequest strReq = new JsonObjectRequest(Request.Method.POST, Server.URL_storeLead, jobj, new Response.Listener<JSONObject>() {
-
-            @Override
-            public void onResponse(JSONObject response) {
-
-                try {
-                    Log.i("response", response.toString());
-                    JSONObject jObj = response;
-                    String success = jObj.getString("success");
-
-                    if (success.equals("1")) {
-                        Toast.makeText(LeadRegister.this, "Lead Id Created Successfully :)", Toast.LENGTH_LONG).show();
-                    } else {
-                        Toast.makeText(LeadRegister.this, "email atau password salah", Toast.LENGTH_LONG).show();
-                    }
-                } catch (JSONException e) {
-                    // JSON error
-                    e.printStackTrace();
-
-                    Toast.makeText(LeadRegister.this, "Ora oleh data", Toast.LENGTH_SHORT).show();
-                }
-
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                error.printStackTrace();
-                NetworkResponse response = error.networkResponse;
-                String errorMsg = "";
-                if (response != null && response.data != null) {
-                    String errorString = new String(response.data);
-                    Log.i("log error", errorString);
-                }
-                Toast.makeText(LeadRegister.this, "Error" + error.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        RequestQueue requestQueue = Volley.newRequestQueue(this);
-        requestQueue.add(strReq);
-
-    }
-
 
     private void tampilkanlead() {
         final JSONObject jobj = new JSONObject();
@@ -248,13 +175,24 @@ public class LeadRegister extends AppCompatActivity implements LeadRegisterAdapt
                     JSONObject jObj = response;
                     String success = jObj.getString("success");
                     if (success.equals("1")) {
+//                        JSONObject leads = new JSONObject();
                         JSONArray jray = jObj.getJSONArray("lead");
                         JSONArray jray_user = jObj.getJSONArray("sales_list");
                         JSONArray jray_contact = jObj.getJSONArray("contact_list");
                         JSONArray jray_presales = jObj.getJSONArray("presales_list");
+//                        JSONObject lead = jray.getJSONObject(0);
+//                        Intent intent = getIntent();
+//                        String extraName = intent.getStringExtra("name");
+//                        String extraEmail = intent.getStringExtra("email");
+
+//                        mName.setText(extraName);
+//                        mEmail.setText(extraEmail);
 
                         progresslead.setVisibility(View.GONE);
                         Log.i("response", String.valueOf(jray.length()));
+//                        mlead.setVisibility(View.VISIBLE);
+//                        mlead.setText(lead_id);
+//                        mopp.setText(opt_name);
 
                         if (response.length() > 0) {
                             for (int i = 0; i < jray.length(); i++) {
@@ -271,31 +209,6 @@ public class LeadRegister extends AppCompatActivity implements LeadRegisterAdapt
                                 Log.i(item.getResult(), "onResponse: ");
                             }
                             leadsAdapter.notifyDataSetChanged();
-
-                            for (int i = 0; i < jray_user.length(); i++) {
-                                JSONObject users = jray_user.getJSONObject(i);
-                                String sales = users.getString("name");
-                                SalesName.add(sales);
-                            }
-
-                            for (int i = 0; i < jray_contact.length(); i++) {
-                                JSONObject contact = jray_contact.getJSONObject(i);
-                                String contacts = contact.getString("brand_name");
-                                ContactName.add(contacts);
-                            }
-
-                            for (int i = 0; i < jray_presales.length(); i++) {
-                                JSONObject presales = jray_presales.getJSONObject(i);
-                                String presaleses = presales.getString("name");
-                                PresalesName.add(presaleses);
-
-                            }
-                            spinnSales.setAdapter(new ArrayAdapter<String>(LeadRegister.this, android.R.layout.simple_spinner_dropdown_item, SalesName));
-
-                            spinContact.setAdapter(new ArrayAdapter<String>(LeadRegister.this, android.R.layout.simple_spinner_dropdown_item, ContactName)
-                            );
-
-                            spinPresales.setAdapter(new ArrayAdapter<String>(LeadRegister.this, android.R.layout.simple_spinner_dropdown_item, PresalesName));
 
                             //wes,
                             //ohh bedone construktor mbe getter setter ngono
@@ -341,9 +254,8 @@ public class LeadRegister extends AppCompatActivity implements LeadRegisterAdapt
 
     @Override
     public void doClick(int pos) {
-        Intent intent = new Intent(this, AddLeadActivity.class);
-        intent.putExtra(LEADS1, lList.get(pos));
-        intent.putExtra("detail_lead", "coba");
+        Intent intent = new Intent(this, DetailActivity.class);
+        intent.putExtra(LEADS1, leadsAdapter.getItem(pos));
         startActivity(intent);
     }
 
@@ -351,8 +263,121 @@ public class LeadRegister extends AppCompatActivity implements LeadRegisterAdapt
     public void doEdit(int pos) {
         itemPos = pos;
         Intent intent = new Intent(LeadRegister.this, AddLeadActivity.class);
-        intent.putExtra(LEADS1, lList.get(pos));
+        intent.putExtra(LEADS1, leadsAdapter.getItem(pos));
         startActivityForResult(intent, REQUEST_CODE_EDIT);
+    }
+
+    @Override
+    public void doAssign(int pos) {
+        PresalesName = new ArrayList<String>();
+
+        itemPos = pos;
+        Leads lead = leadsAdapter.getItem(pos);
+        AlertDialog.Builder mBuilder = new AlertDialog.Builder(LeadRegister.this);
+        View mView = getLayoutInflater().inflate(R.layout.add_lead, null);
+        mBuilder.setView(mView);
+
+        spinPresales = mView.findViewById(R.id.spinner_presales);
+        btnPresales = mView.findViewById(R.id.btn_presales);
+        tvLead = mView.findViewById(R.id.lead_id);
+
+
+        tvLead.setText(lead.getLead_id());
+        AlertDialog dialog = mBuilder.create();
+        dialog.show();
+
+        final JSONObject jobj = new JSONObject();
+        final String presales = null;
+        try {
+            jobj.put("presales", presales);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        final JsonObjectRequest strReq = new JsonObjectRequest(Request.Method.GET, Server.URL_Lead, jobj, new Response.Listener<JSONObject>() {
+
+            @Override
+            public void onResponse(JSONObject response) {
+                try {
+                    Log.i("response", response.toString());
+                    JSONObject jObj = response;
+                    String success = jObj.getString("success");
+                    if (success.equals("1")) {
+                        JSONArray jray_lead = jObj.getJSONArray("lead");
+                        JSONArray jray_presales = jObj.getJSONArray("presales_list");
+                        if (response.length() > 0) {
+
+
+                            for (int i = 0; i < jray_presales.length(); i++) {
+                                JSONObject presales = jray_presales.getJSONObject(i);
+                                String presaleses = presales.getString("name");
+                                PresalesName.add(presaleses);
+
+                            }
+                            Log.i(jray_presales.toString(), "onResponse: ");
+                            spinPresales.setAdapter(new ArrayAdapter<String>(LeadRegister.this, android.R.layout.simple_spinner_dropdown_item, PresalesName));
+
+                        }
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        });
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(strReq);
+
+        btnPresales.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                assignPresales();
+            }
+        });
+
+    }
+
+    private void assignPresales() {
+
+        final String presales = spinPresales.getSelectedItem().toString().trim();
+        String lead_id = tvLead.getText().toString().trim();
+
+        final JSONObject jobj = new JSONObject();
+        try {
+            jobj.put("spinner_presales", presales);
+            jobj.put("lead_id", lead_id);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        final JsonObjectRequest strReq = new JsonObjectRequest(Request.Method.POST, Server.URL_assign, jobj, new Response.Listener<JSONObject>() {
+
+            @Override
+            public void onResponse(JSONObject response) {
+                Log.i("response", response.toString());
+                JSONObject jObj = response;
+
+                Intent intent = getIntent();
+                finish();
+                startActivity(intent);
+                Toast.makeText(getApplicationContext(), "Successfully Add Presales", Toast.LENGTH_LONG).show();
+
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        });
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(strReq);
     }
 
     @Override

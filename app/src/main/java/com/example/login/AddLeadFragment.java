@@ -170,9 +170,7 @@ public class AddLeadFragment extends Fragment {
     private void updateLead() {
         final JSONObject jobj = new JSONObject();
         try {
-            jobj.put("spinContact", contact2);
             jobj.put("mopp", opp_name2);
-            jobj.put("spinnSales", sales2);
             jobj.put("closing_date", tgl2);
             jobj.put("amount", amount2);
             jobj.put("info", info2);
