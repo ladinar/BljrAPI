@@ -14,6 +14,7 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -51,14 +52,14 @@ public class LeadRegister extends AppCompatActivity implements LeadRegisterAdapt
     //    SearchView searchView;
     ProgressBar progresslead;
     Spinner spinContact, spinnSales, spinPresales;
-    TextView mName, mEmail, mlead, mopp, mcoba, mstatus, mAmount, tvLead;
+    TextView mName, mEmail, mlead, mopp, mcoba, mstatus, mAmount, tvLead, ivAssign;
     LeadRegisterAdapter leadsAdapter;
     Button btnAddlead, btnPresales;
     ArrayAdapter<String> SpinnerAdapter;
     DatePickerDialog.OnDateSetListener date;
     EditText searchText, eLead;
     FloatingActionButton fabutton;
-    String eLeads;
+    String cek_status;
     int itemPos;
 
 
@@ -72,7 +73,7 @@ public class LeadRegister extends AppCompatActivity implements LeadRegisterAdapt
         searchText = findViewById(R.id.search_view);
         mAmount = findViewById(R.id.maamount);
         btnPresales = findViewById(R.id.btn_presales);
-//        btnAddlead = findViewById(R.id.addlead);
+        ivAssign = findViewById(R.id.iv_assign);
 
         tampilkanlead();
 
@@ -83,18 +84,9 @@ public class LeadRegister extends AppCompatActivity implements LeadRegisterAdapt
         leadsAdapter = new LeadRegisterAdapter(this, lList);
         recyclerView.setAdapter(leadsAdapter);
 
+
         SalesName = new ArrayList<String>();
         ContactName = new ArrayList<String>();
-
-//        mAmount.addTextChangedListener(watch);
-
-
-//        btnAddlead.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                addlead();
-//            }
-//        });
 
         searchText.addTextChangedListener(new TextWatcher() {
 
@@ -273,7 +265,7 @@ public class LeadRegister extends AppCompatActivity implements LeadRegisterAdapt
     @Override
     public void doClick(int pos) {
         Intent intent = new Intent(this, DetailActivity.class);
-        intent.putExtra(LEADS1, lList.get(pos));
+        intent.putExtra(LEADS1, leadsAdapter.getItem(pos));
         startActivity(intent);
 
     }
@@ -282,7 +274,7 @@ public class LeadRegister extends AppCompatActivity implements LeadRegisterAdapt
     public void doEdit(int pos) {
         itemPos = pos;
         Intent intent = new Intent(LeadRegister.this, AddLeadActivity.class);
-        intent.putExtra(LEADS1, lList.get(pos));
+        intent.putExtra(LEADS1, leadsAdapter.getItem(pos));
         startActivityForResult(intent, REQUEST_CODE_EDIT);
     }
 
@@ -291,6 +283,7 @@ public class LeadRegister extends AppCompatActivity implements LeadRegisterAdapt
         PresalesName = new ArrayList<String>();
 
         itemPos = pos;
+        Leads lead = leadsAdapter.getItem(pos);
         AlertDialog.Builder mBuilder = new AlertDialog.Builder(LeadRegister.this);
         View mView = getLayoutInflater().inflate(R.layout.add_lead, null);
         mBuilder.setView(mView);
@@ -298,11 +291,9 @@ public class LeadRegister extends AppCompatActivity implements LeadRegisterAdapt
         spinPresales = mView.findViewById(R.id.spinner_presales);
         btnPresales = mView.findViewById(R.id.btn_presales);
         tvLead = mView.findViewById(R.id.lead_id);
-        eLead = mView.findViewById(R.id.eLead);
 
-        eLeads = eLead.getText().toString().trim();
 
-        tvLead.setText(eLeads);
+        tvLead.setText(lead.getLead_id());
         AlertDialog dialog = mBuilder.create();
         dialog.show();
 
@@ -365,6 +356,39 @@ public class LeadRegister extends AppCompatActivity implements LeadRegisterAdapt
 
     private void assignPresales() {
 
+        final String presales = spinPresales.getSelectedItem().toString().trim();
+        String lead_id = tvLead.getText().toString().trim();
+
+        final JSONObject jobj = new JSONObject();
+        try {
+            jobj.put("spinner_presales", presales);
+            jobj.put("lead_id", lead_id);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        final JsonObjectRequest strReq = new JsonObjectRequest(Request.Method.POST, Server.URL_assign, jobj, new Response.Listener<JSONObject>() {
+
+            @Override
+            public void onResponse(JSONObject response) {
+                Log.i("response", response.toString());
+                JSONObject jObj = response;
+
+                Intent intent = getIntent();
+                finish();
+                startActivity(intent);
+                Toast.makeText(getApplicationContext(), "Successfully Add Presales", Toast.LENGTH_LONG).show();
+
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        });
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(strReq);
     }
 
     @Override

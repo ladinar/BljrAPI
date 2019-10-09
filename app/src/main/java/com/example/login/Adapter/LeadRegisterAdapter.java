@@ -4,7 +4,6 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -40,6 +39,7 @@ public class LeadRegisterAdapter extends RecyclerView.Adapter<LeadRegisterAdapte
     public void onBindViewHolder(ViewHolder holder, int position) {
         final Leads lead = Leadlist.get(position);
 
+
         //healah salah iki lo
         //oalah iku sg nde settext uduk teko model?
         //yoteko model tapi kan sng di celuk variabel e
@@ -65,7 +65,9 @@ public class LeadRegisterAdapter extends RecyclerView.Adapter<LeadRegisterAdapte
         }
 
         holder.tvinfo.setText(lead.getInfo());
-        holder.eLead.setText(lead.getLead_id());
+        if (lead.getResult() == "OPEN") {
+            holder.ivAssign.setVisibility(View.VISIBLE);
+        }
 
     }
 
@@ -81,6 +83,11 @@ public class LeadRegisterAdapter extends RecyclerView.Adapter<LeadRegisterAdapte
         return Leadlist.size();
     }
 
+    //buat position dinamis
+    public Leads getItem(int position) {
+        return Leadlist.get(position);
+    }
+
 
     public interface ILeadAdapter {
         void doClick(int pos);
@@ -92,9 +99,8 @@ public class LeadRegisterAdapter extends RecyclerView.Adapter<LeadRegisterAdapte
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView tvLead, tvOpty, tvSales, tvContact, etClosing_date, tvStatus, tvamount, tvinfo, ivEdit, ivAssign;
-        EditText eLead;
 
-        public ViewHolder(View itemView) {
+        public ViewHolder(final View itemView) {
             super(itemView);
             ivEdit = itemView.findViewById(R.id.iv_edit);
             ivAssign = itemView.findViewById(R.id.iv_assign);
@@ -128,7 +134,6 @@ public class LeadRegisterAdapter extends RecyclerView.Adapter<LeadRegisterAdapte
             tvStatus = itemView.findViewById(R.id.mStatus);
             tvamount = itemView.findViewById(R.id.maamount);
             tvinfo = itemView.findViewById(R.id.minfo);
-            eLead = itemView.findViewById(R.id.eLead);
 
         }
     }
