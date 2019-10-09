@@ -16,4 +16,17 @@
     <string name="Password">Password</string>
     <string name="Login">Login</string>
     <string name="Email">Email</string>
+    <string-array name="priority">
+        <item>Choose Priority</item>
+        <item>Contribute</item>
+        <item>Fight</item>
+        <item>Foot Print</item>
+        <item>Guided</item>
+    </string-array>
+    <string-array name="project_size">
+        <item>Choose Project Size</item>
+        <item>Small</item>
+        <item>Medium</item>
+        <item>Advance</item>
+    </string-array>
 </resources>
