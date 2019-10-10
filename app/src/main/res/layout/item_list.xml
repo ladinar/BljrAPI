@@ -92,6 +92,7 @@
                 android:text="coba4"></TextView>
 
             <TextView
+                android:inputType="number"
                 android:id="@+id/maamount"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

@@ -58,12 +58,7 @@ public class LeadRegisterAdapter extends RecyclerView.Adapter<LeadRegisterAdapte
         holder.tvContact.setText(lead.getId_customer());
         holder.etClosing_date.setText(lead.getClosing_date());
         holder.tvStatus.setText(lead.getResult());
-        if (!lead.getAmount().isEmpty()) {
-            holder.tvamount.setText(formatRupiah.format(Integer.parseInt(lead.getAmount())));
-        } else {
-            holder.tvamount.setText(formatRupiah.format(Integer.parseInt(lead.getAmount())));
-        }
-
+        holder.tvamount.setText(formatRupiah.format(Integer.valueOf(lead.getAmount())));
         holder.tvinfo.setText(lead.getInfo());
         if (lead.getResult() == "OPEN") {
             holder.ivAssign.setVisibility(View.VISIBLE);

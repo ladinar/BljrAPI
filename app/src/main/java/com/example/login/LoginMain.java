@@ -70,10 +70,6 @@ public class LoginMain extends AppCompatActivity {
 
 
     public void handlekoneksilogin(final String email, final String password) {
-
-        bola.setVisibility(View.VISIBLE);
-        login.setVisibility(View.GONE);
-
         JSONObject jsonBody = new JSONObject();
         try {
             jsonBody.put("email", email);
@@ -104,6 +100,8 @@ public class LoginMain extends AppCompatActivity {
                         String password = user.getString("password");
 
                         Toast.makeText(LoginMain.this, "Hallo! " + name + " Loginmu bener :)", Toast.LENGTH_LONG).show();
+                        bola.setVisibility(View.VISIBLE);
+                        login.setVisibility(View.GONE);
                         doClick(email, name);
                     } else {
                         Toast.makeText(LoginMain.this, "email atau password salah", Toast.LENGTH_LONG).show();
