@@ -11,6 +11,12 @@ public class Leads implements Serializable {
     private String results;
     private String amounts;
     private String info;
+    private String assesment;
+    private String proposed;
+    private String proof;
+    private String project_budget;
+    private String priority;
+    private String project_size;
 
     public String getResult() {
         return results;
@@ -76,5 +82,52 @@ public class Leads implements Serializable {
         this.info = info;
     }
 
+    public String getAssesment() {
+        return assesment;
+    }
+
+    public void setAssesment(String assesment) {
+        this.assesment = assesment;
+    }
+
+    public String getProject_size() {
+        return project_size;
+    }
+
+    public void setProject_size(String project_size) {
+        this.project_size = project_size;
+    }
+
+    public String getProposed() {
+        return proposed;
+    }
+
+    public void setProposed(String proposed) {
+        this.proposed = proposed;
+    }
+
+    public String getPriority() {
+        return priority;
+    }
+
+    public void setPriority(String priority) {
+        this.priority = priority;
+    }
+
+    public String getProject_budget() {
+        return project_budget;
+    }
+
+    public void setProject_budget(String project_budget) {
+        this.project_budget = project_budget;
+    }
+
+    public String getProof() {
+        return proof;
+    }
+
+    public void setProof(String proof) {
+        this.proof = proof;
+    }
 
 }
