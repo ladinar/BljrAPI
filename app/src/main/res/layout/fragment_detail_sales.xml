@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="match_parent"
-
     android:gravity="center"
     tools:context=".DetailSalesFragment">
 
@@ -17,6 +16,23 @@
             android:layout_height="match_parent"
             android:background="@drawable/bg_detail">
 
+
+
+
+
+
+            <ImageView
+                android:layout_width="500dp"
+                android:layout_height="850dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="100dp"
+                android:layout_marginEnd="0dp"
+                android:layout_marginBottom="-13dp"
+                app:srcCompat="@drawable/rectangle_33" />
+
+
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="178dp"
@@ -25,6 +41,11 @@
 
             <EditText
                 android:id="@+id/edit_lead_id_fragment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <EditText
+                android:id="@+id/edit_nik_fragment"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
@@ -200,39 +221,38 @@
             <ImageView
                 android:layout_width="203dp"
                 android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
                 android:layout_marginLeft="100dp"
                 android:layout_marginTop="280dp"
+                android:layout_marginEnd="108dp"
                 app:srcCompat="@drawable/line" />
+
 
             <ImageView
                 android:layout_width="102dp"
                 android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="101dp"
                 android:layout_marginLeft="100dp"
                 android:layout_marginTop="279dp"
+                android:layout_marginEnd="208dp"
                 app:srcCompat="@drawable/rectangle_3" />
 
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="570dp"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentBottom="true"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="300dp"
-                android:layout_marginEnd="-1dp"
-                android:layout_marginBottom="0dp"
-                app:srcCompat="@drawable/rectangle_4" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="120dp"
                 android:layout_marginLeft="160dp"
                 android:layout_marginTop="308dp"
+                android:layout_marginEnd="118dp"
                 android:text="Solution Design"
                 android:textColor="@android:color/black"
                 android:textSize="13dp"
                 android:textStyle="bold" />
-
 
             <TextView
                 android:layout_width="wrap_content"
@@ -245,7 +265,7 @@
 
             <EditText
                 android:layout_width="350dp"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
                 android:layout_marginStart="30dp"
@@ -257,13 +277,14 @@
                 android:inputType="text"
                 android:padding="10dp"
                 android:textColor="#A1A1A1"
+                android:id="@+id/edit_assesment"
                 android:textSize="12dp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="30dp"
-                android:layout_marginTop="397dp"
+                android:layout_marginTop="410dp"
                 android:text="Last updated on.........."
                 android:textColor="#A1A1A1"
                 android:textSize="9dp" />
@@ -273,32 +294,33 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="30dp"
-                android:layout_marginTop="415dp"
+                android:layout_marginTop="428dp"
                 android:text="Proposed Design"
                 android:textColor="#60CEFF"
                 android:textSize="9dp" />
 
             <EditText
                 android:layout_width="350dp"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
                 android:layout_marginStart="30dp"
                 android:layout_marginLeft="30dp"
-                android:layout_marginTop="430dp"
+                android:layout_marginTop="443dp"
                 android:layout_marginEnd="31dp"
                 android:background="@drawable/border"
                 android:hint="Enter proposed design"
                 android:inputType="text"
                 android:padding="10dp"
                 android:textColor="#A1A1A1"
+                android:id="@+id/edit_proposed"
                 android:textSize="12dp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="30dp"
-                android:layout_marginTop="467dp"
+                android:layout_marginTop="493dp"
                 android:text="Last updated on.........."
                 android:textColor="#A1A1A1"
                 android:textSize="9dp" />
@@ -308,32 +330,33 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="30dp"
-                android:layout_marginTop="485dp"
+                android:layout_marginTop="510dp"
                 android:text="Proof of Value"
                 android:textColor="#60CEFF"
                 android:textSize="9dp" />
 
             <EditText
                 android:layout_width="350dp"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
                 android:layout_marginStart="30dp"
                 android:layout_marginLeft="30dp"
-                android:layout_marginTop="500dp"
+                android:layout_marginTop="523dp"
                 android:layout_marginEnd="31dp"
                 android:background="@drawable/border"
                 android:hint="Enter proof of value"
                 android:inputType="text"
                 android:padding="10dp"
                 android:textColor="#A1A1A1"
+                android:id="@+id/edit_proof"
                 android:textSize="12dp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="30dp"
-                android:layout_marginTop="537dp"
+                android:layout_marginTop="572dp"
                 android:text="Last updated on.........."
                 android:textColor="#A1A1A1"
                 android:textSize="9dp" />
@@ -343,30 +366,27 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="30dp"
-                android:layout_marginTop="555dp"
+                android:layout_marginTop="588dp"
                 android:text="Project Budget"
                 android:textColor="#60CEFF"
                 android:textSize="9dp" />
 
-            <ImageView
-                android:layout_width="351dp"
-                android:layout_height="46dp"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginStart="30dp"
-                android:layout_marginLeft="30dp"
-                android:layout_marginTop="565dp"
-                android:layout_marginEnd="30dp"
-                app:srcCompat="@drawable/bg_amount_detail" />
-
             <EditText
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="350dp"
+                android:layout_height="50dp"
                 android:layout_marginLeft="70dp"
-                android:layout_marginTop="567dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="602dp"
+                android:layout_marginEnd="31dp"
                 android:hint="Enter amount"
-                android:inputType="text"
+                android:background="@drawable/back"
+                android:drawableLeft="@drawable/rp"
+                android:inputType="numberDecimal"
                 android:textColor="#A1A1A1"
+                android:paddingLeft="8dp"
+                android:id="@+id/edit_project_budget"
                 android:textSize="12dp" />
 
 
@@ -374,75 +394,63 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="30dp"
-                android:layout_marginTop="615dp"
+                android:layout_marginTop="657dp"
                 android:text="Priority"
                 android:textColor="#60CEFF"
                 android:textSize="9dp" />
 
-            <EditText
+            <Spinner
+                android:id="@+id/spinner_priority"
                 android:layout_width="350dp"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
                 android:layout_marginStart="30dp"
                 android:layout_marginLeft="30dp"
-                android:layout_marginTop="630dp"
+                android:layout_marginTop="670dp"
                 android:layout_marginEnd="31dp"
+                android:entries="@array/priority"
                 android:background="@drawable/border"
-                android:hint="Choose priority"
                 android:inputType="text"
                 android:padding="10dp"
                 android:textColor="#A1A1A1"
                 android:textSize="12dp" />
-
-            <ImageView
-                android:layout_width="9dp"
-                android:layout_height="8dp"
-                android:layout_marginLeft="355dp"
-                android:layout_marginTop="645dp"
-                app:srcCompat="@drawable/dropdown" />
-
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="30dp"
-                android:layout_marginTop="675dp"
-                android:text="Priority"
+                android:layout_marginTop="715dp"
+                android:text="Project Size"
                 android:textColor="#60CEFF"
                 android:textSize="9dp" />
 
-            <EditText
+            <Spinner
+                android:id="@+id/spinner_project_size"
                 android:layout_width="350dp"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
                 android:layout_marginStart="30dp"
                 android:layout_marginLeft="30dp"
-                android:layout_marginTop="690dp"
+                android:layout_marginTop="730dp"
                 android:layout_marginEnd="31dp"
+                android:entries="@array/project_size"
                 android:background="@drawable/border"
-                android:hint="Choose priority"
                 android:inputType="text"
                 android:padding="10dp"
                 android:textColor="#A1A1A1"
-                android:textSize="12dp" />
-
-            <ImageView
-                android:layout_width="9dp"
-                android:layout_height="8dp"
-                android:layout_marginLeft="355dp"
-                android:layout_marginTop="705dp"
-                app:srcCompat="@drawable/dropdown" />
+                android:textSize="10dp" />
 
 
             <Button
                 android:layout_width="67dp"
                 android:layout_height="25dp"
                 android:layout_marginLeft="30dp"
-                android:layout_marginTop="755dp"
+                android:layout_marginTop="785dp"
                 android:background="@color/colorAccent"
                 android:hint="Submit"
+                android:id="@+id/btn_submit_sd"
                 android:textColorHint="@android:color/white" />
 
 
@@ -451,23 +459,24 @@
                 android:layout_height="25dp"
                 android:layout_alignParentEnd="true"
                 android:layout_marginLeft="253dp"
-                android:layout_marginTop="755dp"
+                android:layout_marginTop="785dp"
                 android:layout_marginEnd="31dp"
                 android:background="@color/colorPrimary"
                 android:hint="Tender Process"
+                android:id="@+id/btn_tp"
                 android:textColorHint="@android:color/white" />
 
 
-            <ImageView
+            <!--<ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_marginTop="790dp"
                 android:layout_marginEnd="27dp"
-                app:srcCompat="@drawable/bg_log" />
+                app:srcCompat="@drawable/bg_log" />-->
 
 
-            <TextView
+            <!--<TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="165dp"
@@ -475,7 +484,7 @@
                 android:text="Change Log"
                 android:textColor="@android:color/black"
                 android:textSize="13dp"
-                android:textStyle="bold" />
+                android:textStyle="bold" />-->
 
         </RelativeLayout>
 

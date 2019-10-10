@@ -141,6 +141,7 @@ public class LeadRegister extends AppCompatActivity implements LeadRegisterAdapt
 
     private void addlead() {
         Intent intent = new Intent(LeadRegister.this, AddLeadActivity.class);
+        intent.putExtra("addlead", "coba");
         startActivity(intent);
     }
 
@@ -257,8 +258,9 @@ public class LeadRegister extends AppCompatActivity implements LeadRegisterAdapt
 
     @Override
     public void doClick(int pos) {
-        Intent intent = new Intent(this, DetailActivity.class);
+        Intent intent = new Intent(this, AddLeadActivity.class);
         intent.putExtra(LEADS1, leadsAdapter.getItem(pos));
+        intent.putExtra("detail_lead", "coba");
         startActivity(intent);
 
     }

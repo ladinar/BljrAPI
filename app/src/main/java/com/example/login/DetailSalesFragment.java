@@ -1,14 +1,17 @@
 package com.example.login;
 
 import android.content.Context;
-import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,15 +29,20 @@ import com.example.login.model.Leads;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 import util.Server;
 
 public class DetailSalesFragment extends Fragment {
     TextView tvLead, tvOppName, tvLead2, tvpresales;
-    String lead_edit, etOppName2, etLead2;
-    EditText etLead;
+    String lead_edit, etOppName2, etLead2, etassesment2, etproposed2, etproof2, etproject_budget2, etpriority, etproject_size, etNik2;
+    EditText etLead, etassesment, etproposed, etproject_budget, etproof, etNik;
+    Spinner spinnerPriority, spinnerProjectSize;
+    Button btnSubmitsd, btnTp;
     private OnFragmentInteractionListener mListener;
 
     public DetailSalesFragment() {
@@ -63,10 +71,90 @@ public class DetailSalesFragment extends Fragment {
         etLead.setText(lead.getLead_id());
         etLead2 = etLead.getText().toString().trim();
         etLead.setVisibility(View.GONE);
+        etassesment = view.findViewById(R.id.edit_assesment);
+        etproposed = view.findViewById(R.id.edit_proposed);
+        etproof = view.findViewById(R.id.edit_proof);
+        etproject_budget = view.findViewById(R.id.edit_project_budget);
+        etproject_budget.addTextChangedListener(onTextChangedListener());
+        spinnerPriority = view.findViewById(R.id.spinner_priority);
+        spinnerProjectSize = view.findViewById(R.id.spinner_project_size);
+        btnSubmitsd = view.findViewById(R.id.btn_submit_sd);
+        btnSubmitsd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                etassesment2 = etassesment.getText().toString().trim();
+                etproposed2 = etproposed.getText().toString().trim();
+                etproof2 = etproof.getText().toString();
+                etproject_budget2 = etproject_budget.getText().toString().trim().replaceAll(",", "");
+                etpriority = spinnerPriority.getSelectedItem().toString().trim();
+                etproject_size = spinnerProjectSize.getSelectedItem().toString().trim();
+                updatesd();
+            }
+        });
+
+        btnTp = view.findViewById(R.id.btn_tp);
+        etNik = view.findViewById(R.id.edit_nik_fragment);
+        etNik.setVisibility(View.GONE);
+        /*etNik.setText(lead.getNik());
+        etNik2 = etNik.getText().toString().trim();*/
+
+//        tampilsd();
 
         tampilkanpresales();
 
         return view;
+    }
+
+    private void tampilsd() {
+        final JSONObject jobj = new JSONObject();
+        final String presales = "null";
+        try {
+
+            jobj.put("spinnerProjectSize", etproject_size);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        final JsonObjectRequest strReq = new JsonObjectRequest(Request.Method.POST, Server.URL_update_sd, jobj, new Response.Listener<JSONObject>() {
+
+            @Override
+            public void onResponse(JSONObject response) {
+                Log.i("response", response.toString());
+                JSONObject jObj = response;
+                String success = null;
+                try {
+                    success = jObj.getString("success");
+
+                    if (success.equals("1")) {
+                        Toast.makeText(getActivity(), "Solution Design Updated Successfully :)", Toast.LENGTH_LONG).show();
+
+                    } else {
+                        Toast.makeText(getActivity(), "salah!", Toast.LENGTH_LONG).show();
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+
+                    Toast.makeText(getActivity(), "Ora oleh data", Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        error.printStackTrace();
+                        NetworkResponse response = error.networkResponse;
+                        String errorMsg = "";
+                        if (response != null && response.data != null) {
+                            String errorString = new String(response.data);
+                            Log.i("log error", errorString);
+                        }
+                        Toast.makeText(getActivity(), "Error" + error.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+        RequestQueue requestQueue = Volley.newRequestQueue(getContext());
+        requestQueue.add(strReq);
     }
 
     private void tampilkanpresales() {
@@ -74,6 +162,7 @@ public class DetailSalesFragment extends Fragment {
         final String presales = "null";
         try {
             jobj.put("etLead", etLead2);
+
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -112,17 +201,22 @@ public class DetailSalesFragment extends Fragment {
         requestQueue.add(strReq);
     }
 
-    private void updatelead() {
+    private void updatesd() {
         final JSONObject jobj = new JSONObject();
         try {
-            jobj.put("etOppName", etOppName2);
-            jobj.put("tvLead", lead_edit);
+            jobj.put("etassesment", etassesment2);
+            jobj.put("etproposed", etproposed2);
+            jobj.put("etproof", etproof2);
+            jobj.put("etproject_budget", etproject_budget2);
+            jobj.put("spinnerPriority", etpriority);
+            jobj.put("spinnerProjectSize", etproject_size);
+            jobj.put("etLead", etLead2);
 
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
-        final JsonObjectRequest strReq = new JsonObjectRequest(Request.Method.POST, Server.URL_updateLead, jobj, new Response.Listener<JSONObject>() {
+        final JsonObjectRequest strReq = new JsonObjectRequest(Request.Method.POST, Server.URL_update_sd, jobj, new Response.Listener<JSONObject>() {
 
             @Override
             public void onResponse(JSONObject response) {
@@ -133,9 +227,7 @@ public class DetailSalesFragment extends Fragment {
                     success = jObj.getString("success");
 
                     if (success.equals("1")) {
-                        Intent intent = new Intent(getActivity(), LeadRegister.class);
-                        Toast.makeText(getActivity(), "Lead Id Updated Successfully :)", Toast.LENGTH_LONG).show();
-                        startActivity(intent);
+                        Toast.makeText(getActivity(), "Solution Design Updated Successfully :)", Toast.LENGTH_LONG).show();
 
                     } else {
                         Toast.makeText(getActivity(), "salah!", Toast.LENGTH_LONG).show();
@@ -166,12 +258,6 @@ public class DetailSalesFragment extends Fragment {
         requestQueue.add(strReq);
     }
 
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
-    }
-
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -192,5 +278,47 @@ public class DetailSalesFragment extends Fragment {
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
+    }
+
+    private TextWatcher onTextChangedListener() {
+        return new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                etproject_budget.removeTextChangedListener(this);
+
+                try {
+                    String originalString = s.toString();
+
+                    Long longval;
+                    if (originalString.contains(",")) {
+                        originalString = originalString.replaceAll(",", "");
+                    }
+
+                    longval = Long.parseLong(originalString);
+
+                    DecimalFormat formatter = (DecimalFormat) NumberFormat.getInstance(Locale.US);
+                    formatter.applyPattern("#,###,###,###");
+                    String formattedString = formatter.format(longval);
+
+                    //setting text after format to EditText
+                    etproject_budget.setText(formattedString);
+                    etproject_budget.setSelection(etproject_budget.getText().length());
+                } catch (NumberFormatException nfe) {
+                    nfe.printStackTrace();
+                }
+
+                etproject_budget.addTextChangedListener(this);
+            }
+        };
     }
 }
