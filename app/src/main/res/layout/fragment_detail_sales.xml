@@ -5,6 +5,7 @@
     android:layout_width="wrap_content"
     android:layout_height="match_parent"
     android:gravity="center"
+    android:background="#FFFFFF"
     tools:context=".DetailSalesFragment">
 
     <ScrollView
@@ -285,7 +286,16 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="30dp"
                 android:layout_marginTop="410dp"
-                android:text="Last updated on.........."
+                android:text="Last updated on:"
+                android:textColor="#A1A1A1"
+                android:textSize="9dp" />
+
+            <TextView
+                android:id="@+id/tvtimeassessment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="101dp"
+                android:layout_marginTop="410dp"
                 android:textColor="#A1A1A1"
                 android:textSize="9dp" />
 
@@ -321,7 +331,16 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="30dp"
                 android:layout_marginTop="493dp"
-                android:text="Last updated on.........."
+                android:text="Last updated on:"
+                android:textColor="#A1A1A1"
+                android:textSize="9dp" />
+
+            <TextView
+                android:id="@+id/tvtimeproposed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="101dp"
+                android:layout_marginTop="493dp"
                 android:textColor="#A1A1A1"
                 android:textSize="9dp" />
 
@@ -357,7 +376,16 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="30dp"
                 android:layout_marginTop="572dp"
-                android:text="Last updated on.........."
+                android:text="Last updated on:"
+                android:textColor="#A1A1A1"
+                android:textSize="9dp" />
+
+            <TextView
+                android:id="@+id/tvtimeproof"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="101dp"
+                android:layout_marginTop="572dp"
                 android:textColor="#A1A1A1"
                 android:textSize="9dp" />
 
@@ -381,7 +409,7 @@
                 android:layout_marginTop="602dp"
                 android:layout_marginEnd="31dp"
                 android:hint="Enter amount"
-                android:background="@drawable/back"
+                android:background="@drawable/border"
                 android:drawableLeft="@drawable/rp"
                 android:inputType="numberDecimal"
                 android:textColor="#A1A1A1"
@@ -420,7 +448,25 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="30dp"
-                android:layout_marginTop="715dp"
+                android:layout_marginTop="710dp"
+                android:text="Current Priority:"
+                android:textColor="#A1A1A1"
+                android:textSize="9dp" />
+
+            <TextView
+                android:id="@+id/tvpriority"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="97dp"
+                android:layout_marginTop="710dp"
+                android:textColor="#A1A1A1"
+                android:textSize="9dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="728dp"
                 android:text="Project Size"
                 android:textColor="#60CEFF"
                 android:textSize="9dp" />
@@ -433,7 +479,7 @@
                 android:layout_alignParentEnd="true"
                 android:layout_marginStart="30dp"
                 android:layout_marginLeft="30dp"
-                android:layout_marginTop="730dp"
+                android:layout_marginTop="742dp"
                 android:layout_marginEnd="31dp"
                 android:entries="@array/project_size"
                 android:background="@drawable/border"
@@ -443,11 +489,31 @@
                 android:textSize="10dp" />
 
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="783dp"
+                android:text="Current Project Size:"
+                android:textColor="#A1A1A1"
+                android:textSize="9dp" />
+
+
+            <TextView
+                android:id="@+id/tvproject_size"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="114dp"
+                android:layout_marginTop="783dp"
+                android:textColor="#A1A1A1"
+                android:textSize="9dp" />
+
+
             <Button
                 android:layout_width="67dp"
                 android:layout_height="25dp"
                 android:layout_marginLeft="30dp"
-                android:layout_marginTop="785dp"
+                android:layout_marginTop="810dp"
                 android:background="@color/colorAccent"
                 android:hint="Submit"
                 android:id="@+id/btn_submit_sd"
@@ -459,7 +525,7 @@
                 android:layout_height="25dp"
                 android:layout_alignParentEnd="true"
                 android:layout_marginLeft="253dp"
-                android:layout_marginTop="785dp"
+                android:layout_marginTop="810dp"
                 android:layout_marginEnd="31dp"
                 android:background="@color/colorPrimary"
                 android:hint="Tender Process"

@@ -38,8 +38,8 @@ import java.util.Map;
 import util.Server;
 
 public class DetailSalesFragment extends Fragment {
-    TextView tvLead, tvOppName, tvLead2, tvpresales;
-    String lead_edit, etOppName2, etLead2, etassesment2, etproposed2, etproof2, etproject_budget2, etpriority, etproject_size, etNik2;
+    TextView tvLead, tvOppName, tvLead2, tvpresales, tvproposed, tvassessment, tvproof, tvproject_size, tvpriority;
+    String lead_edit, etOppName2, etLead2, etassesment2, etproposed2, etproof2, etproject_budget2, etpriority, etproject_size, etNik2, tvassessment2, tvproposed2, tvproof2, tvproject_size2, tvpriority2;
     EditText etLead, etassesment, etproposed, etproject_budget, etproof, etNik;
     Spinner spinnerPriority, spinnerProjectSize;
     Button btnSubmitsd, btnTp;
@@ -79,6 +79,16 @@ public class DetailSalesFragment extends Fragment {
         spinnerPriority = view.findViewById(R.id.spinner_priority);
         spinnerProjectSize = view.findViewById(R.id.spinner_project_size);
         btnSubmitsd = view.findViewById(R.id.btn_submit_sd);
+        tvassessment = view.findViewById(R.id.tvtimeassessment);
+        tvassessment2 = tvassessment.getText().toString().trim();
+        tvproof = view.findViewById(R.id.tvtimeproof);
+        tvproof2 = tvproof.getText().toString().trim();
+        tvproposed = view.findViewById(R.id.tvtimeproposed);
+        tvproposed2 = tvproposed.getText().toString().trim();
+        tvpriority = view.findViewById(R.id.tvpriority);
+        tvpriority2 = tvpriority.getText().toString().trim();
+        tvproject_size = view.findViewById(R.id.tvproject_size);
+        tvproject_size2 = tvproject_size.getText().toString().trim();
         btnSubmitsd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -162,6 +172,15 @@ public class DetailSalesFragment extends Fragment {
         final String presales = "null";
         try {
             jobj.put("etLead", etLead2);
+            jobj.put("etassesment", etassesment2);
+            jobj.put("etproposed", etproposed2);
+            jobj.put("etproof", etproof2);
+            jobj.put("etproject_budget", etproject_budget2);
+            jobj.put("tvproposed", tvproposed2);
+            jobj.put("tvassessment", tvassessment2);
+            jobj.put("tvproof", tvproof2);
+            jobj.put("tvpriority", tvpriority2);
+            jobj.put("tvproject_size", tvproject_size2);
 
         } catch (JSONException e) {
             e.printStackTrace();
@@ -177,6 +196,15 @@ public class DetailSalesFragment extends Fragment {
                     if (success.equals("1")) {
                         JSONObject presales = jObj.getJSONObject("presales_detail");
                         tvpresales.setText(presales.getString("name"));
+                        etassesment.setText(presales.getString("assessments"));
+                        etproposed.setText(presales.getString("pds"));
+                        etproof.setText(presales.getString("povs"));
+                        etproject_budget.setText(presales.getString("pbs"));
+                        tvassessment.setText(presales.getString("assessment_dates"));
+                        tvproposed.setText(presales.getString("pd_dates"));
+                        tvproof.setText(presales.getString("pov_dates"));
+                        tvpriority.setText(presales.getString("prioritys"));
+                        tvproject_size.setText(presales.getString("project_sizes"));
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
