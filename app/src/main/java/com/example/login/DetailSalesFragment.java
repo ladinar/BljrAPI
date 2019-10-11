@@ -1,6 +1,7 @@
 package com.example.login;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.Editable;
@@ -15,6 +16,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import com.android.volley.NetworkResponse;
@@ -24,6 +26,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.baoyachi.stepview.HorizontalStepView;
+import com.baoyachi.stepview.bean.StepBean;
 import com.example.login.model.Leads;
 
 import org.json.JSONException;
@@ -31,7 +35,9 @@ import org.json.JSONObject;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
@@ -43,6 +49,8 @@ public class DetailSalesFragment extends Fragment {
     EditText etLead, etassesment, etproposed, etproject_budget, etproof, etNik;
     Spinner spinnerPriority, spinnerProjectSize;
     Button btnSubmitsd, btnTp;
+    HorizontalStepView horizontalsStepView;
+    List<StepBean> sources = new ArrayList<>();
     private OnFragmentInteractionListener mListener;
 
     public DetailSalesFragment() {
@@ -64,6 +72,7 @@ public class DetailSalesFragment extends Fragment {
         tvLead2 = view.findViewById(R.id.lead_detail);
         tvLead.setText(lead.getLead_id());
         tvLead2.setText(lead.getLead_id());
+
         tvOppName = view.findViewById(R.id.edit_opp_name_fragment);
         tvOppName.setText(lead.getOpp_name());
         tvpresales = view.findViewById(R.id.presales_detail_lead);
@@ -101,6 +110,63 @@ public class DetailSalesFragment extends Fragment {
 //        tampilsd();
 
         tampilkanpresales();
+
+        horizontalsStepView = view.findViewById(R.id.horizontalStepview);
+        Log.i(lead.getResult(), "onCreateView: ");
+        if (lead.getResult().equals("INITIAL")) {
+            sources.add(new StepBean("Initial", 0));
+            sources.add(new StepBean("Open", -1));
+            sources.add(new StepBean("SD", -1));
+            sources.add(new StepBean("TP", -1));
+            sources.add(new StepBean("Win/Lose", -1));
+        } else if (lead.getResult().equals("OPEN")) {
+            sources.add(new StepBean("Initial", 1));
+            sources.add(new StepBean("Open", 0));
+            sources.add(new StepBean("SD", -1));
+            sources.add(new StepBean("TP", -1));
+            sources.add(new StepBean("Win/Lose", -1));
+        } else if (lead.getResult().equals("SOLUTION DESIGN")) {
+            sources.add(new StepBean("Initial", 1));
+            sources.add(new StepBean("Open", 1));
+            sources.add(new StepBean("SD", 0));
+            sources.add(new StepBean("TP", -1));
+            sources.add(new StepBean("Win/Lose", -1));
+        } else if (lead.getResult().equals("TENDER PROCESS")) {
+            sources.add(new StepBean("Initial", 1));
+            sources.add(new StepBean("Open", 1));
+            sources.add(new StepBean("SD", 1));
+            sources.add(new StepBean("TP", 0));
+            sources.add(new StepBean("Win/Lose", -1));
+        } else if (lead.getResult().equals("WIN")) {
+            sources.add(new StepBean("Initial", 1));
+            sources.add(new StepBean("Open", 1));
+            sources.add(new StepBean("SD", 1));
+            sources.add(new StepBean("TP", 1));
+            sources.add(new StepBean("Win", 1));
+        } else if (lead.getResult().equals("LOSE")) {
+            sources.add(new StepBean("Initial", 1));
+            sources.add(new StepBean("Open", 1));
+            sources.add(new StepBean("SD", 1));
+            sources.add(new StepBean("TP", 1));
+            sources.add(new StepBean("Lose", 1));
+        }
+
+
+//        sources.add(new StepBean("Initial",1));
+//        sources.add(new StepBean("Open",1));
+//        sources.add(new StepBean("SD",1));
+//        sources.add(new StepBean("TP",0));
+//        sources.add(new StepBean("Win/Lose",-1));
+
+        horizontalsStepView.setStepViewTexts(sources)
+                .setTextSize(10)
+                .setStepsViewIndicatorCompletedLineColor(Color.parseColor("#FFFF00"))
+                .setStepViewComplectedTextColor(Color.parseColor("#FFFF00"))
+                .setStepViewUnComplectedTextColor(ContextCompat.getColor(getActivity(), R.color.uncompleted_text_color))
+                .setStepsViewIndicatorUnCompletedLineColor(Color.parseColor("#FFFFFF"))
+                .setStepsViewIndicatorCompleteIcon(ContextCompat.getDrawable(getActivity(), R.drawable.complted))
+                .setStepsViewIndicatorAttentionIcon(ContextCompat.getDrawable(getActivity(), R.drawable.attention))
+                .setStepsViewIndicatorDefaultIcon(ContextCompat.getDrawable(getActivity(), R.drawable.default_icon));
 
         return view;
     }
