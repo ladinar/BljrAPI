@@ -40,7 +40,9 @@ import util.Server;
 
 public class DetailSalesFragment extends Fragment {
     TextView tvLead, tvOppName, tvLead2, tvpresales, tvproposed, tvassessment, tvproof, tvproject_size, tvpriority;
-    String lead_edit, etOppName2, etLead2, etassesment2, etproposed2, etproof2, etproject_budget2, etpriority, etproject_size, etNik2, tvassessment2, tvproposed2, tvproof2, tvproject_size2, tvpriority2, etassess_before2, etpro_before2, etproof_before2, etpb_before2, etprio_before2, etpj_before2, ettimeasses_before2, ettimepro_before2, ettimeproof_before2;
+    String lead_edit, etOppName2, etLead2, etassesment2, etproposed2, etproof2, etproject_budget2, etpriority, etproject_size,
+            etNik2, tvassessment2, tvproposed2, tvproof2, tvproject_size2, tvpriority2, etassess_before2, etpro_before2,
+            etproof_before2, etpb_before2, etprio_before2, etpj_before2, ettimeasses_before2, ettimepro_before2, ettimeproof_before2, etassesment3;
     EditText etLead, etassesment, etproposed, etproject_budget, etproof, etNik, etassess_before, etpro_before, etproof_before, etpb_before, etprio_before, etpj_before, ettimeasses_before, ettimepro_before, ettimeproof_before;
     Spinner spinnerPriority, spinnerProjectSize;
     Button btnSubmitsd, btnTp;
@@ -122,6 +124,14 @@ public class DetailSalesFragment extends Fragment {
         });
 
         btnTp = view.findViewById(R.id.btn_tp);
+        btnTp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                etLead2 = etLead.getText().toString().trim();
+                etassesment3 = etassesment.getText().toString().trim();
+                raise_to_tender();
+            }
+        });
         etNik = view.findViewById(R.id.edit_nik_fragment);
         etNik.setVisibility(View.GONE);
         /*etNik.setText(lead.getNik());
@@ -130,6 +140,45 @@ public class DetailSalesFragment extends Fragment {
         tampilkanpresales();
 
         return view;
+    }
+
+    private void raise_to_tender() {
+        final JSONObject jobj = new JSONObject();
+        try {
+            jobj.put("etLead", etLead2);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        final JsonObjectRequest strReq = new JsonObjectRequest(Request.Method.POST, Server.URL_raise_to_tender, jobj, new Response.Listener<JSONObject>() {
+
+            @Override
+            public void onResponse(JSONObject response) {
+                Log.i("response", response.toString());
+
+                Intent intent = new Intent(getActivity(), LeadRegister.class);
+                Toast.makeText(getActivity(), "Raise to Tender Successfully :)", Toast.LENGTH_LONG).show();
+                startActivity(intent);
+
+            }
+        },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        error.printStackTrace();
+                        NetworkResponse response = error.networkResponse;
+                        String errorMsg = "";
+                        if (response != null && response.data != null) {
+                            String errorString = new String(response.data);
+                            Log.i("log error", errorString);
+                        }
+                        Toast.makeText(getActivity(), "Error" + error.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+        RequestQueue requestQueue = Volley.newRequestQueue(getContext());
+        requestQueue.add(strReq);
     }
 
     private void tampilkanpresales() {
