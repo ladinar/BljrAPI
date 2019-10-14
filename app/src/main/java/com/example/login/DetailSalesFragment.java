@@ -2,6 +2,7 @@ package com.example.login;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.Editable;
@@ -16,6 +17,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import com.android.volley.NetworkResponse;
@@ -73,7 +75,6 @@ public class DetailSalesFragment extends Fragment {
         tvLead2 = view.findViewById(R.id.lead_detail);
         tvLead.setText(lead.getLead_id());
         tvLead2.setText(lead.getLead_id());
-
         tvOppName = view.findViewById(R.id.edit_opp_name_fragment);
         tvOppName.setText(lead.getOpp_name());
         tvpresales = view.findViewById(R.id.presales_detail_lead);
@@ -143,6 +144,8 @@ public class DetailSalesFragment extends Fragment {
         etNik.setVisibility(View.GONE);
         /*etNik.setText(lead.getNik());
         etNik2 = etNik.getText().toString().trim();*/
+
+//        tampilsd();
 
         tampilkanpresales();
 
