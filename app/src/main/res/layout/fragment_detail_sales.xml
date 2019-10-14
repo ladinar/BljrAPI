@@ -5,7 +5,6 @@
     android:layout_width="wrap_content"
     android:layout_height="match_parent"
     android:gravity="center"
-    android:background="#FFFFFF"
     tools:context=".DetailSalesFragment">
 
     <ScrollView
@@ -16,6 +15,10 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@drawable/bg_detail">
+
+
+
+
 
 
             <ImageView
@@ -29,11 +32,12 @@
                 android:layout_marginBottom="9dp"
                 app:srcCompat="@drawable/rectangle_33" />
 
+
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="178dp"
                 android:layout_marginTop="70dp"
-                app:srcCompat="@drawable/rectangle_2" />
+                android:background="#333639" />
 
             <EditText
                 android:id="@+id/edit_lead_id_fragment"
@@ -74,127 +78,53 @@
                 android:textColor="@android:color/black"
                 android:textSize="10dp" />
 
-
-            <ImageView
+            <com.baoyachi.stepview.HorizontalStepView
+                android:id="@+id/horizontalStepview"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="0dp"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="30dp"
-                android:layout_marginTop="115dp"
-                app:srcCompat="@drawable/circle" />
+                android:layout_marginTop="100dp" />
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="25dp"
-                android:layout_marginTop="130dp"
-                android:text="Initial"
-                android:textColor="@android:color/black"
-                android:textSize="9dp" />
-
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="70dp"
-                android:layout_marginTop="115dp"
-                app:srcCompat="@drawable/circle" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="65dp"
-                android:layout_marginTop="130dp"
-                android:text="Open"
-                android:textColor="@android:color/black"
-                android:textSize="9dp" />
-
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="110dp"
-                android:layout_marginTop="115dp"
-                app:srcCompat="@drawable/circle" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="110dp"
-                android:layout_marginTop="130dp"
-                android:text="SD"
-                android:textColor="@android:color/black"
-                android:textSize="9dp" />
-
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="150dp"
-                android:layout_marginTop="115dp"
-                app:srcCompat="@drawable/circle" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="150dp"
-                android:layout_marginTop="130dp"
-                android:text="TP"
-                android:textColor="@android:color/black"
-                android:textSize="9dp" />
-
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="190dp"
-                android:layout_marginTop="115dp"
-                app:srcCompat="@drawable/circle" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="180dp"
-                android:layout_marginTop="130dp"
-                android:text="Win/Lose"
-                android:textColor="@android:color/black"
-                android:textSize="9dp" />
-
-
-            <TextView
+                android:layout_marginLeft="170dp"
                 android:id="@+id/lead_detail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="250dp"
-                android:layout_marginTop="78dp"
-                android:textColor="@android:color/black"
+                android:layout_marginTop="180dp"
+                android:text="lead"
+                android:textColor="@android:color/white"
                 android:textSize="13dp" />
 
             <TextView
+                android:layout_marginLeft="170dp"
+                android:layout_marginTop="195dp"
                 android:id="@+id/edit_opp_name_fragment"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="250dp"
-                android:layout_marginTop="105dp"
-                android:textColor="@android:color/black"
+                android:maxLines="1"
+                android:text="opti"
+                android:textColor="@android:color/white"
                 android:textSize="12dp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="250dp"
+                android:layout_marginLeft="170dp"
                 android:layout_marginTop="210dp"
                 android:text="Current presales: "
-                android:textColor="@android:color/black"
-                android:textSize="7dp" />
+                android:textColor="@android:color/white"
+                android:textSize="12dp" />
 
             <TextView
+                android:layout_marginLeft="265dp"
+                android:maxLines="1"
                 android:id="@+id/presales_detail_lead"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="304dp"
+                android:text="coba"
                 android:layout_marginTop="210dp"
-                android:textColor="@android:color/black"
-                android:textSize="7dp" />
+                android:textColor="@android:color/white"
+                android:textSize="12dp" />
 
             <TextView
                 android:layout_width="wrap_content"

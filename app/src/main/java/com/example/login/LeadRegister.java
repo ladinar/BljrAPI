@@ -34,9 +34,11 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import util.Server;
@@ -46,13 +48,15 @@ public class LeadRegister extends AppCompatActivity implements LeadRegisterAdapt
     public static final String LEADS1 = "leads";
     public static final int REQUEST_CODE_EDIT = 99;
     public List<Leads> lList = new ArrayList<>();
+
+    ArrayList<Integer> total_amount = new ArrayList<>();
     public List<String> SalesName, ContactName, PresalesName;
     public static String lead_id;
     public static String name_sales;
     //    SearchView searchView;
     ProgressBar progresslead;
     Spinner spinContact, spinnSales, spinPresales;
-    TextView mName, mEmail, mlead, mopp, mcoba, mstatus, mAmount, tvLead, ivAssign;
+    TextView mName, mEmail, mlead, mopp, mcoba, mstatus, mAmount, tvLead, ivAssign, tvTAmount;
     LeadRegisterAdapter leadsAdapter;
     Button btnAddlead, btnPresales;
     ArrayAdapter<String> SpinnerAdapter;
@@ -60,7 +64,9 @@ public class LeadRegister extends AppCompatActivity implements LeadRegisterAdapt
     EditText searchText, eLead;
     FloatingActionButton fabutton;
     String cek_status;
-    int itemPos;
+    int itemPos, total;
+    Locale localeID = new Locale("in", "ID");
+    NumberFormat formatRupiah = NumberFormat.getCurrencyInstance(localeID);
 
 
     @Override
@@ -74,7 +80,7 @@ public class LeadRegister extends AppCompatActivity implements LeadRegisterAdapt
         mAmount = findViewById(R.id.maamount);
         btnPresales = findViewById(R.id.btn_presales);
         ivAssign = findViewById(R.id.iv_assign);
-//        mName = findViewById(R.id.tvNama);
+        tvTAmount = findViewById(R.id.total_amount);
 
 //      swipeRefreshLayout = findViewById(R.id.swiperefreshLayout);
         tampilkanlead();
@@ -120,13 +126,16 @@ public class LeadRegister extends AppCompatActivity implements LeadRegisterAdapt
 
     private void filter(String s) {
         ArrayList<Leads> filteredList = new ArrayList<>();
-
+        int total2 = 0;
         for (Leads item : lList) {
-            if (item.getLead_id().toLowerCase().contains(s.toLowerCase())) {
+            if (item.getLead_id().toLowerCase().contains(s.toLowerCase()) || item.getNik().toLowerCase().contains(s.toLowerCase()) ||
+                    item.getResult().toLowerCase().contains(s.toLowerCase()) || item.getOpp_name().toLowerCase().contains(s.toLowerCase())) {
                 filteredList.add(item);
+                total_amount.add(item.getAmount());
+                total2 += item.getAmount();
             }
         }
-
+        tvTAmount.setText(formatRupiah.format(total2));
         leadsAdapter.filterList(filteredList);
     }
 
@@ -169,6 +178,7 @@ public class LeadRegister extends AppCompatActivity implements LeadRegisterAdapt
                         JSONArray jray_user = jObj.getJSONArray("sales_list");
                         JSONArray jray_contact = jObj.getJSONArray("contact_list");
                         JSONArray jray_presales = jObj.getJSONArray("presales_list");
+
 //                        JSONObject lead = jray.getJSONObject(0);
 //                        Intent intent = getIntent();
 //                        String extraName = intent.getStringExtra("name");
@@ -183,6 +193,7 @@ public class LeadRegister extends AppCompatActivity implements LeadRegisterAdapt
 //                        mopp.setText(opt_name);
 
                         if (response.length() > 0) {
+                            int total2 = 0;
                             for (int i = 0; i < jray.length(); i++) {
                                 JSONObject o = jray.getJSONObject(i);
                                 Leads item = new Leads();
@@ -192,9 +203,14 @@ public class LeadRegister extends AppCompatActivity implements LeadRegisterAdapt
                                 item.setId_customer(o.getString("customer_legal_name"));
                                 item.setClosing_date(o.getString("closing_dates"));
                                 item.setResult(o.getString("results"));
-                                item.setAmount(o.getString("amounts"));
+                                item.setAmount(o.getInt("amounts"));
+
+                                total_amount.add(o.getInt("amounts"));
+                                total2 += total_amount.get(i);
+                                tvTAmount.setText(formatRupiah.format(total2));
+
                                 lList.add(item);
-                                Log.i(item.getResult(), "onResponse: ");
+                                Log.i(String.valueOf(o.getInt("amounts")), "onResponse: ");
                             }
                             leadsAdapter.notifyDataSetChanged();
 
