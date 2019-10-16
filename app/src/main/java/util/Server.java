@@ -9,4 +9,5 @@ public class Server {
     public static final String URL_detail_lead = "http://192.168.2.142/api/tampil_presales";
     public static final String URL_update_sd = "http://192.168.2.142/api/update_sd";
     public static final String URL_raise_to_tender = "http://192.168.2.142/api/raise_to_tender";
+    public static final String URL_update_tp = "http://192.168.2.142/api/update_tp";
 }

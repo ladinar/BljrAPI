@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -48,7 +49,7 @@ public class DetailActivity extends AppCompatActivity implements DetailSalesFrag
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
-
+        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
         Leads lead = (Leads) getIntent().getSerializableExtra(LeadRegister.LEADS1);
         tvpresales = findViewById(R.id.presales_detail_lead);
         etLead = findViewById(R.id.edit_lead_id_fragment);

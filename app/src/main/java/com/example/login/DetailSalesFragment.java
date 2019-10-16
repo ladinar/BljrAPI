@@ -126,8 +126,7 @@ public class DetailSalesFragment extends Fragment {
         btnTp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                etLead2 = etLead.getText().toString().trim();
-                etassesment3 = etassesment.getText().toString().trim();
+//                etLead2 = etLead.getText().toString().trim();
                 raise_to_tender();
             }
         });
