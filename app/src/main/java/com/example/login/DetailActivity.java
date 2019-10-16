@@ -1,43 +1,48 @@
 package com.example.login;
 
-import android.app.DatePickerDialog;
-import android.content.Intent;
+import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
+import androidx.viewpager.widget.ViewPager;
 
-import com.android.volley.NetworkResponse;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.baoyachi.stepview.HorizontalStepView;
+import com.baoyachi.stepview.bean.StepBean;
+import com.example.login.Adapter.PagerAdapter;
 import com.example.login.model.Leads;
+import com.google.android.material.tabs.TabLayout;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Locale;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import util.Server;
 
-public class DetailActivity extends AppCompatActivity {
-    EditText etOppName, etClosing_date;
-    TextView tvLead, tvOppName;
+public class DetailActivity extends AppCompatActivity implements DetailSalesFragment.OnFragmentInteractionListener, TenderFragment.OnFragmentInteractionListener {
+    EditText etLead;
+    String etLead2;
+    TextView tvpresales, tvlead;
     Button btnEditLead;
     String lead_edit, etOppName2, etClosing_date2;
-    Calendar myCalendar;
-    DatePickerDialog.OnDateSetListener date;
+    HorizontalStepView horizontalsStepView;
+    List<StepBean> sources = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,112 +50,139 @@ public class DetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_detail);
 
         Leads lead = (Leads) getIntent().getSerializableExtra(LeadRegister.LEADS1);
-        setTitle(lead.getLead_id());
-        tvLead = findViewById(R.id.edit_lead);
+        tvpresales = findViewById(R.id.presales_detail_lead);
+        etLead = findViewById(R.id.edit_lead_id_fragment);
+        etLead.setText(lead.getLead_id());
+        etLead2 = etLead.getText().toString().trim();
+        etLead.setVisibility(View.GONE);
+        tvlead = findViewById(R.id.detail_lead);
+        tvlead.setText(lead.getLead_id());
 
-        tvLead.setText(lead.getLead_id());
-        tvOppName = findViewById(R.id.opty_name);
-        tvOppName.setText(lead.getOpp_name());
-        etOppName = findViewById(R.id.edit_opp_name);
-        etOppName.setText(lead.getOpp_name());
-        etClosing_date = findViewById(R.id.edit_closing_date);
-        etClosing_date.setText(lead.getClosing_date());
-        btnEditLead = findViewById(R.id.btnEditLead);
+        TabLayout tabLayout = findViewById(R.id.tablayout);
+        tabLayout.addTab(tabLayout.newTab().setText("Solution Design"));
+        tabLayout.addTab(tabLayout.newTab().setText("Tender Process"));
+        tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
+        final ViewPager viewPager = findViewById(R.id.pager);
+        final PagerAdapter adapter = new PagerAdapter(getSupportFragmentManager(), tabLayout.getTabCount());
+        viewPager.setAdapter(adapter);
+        viewPager.setOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
 
-        //button edit
-        btnEditLead.setOnClickListener(new View.OnClickListener() {
+        tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                viewPager.setCurrentItem(tab.getPosition());
+            }
 
             @Override
-            public void onClick(View view) {
-                etOppName2 = etOppName.getText().toString().trim();
-                etClosing_date2 = etClosing_date.getText().toString().trim();
-                lead_edit = tvLead.getText().toString().trim();
-                updatelead();
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
 
             }
         });
+        horizontalsStepView = findViewById(R.id.horizontalStepview);
+        Log.i(lead.getResult(), "onCreateView: ");
+        if (lead.getResult().equals("INITIAL")) {
+            sources.add(new StepBean("Initial", 0));
+            sources.add(new StepBean("Open", -1));
+            sources.add(new StepBean("SD", -1));
+            sources.add(new StepBean("TP", -1));
+            sources.add(new StepBean("Win/Lose", -1));
+        } else if (lead.getResult().equals("OPEN")) {
+            sources.add(new StepBean("Initial", 1));
+            sources.add(new StepBean("Open", 0));
+            sources.add(new StepBean("SD", -1));
+            sources.add(new StepBean("TP", -1));
+            sources.add(new StepBean("Win/Lose", -1));
+        } else if (lead.getResult().equals("SOLUTION DESIGN")) {
+            sources.add(new StepBean("Initial", 1));
+            sources.add(new StepBean("Open", 1));
+            sources.add(new StepBean("SD", 0));
+            sources.add(new StepBean("TP", -1));
+            sources.add(new StepBean("Win/Lose", -1));
+        } else if (lead.getResult().equals("TENDER PROCESS")) {
+            sources.add(new StepBean("Initial", 1));
+            sources.add(new StepBean("Open", 1));
+            sources.add(new StepBean("SD", 1));
+            sources.add(new StepBean("TP", 0));
+            sources.add(new StepBean("Win/Lose", -1));
+        } else if (lead.getResult().equals("WIN")) {
+            sources.add(new StepBean("Initial", 1));
+            sources.add(new StepBean("Open", 1));
+            sources.add(new StepBean("SD", 1));
+            sources.add(new StepBean("TP", 1));
+            sources.add(new StepBean("Win", 1));
+        } else if (lead.getResult().equals("LOSE")) {
+            sources.add(new StepBean("Initial", 1));
+            sources.add(new StepBean("Open", 1));
+            sources.add(new StepBean("SD", 1));
+            sources.add(new StepBean("TP", 1));
+            sources.add(new StepBean("Lose", 1));
+        }
 
-        //tanggal
-        myCalendar = Calendar.getInstance();
-        date = new DatePickerDialog.OnDateSetListener() {
-            @Override
-            public void onDateSet(DatePicker datePicker, int year, int monthOfYear, int dayOfMonth) {
-                myCalendar.set(Calendar.YEAR, year);
-                myCalendar.set(Calendar.MONTH, monthOfYear);
-                myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-                updatelabel();
-            }
-        };
-
-        etClosing_date.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                new DatePickerDialog(DetailActivity.this, date, myCalendar.get(Calendar.YEAR), myCalendar.get(Calendar.MONTH), myCalendar.get(Calendar.DAY_OF_MONTH)).show();
-            }
-        });
-
+        horizontalsStepView.setStepViewTexts(sources)
+                .setTextSize(10)
+                .setStepsViewIndicatorCompletedLineColor(Color.parseColor("#FFFF00"))
+                .setStepViewComplectedTextColor(Color.parseColor("#FFFF00"))
+                .setStepViewUnComplectedTextColor(ContextCompat.getColor(this, R.color.uncompleted_text_color))
+                .setStepsViewIndicatorUnCompletedLineColor(Color.parseColor("#FFFFFF"))
+                .setStepsViewIndicatorCompleteIcon(ContextCompat.getDrawable(this, R.drawable.complted))
+                .setStepsViewIndicatorAttentionIcon(ContextCompat.getDrawable(this, R.drawable.attention))
+                .setStepsViewIndicatorDefaultIcon(ContextCompat.getDrawable(this, R.drawable.default_icon));
+        tampilpresales();
     }
 
-    //tanggal
-    private void updatelabel() {
-        String myFormat = "yyyy-MM-dd";
-        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
-        etClosing_date.setText(sdf.format(myCalendar.getTime()));
-    }
-
-    private void updatelead() {
+    private void tampilpresales() {
         final JSONObject jobj = new JSONObject();
+        final String presales = "null";
         try {
-            jobj.put("etOppName", etOppName2);
-            jobj.put("etClosing_date", etClosing_date2);
-            jobj.put("tvLead", lead_edit);
+            jobj.put("etLead", etLead2);
 
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
-        final JsonObjectRequest strReq = new JsonObjectRequest(Request.Method.POST, Server.URL_updateLead, jobj, new Response.Listener<JSONObject>() {
-
+        final JsonObjectRequest strReq = new JsonObjectRequest(Request.Method.POST, Server.URL_detail_lead, jobj, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-                Log.i("response", response.toString());
-                JSONObject jObj = response;
-                String success = null;
                 try {
-                    success = jObj.getString("success");
-
+                    Log.i("response", response.toString());
+                    JSONObject jObj = response;
+                    String success = jObj.getString("success");
                     if (success.equals("1")) {
-                        Intent intent = new Intent(DetailActivity.this, LeadRegister.class);
-                        Toast.makeText(DetailActivity.this, "Lead Id Updated Successfully :)", Toast.LENGTH_LONG).show();
-                        startActivity(intent);
+                        JSONObject presales = jObj.getJSONObject("presales_detail");
+                        tvpresales.setText(presales.getString("name"));
 
-                    } else {
-                        Toast.makeText(DetailActivity.this, "salah!", Toast.LENGTH_LONG).show();
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
-
-                    Toast.makeText(DetailActivity.this, "Ora oleh data", Toast.LENGTH_SHORT).show();
                 }
 
-            }
-        },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        error.printStackTrace();
-                        NetworkResponse response = error.networkResponse;
-                        String errorMsg = "";
-                        if (response != null && response.data != null) {
-                            String errorString = new String(response.data);
-                            Log.i("log error", errorString);
-                        }
-                        Toast.makeText(DetailActivity.this, "Error" + error.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-                });
 
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("lead_id", presales);
+                return params;
+            }
+        };
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(strReq);
+    }
+
+    @Override
+    public void onFragmentInteraction(Uri uri) {
+
     }
 }

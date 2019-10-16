@@ -2,7 +2,6 @@ package com.example.login;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.Editable;
@@ -17,7 +16,6 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import com.android.volley.NetworkResponse;
@@ -71,13 +69,6 @@ public class DetailSalesFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_detail_sales, container, false);
 
         Leads lead = (Leads) getActivity().getIntent().getSerializableExtra(LeadRegister.LEADS1);
-        tvLead = view.findViewById(R.id.edit_lead_fragment);
-        tvLead2 = view.findViewById(R.id.lead_detail);
-        tvLead.setText(lead.getLead_id());
-        tvLead2.setText(lead.getLead_id());
-        tvOppName = view.findViewById(R.id.edit_opp_name_fragment);
-        tvOppName.setText(lead.getOpp_name());
-        tvpresales = view.findViewById(R.id.presales_detail_lead);
         etLead = view.findViewById(R.id.edit_lead_id_fragment);
         etLead.setText(lead.getLead_id());
         etLead2 = etLead.getText().toString().trim();
@@ -140,71 +131,10 @@ public class DetailSalesFragment extends Fragment {
                 raise_to_tender();
             }
         });
-        etNik = view.findViewById(R.id.edit_nik_fragment);
+        /*etNik = view.findViewById(R.id.edit_nik_fragment);
         etNik.setVisibility(View.GONE);
-        /*etNik.setText(lead.getNik());
-        etNik2 = etNik.getText().toString().trim();*/
-
-//        tampilsd();
-
+*/
         tampilkanpresales();
-
-        horizontalsStepView = view.findViewById(R.id.horizontalStepview);
-        Log.i(lead.getResult(), "onCreateView: ");
-        if (lead.getResult().equals("INITIAL")) {
-            sources.add(new StepBean("Initial", 0));
-            sources.add(new StepBean("Open", -1));
-            sources.add(new StepBean("SD", -1));
-            sources.add(new StepBean("TP", -1));
-            sources.add(new StepBean("Win/Lose", -1));
-        } else if (lead.getResult().equals("OPEN")) {
-            sources.add(new StepBean("Initial", 1));
-            sources.add(new StepBean("Open", 0));
-            sources.add(new StepBean("SD", -1));
-            sources.add(new StepBean("TP", -1));
-            sources.add(new StepBean("Win/Lose", -1));
-        } else if (lead.getResult().equals("SOLUTION DESIGN")) {
-            sources.add(new StepBean("Initial", 1));
-            sources.add(new StepBean("Open", 1));
-            sources.add(new StepBean("SD", 0));
-            sources.add(new StepBean("TP", -1));
-            sources.add(new StepBean("Win/Lose", -1));
-        } else if (lead.getResult().equals("TENDER PROCESS")) {
-            sources.add(new StepBean("Initial", 1));
-            sources.add(new StepBean("Open", 1));
-            sources.add(new StepBean("SD", 1));
-            sources.add(new StepBean("TP", 0));
-            sources.add(new StepBean("Win/Lose", -1));
-        } else if (lead.getResult().equals("WIN")) {
-            sources.add(new StepBean("Initial", 1));
-            sources.add(new StepBean("Open", 1));
-            sources.add(new StepBean("SD", 1));
-            sources.add(new StepBean("TP", 1));
-            sources.add(new StepBean("Win", 1));
-        } else if (lead.getResult().equals("LOSE")) {
-            sources.add(new StepBean("Initial", 1));
-            sources.add(new StepBean("Open", 1));
-            sources.add(new StepBean("SD", 1));
-            sources.add(new StepBean("TP", 1));
-            sources.add(new StepBean("Lose", 1));
-        }
-
-
-//        sources.add(new StepBean("Initial",1));
-//        sources.add(new StepBean("Open",1));
-//        sources.add(new StepBean("SD",1));
-//        sources.add(new StepBean("TP",0));
-//        sources.add(new StepBean("Win/Lose",-1));
-
-        horizontalsStepView.setStepViewTexts(sources)
-                .setTextSize(10)
-                .setStepsViewIndicatorCompletedLineColor(Color.parseColor("#FFFF00"))
-                .setStepViewComplectedTextColor(Color.parseColor("#FFFF00"))
-                .setStepViewUnComplectedTextColor(ContextCompat.getColor(getActivity(), R.color.uncompleted_text_color))
-                .setStepsViewIndicatorUnCompletedLineColor(Color.parseColor("#FFFFFF"))
-                .setStepsViewIndicatorCompleteIcon(ContextCompat.getDrawable(getActivity(), R.drawable.complted))
-                .setStepsViewIndicatorAttentionIcon(ContextCompat.getDrawable(getActivity(), R.drawable.attention))
-                .setStepsViewIndicatorDefaultIcon(ContextCompat.getDrawable(getActivity(), R.drawable.default_icon));
 
         return view;
     }
@@ -285,7 +215,6 @@ public class DetailSalesFragment extends Fragment {
                     String success = jObj.getString("success");
                     if (success.equals("1")) {
                         JSONObject presales = jObj.getJSONObject("presales_detail");
-                        tvpresales.setText(presales.getString("name"));
                         etassesment.setText(presales.getString("assessments"));
                         etproposed.setText(presales.getString("pds"));
                         etproof.setText(presales.getString("povs"));

@@ -74,7 +74,7 @@ public class LeadRegister extends AppCompatActivity implements LeadRegisterAdapt
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lead_register);
 
-        mopp = findViewById(R.id.opty_name);
+        mopp = findViewById(R.id.mopty);
         mstatus = findViewById(R.id.mStatus);
         searchText = findViewById(R.id.search_view);
         mAmount = findViewById(R.id.maamount);
@@ -258,7 +258,7 @@ public class LeadRegister extends AppCompatActivity implements LeadRegisterAdapt
 
     @Override
     public void doClick(int pos) {
-        Intent intent = new Intent(this, AddLeadActivity.class);
+        Intent intent = new Intent(this, DetailActivity.class);
         intent.putExtra(LEADS1, leadsAdapter.getItem(pos));
         intent.putExtra("detail_lead", "coba");
         startActivity(intent);
