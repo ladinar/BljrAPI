@@ -89,10 +89,25 @@
                 android:textSize="12dp" />
 
             <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="497dp"
+                android:text="Current Project Size:"
+                android:textSize="9dp" />
+
+            <TextView
+                android:id="@+id/tvproject_class"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="88dp"
+                android:layout_marginTop="497dp"
+                android:textSize="9dp" />
+
+            <TextView
                 android:id="@+id/textview_deal_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="505dp"
+                android:layout_marginTop="515dp"
                 android:text="Deal Price"
                 android:textColor="#60CEFF"
                 android:textSize="9dp" />
@@ -101,9 +116,10 @@
                 android:id="@+id/edittext_deal_price"
                 android:layout_width="350dp"
                 android:layout_height="45dp"
-                android:layout_marginTop="520dp"
+                android:layout_marginTop="530dp"
                 android:background="@drawable/border"
                 android:drawableLeft="@drawable/rp"
+                android:drawablePadding="3dp"
                 android:hint="Enter deal price"
                 android:inputType="numberDecimal"
                 android:padding="10dp"
@@ -114,16 +130,17 @@
                 android:id="@+id/textview_probability"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="575dp"
+                android:layout_marginTop="585dp"
                 android:text="Win Probability"
                 android:textColor="#60CEFF"
                 android:textSize="9dp" />
+
 
             <Spinner
                 android:id="@+id/spinner_win_prob"
                 android:layout_width="350dp"
                 android:layout_height="45dp"
-                android:layout_marginTop="590dp"
+                android:layout_marginTop="600dp"
                 android:background="@drawable/border"
                 android:entries="@array/win_prob"
                 android:inputType="text"
@@ -132,10 +149,25 @@
                 android:textSize="12dp" />
 
             <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="647dp"
+                android:text="Current Win Porbability:"
+                android:textSize="9dp" />
+
+            <TextView
+                android:id="@+id/tvwin_prob"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="100dp"
+                android:layout_marginTop="647dp"
+                android:textSize="9dp" />
+
+            <TextView
                 android:id="@+id/textview_project_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="645dp"
+                android:layout_marginTop="665dp"
                 android:text="Project Name"
                 android:textColor="#60CEFF"
                 android:textSize="9dp" />
@@ -144,7 +176,7 @@
                 android:id="@+id/edittext_project_name"
                 android:layout_width="350dp"
                 android:layout_height="45dp"
-                android:layout_marginTop="660dp"
+                android:layout_marginTop="680dp"
                 android:background="@drawable/border"
                 android:hint="Enter project name"
                 android:inputType="text"
@@ -156,7 +188,7 @@
                 android:id="@+id/textview_submit_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="715dp"
+                android:layout_marginTop="735dp"
                 android:text="Submit Date"
                 android:textColor="#60CEFF"
                 android:textSize="9dp" />
@@ -165,7 +197,7 @@
                 android:id="@+id/edittext_submit_date"
                 android:layout_width="350dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="730dp"
+                android:layout_marginTop="750dp"
                 android:background="@drawable/border"
                 android:clickable="true"
                 android:drawableLeft="@drawable/calendar_img"
@@ -181,7 +213,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="785dp"
+                android:layout_marginTop="810dp"
                 android:text="Quote Number"
                 android:textColor="#60CEFF"
                 android:textSize="9dp" />
@@ -190,7 +222,7 @@
                 android:id="@+id/edittext_quote"
                 android:layout_width="350dp"
                 android:layout_height="45dp"
-                android:layout_marginTop="800dp"
+                android:layout_marginTop="825dp"
                 android:background="@drawable/border"
                 android:hint="Enter Quote Number"
                 android:inputType="text"
@@ -202,7 +234,7 @@
                 android:id="@+id/btn_submit_tp"
                 android:layout_width="67dp"
                 android:layout_height="25dp"
-                android:layout_marginTop="880dp"
+                android:layout_marginTop="900dp"
                 android:background="@color/colorAccent"
                 android:hint="Submit"
                 android:textColorHint="@android:color/white" />
@@ -212,7 +244,7 @@
                 android:layout_width="67dp"
                 android:layout_height="25dp"
                 android:layout_marginLeft="280dp"
-                android:layout_marginTop="880dp"
+                android:layout_marginTop="900dp"
                 android:background="@color/colorPrimary"
                 android:hint="Result"
                 android:textColorHint="@android:color/white" />
