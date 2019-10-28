@@ -205,7 +205,7 @@ public class DetailSalesFragment extends Fragment {
             e.printStackTrace();
         }
 
-        final JsonObjectRequest strReq = new JsonObjectRequest(Request.Method.POST, Server.URL_detail_lead, jobj, new Response.Listener<JSONObject>() {
+        final JsonObjectRequest strReq = new JsonObjectRequest(Request.Method.POST, Server.URL_tampil_sd, jobj, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 try {

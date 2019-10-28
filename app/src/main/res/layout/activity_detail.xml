@@ -31,7 +31,7 @@
         android:layout_width="match_parent"
         android:layout_height="178dp"
         android:layout_marginTop="70dp"
-        android:background="#333639" />
+        android:background="#FFFFFF" />
 
     <EditText
         android:id="@+id/edit_lead_id_fragment"
@@ -86,48 +86,49 @@
         android:id="@+id/horizontalStepview"
         android:layout_height="match_parent"
         android:layout_width="wrap_content"
-        android:layout_marginLeft="0dp"
-        android:layout_marginTop="100dp" />
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="90dp" />
 
     <TextView
-        android:id="@+id/lead_detail"
+        android:id="@+id/opp_name_detail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="170dp"
+        android:layout_marginLeft="185dp"
         android:layout_marginTop="180dp"
-        android:text="lead"
-        android:textColor="@android:color/white"
         android:textSize="13dp" />
 
     <TextView
-        android:id="@+id/edit_opp_name_fragment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="170dp"
-        android:layout_marginTop="195dp"
+        android:layout_marginLeft="185dp"
+        android:layout_marginTop="200dp"
+        android:text="Owner:"
+        android:textSize="13dp" />
+
+    <TextView
+        android:id="@+id/owner_detail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="227dp"
+        android:layout_marginTop="200dp"
         android:maxLines="1"
-        android:text="opti"
-        android:textColor="@android:color/white"
-        android:textSize="12dp" />
+        android:textSize="13dp" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="170dp"
-        android:layout_marginTop="210dp"
+        android:layout_marginLeft="185dp"
+        android:layout_marginTop="223dp"
         android:text="Current presales: "
-        android:textColor="@android:color/white"
         android:textSize="12dp" />
 
     <TextView
         android:id="@+id/presales_detail_lead"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="265dp"
-        android:layout_marginTop="210dp"
+        android:layout_marginLeft="280dp"
+        android:layout_marginTop="223dp"
         android:maxLines="1"
-        android:text="coba"
-        android:textColor="@android:color/white"
         android:textSize="12dp" />
 
     <com.google.android.material.tabs.TabLayout

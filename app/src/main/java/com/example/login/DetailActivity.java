@@ -39,7 +39,7 @@ import util.Server;
 public class DetailActivity extends AppCompatActivity implements DetailSalesFragment.OnFragmentInteractionListener, TenderFragment.OnFragmentInteractionListener {
     EditText etLead;
     String etLead2;
-    TextView tvpresales, tvlead;
+    TextView tvpresales, tvlead, tvopp, tvowner;
     Button btnEditLead;
     String lead_edit, etOppName2, etClosing_date2;
     HorizontalStepView horizontalsStepView;
@@ -58,6 +58,8 @@ public class DetailActivity extends AppCompatActivity implements DetailSalesFrag
         etLead.setVisibility(View.GONE);
         tvlead = findViewById(R.id.detail_lead);
         tvlead.setText(lead.getLead_id());
+        tvopp = findViewById(R.id.opp_name_detail);
+        tvowner = findViewById(R.id.owner_detail);
 
         TabLayout tabLayout = findViewById(R.id.tablayout);
         tabLayout.addTab(tabLayout.newTab().setText("Solution Design"));
@@ -116,28 +118,30 @@ public class DetailActivity extends AppCompatActivity implements DetailSalesFrag
             sources.add(new StepBean("Open", 1));
             sources.add(new StepBean("SD", 1));
             sources.add(new StepBean("TP", 1));
-            sources.add(new StepBean("Win", 1));
+            sources.add(new StepBean("Win", 0));
         } else if (lead.getResult().equals("LOSE")) {
             sources.add(new StepBean("Initial", 1));
             sources.add(new StepBean("Open", 1));
             sources.add(new StepBean("SD", 1));
             sources.add(new StepBean("TP", 1));
-            sources.add(new StepBean("Lose", 1));
+            sources.add(new StepBean("Lose", 0));
         }
 
         horizontalsStepView.setStepViewTexts(sources)
-                .setTextSize(10)
-                .setStepsViewIndicatorCompletedLineColor(Color.parseColor("#FFFF00"))
-                .setStepViewComplectedTextColor(Color.parseColor("#FFFF00"))
-                .setStepViewUnComplectedTextColor(ContextCompat.getColor(this, R.color.uncompleted_text_color))
-                .setStepsViewIndicatorUnCompletedLineColor(Color.parseColor("#FFFFFF"))
-                .setStepsViewIndicatorCompleteIcon(ContextCompat.getDrawable(this, R.drawable.complted))
-                .setStepsViewIndicatorAttentionIcon(ContextCompat.getDrawable(this, R.drawable.attention))
-                .setStepsViewIndicatorDefaultIcon(ContextCompat.getDrawable(this, R.drawable.default_icon));
+                .setTextSize(8)
+                .setStepsViewIndicatorCompletedLineColor(Color.parseColor("#000000"))
+                .setStepViewComplectedTextColor(Color.parseColor("#000000"))
+                .setStepViewUnComplectedTextColor(Color.parseColor("#000000"))
+                .setStepsViewIndicatorUnCompletedLineColor(Color.parseColor("#b5bdc9"))
+                .setStepsViewIndicatorCompleteIcon(ContextCompat.getDrawable(this, R.drawable.group_8))
+                .setStepsViewIndicatorAttentionIcon(ContextCompat.getDrawable(this, R.drawable.group_9))
+                .setStepsViewIndicatorDefaultIcon(ContextCompat.getDrawable(this, R.drawable.group_7));
+
         tampilpresales();
+        tampildetail();
     }
 
-    private void tampilpresales() {
+    private void tampildetail() {
         final JSONObject jobj = new JSONObject();
         final String presales = "null";
         try {
@@ -155,9 +159,53 @@ public class DetailActivity extends AppCompatActivity implements DetailSalesFrag
                     JSONObject jObj = response;
                     String success = jObj.getString("success");
                     if (success.equals("1")) {
+                        JSONObject detail = jObj.getJSONObject("lead_id");
+                        tvowner.setText(detail.getString("name"));
+                        tvopp.setText(detail.getString("opp_name"));
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("lead_id", presales);
+                return params;
+            }
+        };
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(strReq);
+    }
+
+    private void tampilpresales() {
+        final JSONObject jobj = new JSONObject();
+        final String presales = "null";
+        try {
+            jobj.put("etLead", etLead2);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        final JsonObjectRequest strReq = new JsonObjectRequest(Request.Method.POST, Server.URL_tampil_sd, jobj, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                try {
+                    Log.i("response", response.toString());
+                    JSONObject jObj = response;
+                    String success = jObj.getString("success");
+                    if (success.equals("1")) {
                         JSONObject presales = jObj.getJSONObject("presales_detail");
                         tvpresales.setText(presales.getString("name"));
-
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
