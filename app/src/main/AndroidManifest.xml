@@ -15,14 +15,13 @@
         <activity android:name=".AddLeadActivity"></activity>
         <activity android:name=".DetailActivity" />
         <activity android:name=".LeadRegister">
+        </activity>
+        <activity android:name=".LoginMain">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity android:name=".LoginMain">
-
         </activity>
         <activity android:name=".MainActivity" />
     </application>
