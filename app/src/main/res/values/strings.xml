@@ -29,6 +29,25 @@
         <item>Medium</item>
         <item>Advance</item>
     </string-array>
+    <string-array name="project_class">
+        <item>Choose Project Class</item>
+        <item>Normal</item>
+        <item>Blanket</item>
+        <item>Multiyears</item>
+    </string-array>
+    <string-array name="win_prob">
+        <item>Choose Win Probability</item>
+        <item>HIGH</item>
+        <item>MEDIUM</item>
+        <item>LOW</item>
+    </string-array>
+    <string-array name="result">
+        <item>WIN</item>
+        <item>LOSE</item>
+        <item>HOLD</item>
+        <item>CANCEL</item>
+        <item>SPESIAL</item>
+    </string-array>
     <string name="total_amount">Total Amount</string>
     <string name="price_in_last_12_days">Price in last 12 days</string>
 </resources>

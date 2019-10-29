@@ -1,7 +1,7 @@
 package com.example.login;
 
 import android.content.Context;
-import android.graphics.Color;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.Editable;
@@ -16,7 +16,6 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import com.android.volley.NetworkResponse;
@@ -44,9 +43,11 @@ import java.util.Map;
 import util.Server;
 
 public class DetailSalesFragment extends Fragment {
-    TextView tvLead, tvOppName, tvLead2, tvpresales;
-    String lead_edit, etOppName2, etLead2, etassesment2, etproposed2, etproof2, etproject_budget2, etpriority, etproject_size, etNik2;
-    EditText etLead, etassesment, etproposed, etproject_budget, etproof, etNik;
+    TextView tvLead, tvOppName, tvLead2, tvpresales, tvproposed, tvassessment, tvproof, tvproject_size, tvpriority;
+    String lead_edit, etOppName2, etLead2, etassesment2, etproposed2, etproof2, etproject_budget2, etpriority, etproject_size,
+            etNik2, tvassessment2, tvproposed2, tvproof2, tvproject_size2, tvpriority2, etassess_before2, etpro_before2,
+            etproof_before2, etpb_before2, etprio_before2, etpj_before2, ettimeasses_before2, ettimepro_before2, ettimeproof_before2, etassesment3;
+    EditText etLead, etassesment, etproposed, etproject_budget, etproof, etNik, etassess_before, etpro_before, etproof_before, etpb_before, etprio_before, etpj_before, ettimeasses_before, ettimepro_before, ettimeproof_before;
     Spinner spinnerPriority, spinnerProjectSize;
     Button btnSubmitsd, btnTp;
     HorizontalStepView horizontalsStepView;
@@ -68,14 +69,6 @@ public class DetailSalesFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_detail_sales, container, false);
 
         Leads lead = (Leads) getActivity().getIntent().getSerializableExtra(LeadRegister.LEADS1);
-        tvLead = view.findViewById(R.id.edit_lead_fragment);
-        tvLead2 = view.findViewById(R.id.lead_detail);
-        tvLead.setText(lead.getLead_id());
-        tvLead2.setText(lead.getLead_id());
-
-        tvOppName = view.findViewById(R.id.edit_opp_name_fragment);
-        tvOppName.setText(lead.getOpp_name());
-        tvpresales = view.findViewById(R.id.presales_detail_lead);
         etLead = view.findViewById(R.id.edit_lead_id_fragment);
         etLead.setText(lead.getLead_id());
         etLead2 = etLead.getText().toString().trim();
@@ -88,6 +81,34 @@ public class DetailSalesFragment extends Fragment {
         spinnerPriority = view.findViewById(R.id.spinner_priority);
         spinnerProjectSize = view.findViewById(R.id.spinner_project_size);
         btnSubmitsd = view.findViewById(R.id.btn_submit_sd);
+        tvassessment = view.findViewById(R.id.tvtimeassessment);
+        tvassessment2 = tvassessment.getText().toString().trim();
+        tvproof = view.findViewById(R.id.tvtimeproof);
+        tvproof2 = tvproof.getText().toString().trim();
+        tvproposed = view.findViewById(R.id.tvtimeproposed);
+        tvproposed2 = tvproposed.getText().toString().trim();
+        tvpriority = view.findViewById(R.id.tvpriority);
+        tvpriority2 = tvpriority.getText().toString().trim();
+        tvproject_size = view.findViewById(R.id.tvproject_size);
+        tvproject_size2 = tvproject_size.getText().toString().trim();
+        etassess_before = view.findViewById(R.id.tv_assessment_before);
+        etassess_before2 = etassess_before.getText().toString().trim();
+        etpro_before = view.findViewById(R.id.tv_propoosed_before);
+        etpro_before2 = etpro_before.getText().toString().trim();
+        etproof_before = view.findViewById(R.id.tv_proof_before);
+        etproof_before2 = etproof_before.getText().toString().trim();
+        etpb_before = view.findViewById(R.id.tv_pb_before);
+        etpb_before2 = etpb_before.getText().toString().trim();
+        etprio_before = view.findViewById(R.id.tv_prio_before);
+        etprio_before2 = etprio_before.getText().toString().trim();
+        etpj_before = view.findViewById(R.id.tv_pj_before);
+        etpj_before2 = etpj_before.getText().toString().trim();
+        ettimeasses_before = view.findViewById(R.id.ettimeasses_before);
+        ettimeasses_before2 = ettimeasses_before.getText().toString().trim();
+        ettimepro_before = view.findViewById(R.id.ettimepropose_before);
+        ettimepro_before2 = ettimepro_before.getText().toString().trim();
+        ettimeproof_before = view.findViewById(R.id.ettimeproof_before);
+        ettimeproof_before2 = ettimeproof_before.getText().toString().trim();
         btnSubmitsd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -102,189 +123,39 @@ public class DetailSalesFragment extends Fragment {
         });
 
         btnTp = view.findViewById(R.id.btn_tp);
-        etNik = view.findViewById(R.id.edit_nik_fragment);
+        btnTp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                etLead2 = etLead.getText().toString().trim();
+                raise_to_tender();
+            }
+        });
+        /*etNik = view.findViewById(R.id.edit_nik_fragment);
         etNik.setVisibility(View.GONE);
-        /*etNik.setText(lead.getNik());
-        etNik2 = etNik.getText().toString().trim();*/
-
-//        tampilsd();
-
+*/
         tampilkanpresales();
-
-        horizontalsStepView = view.findViewById(R.id.horizontalStepview);
-        Log.i(lead.getResult(), "onCreateView: ");
-        if (lead.getResult().equals("INITIAL")) {
-            sources.add(new StepBean("Initial", 0));
-            sources.add(new StepBean("Open", -1));
-            sources.add(new StepBean("SD", -1));
-            sources.add(new StepBean("TP", -1));
-            sources.add(new StepBean("Win/Lose", -1));
-
-            horizontalsStepView.setStepViewTexts(sources)
-                    .setTextSize(10)
-                    .setStepsViewIndicatorCompletedLineColor(Color.parseColor("#FFFF00"))
-                    .setStepViewUnComplectedTextColor(ContextCompat.getColor(getActivity(), R.color.uncompleted_text_color))
-                    .setStepsViewIndicatorUnCompletedLineColor(Color.parseColor("#FFFFFF"))
-                    .setStepsViewIndicatorCompleteIcon(ContextCompat.getDrawable(getActivity(), R.drawable.complted))
-                    .setStepsViewIndicatorAttentionIcon(ContextCompat.getDrawable(getActivity(), R.drawable.attention))
-                    .setStepsViewIndicatorDefaultIcon(ContextCompat.getDrawable(getActivity(), R.drawable.default_icon));
-        } else if (lead.getResult().equals("OPEN")) {
-            sources.add(new StepBean("Initial", 1));
-            sources.add(new StepBean("Open", 0));
-            sources.add(new StepBean("SD", 1));
-//            Log.i(String.valueOf(sources.add(new StepBean("Initial", 1))), "onCreateView: ");
-            if (sources.add(new StepBean("Initial", 1))) {
-                horizontalsStepView.setStepViewTexts(sources)
-                        .setStepsViewIndicatorCompleteIcon(ContextCompat.getDrawable(getActivity(), R.drawable.bg_amount));
-            } else if (sources.add(new StepBean("Open", 1))) {
-                horizontalsStepView.setStepViewTexts(sources)
-                        .setStepsViewIndicatorCompleteIcon(ContextCompat.getDrawable(getActivity(), R.drawable.complted));
-            } else if (sources.add(new StepBean("SD", 0))) {
-                horizontalsStepView.setStepViewTexts(sources);
-//                        .setStepsViewIndicatorAttentionIcon(ContextCompat.getDrawable(getActivity(), R.drawable.default_icon));
-            }
-
-//            if (sources.add(new StepBean("Initial", 1))){
-//
-//            }
-//            sources.add(new StepBean("Initial", 1));
-//            sources.add(new StepBean("Open", 0));
-//            sources.add(new StepBean("SD", -1));
-//            sources.add(new StepBean("TP", -1));
-//            sources.add(new StepBean("Win/Lose", -1));
-//
-//            horizontalsStepView.setStepViewTexts(sources)
-//                    .setTextSize(10)
-//                    .setStepsViewIndicatorCompletedLineColor(Color.parseColor("#FFFF00"))
-//                    .setStepViewUnComplectedTextColor(ContextCompat.getColor(getActivity(), R.color.uncompleted_text_color))
-//                    .setStepsViewIndicatorUnCompletedLineColor(Color.parseColor("#FFFFFF"))
-//                    .setStepsViewIndicatorCompleteIcon(ContextCompat.getDrawable(getActivity(), R.drawable.complted))
-//                    .setStepsViewIndicatorAttentionIcon(ContextCompat.getDrawable(getActivity(), R.drawable.attention))
-//                    .setStepsViewIndicatorDefaultIcon(ContextCompat.getDrawable(getActivity(), R.drawable.default_icon));
-        } else if (lead.getResult().equals("SOLUTION DESIGN")) {
-//            sources.add(new StepBean("Initial", 1));
-//            sources.add(new StepBean("Open", 1));
-//            sources.add(new StepBean("SD", 0));
-//            sources.add(new StepBean("TP", -1));
-//            sources.add(new StepBean("Win/Lose", -1));
-
-            if (sources.add(new StepBean("Initial", 1))) {
-                sources.add(new StepBean("Initial", 1));
-                horizontalsStepView.setStepViewTexts(sources)
-                        .setTextSize(10)
-                        .setStepsViewIndicatorCompletedLineColor(Color.parseColor("#FFFF00"))
-                        .setStepViewUnComplectedTextColor(ContextCompat.getColor(getActivity(), R.color.uncompleted_text_color))
-                        .setStepsViewIndicatorUnCompletedLineColor(Color.parseColor("#FFFFFF"))
-                        .setStepsViewIndicatorCompleteIcon(ContextCompat.getDrawable(getActivity(), R.drawable.complted))
-                        .setStepsViewIndicatorAttentionIcon(ContextCompat.getDrawable(getActivity(), R.drawable.attention))
-                        .setStepsViewIndicatorDefaultIcon(ContextCompat.getDrawable(getActivity(), R.drawable.default_icon));
-            }
-//            horizontalsStepView.setStepViewTexts(sources)
-//                    .setTextSize(10)
-//                    .setStepsViewIndicatorCompletedLineColor(Color.parseColor("#FFFF00"))
-//                    .setStepViewUnComplectedTextColor(ContextCompat.getColor(getActivity(), R.color.uncompleted_text_color))
-//                    .setStepsViewIndicatorUnCompletedLineColor(Color.parseColor("#FFFFFF"))
-//                    .setStepsViewIndicatorCompleteIcon(ContextCompat.getDrawable(getActivity(), R.drawable.complted))
-//                    .setStepsViewIndicatorAttentionIcon(ContextCompat.getDrawable(getActivity(), R.drawable.attention))
-//                    .setStepsViewIndicatorDefaultIcon(ContextCompat.getDrawable(getActivity(), R.drawable.default_icon));
-        } else if (lead.getResult().equals("TENDER PROCESS")) {
-            sources.add(new StepBean("Initial", 1));
-            sources.add(new StepBean("Open", 1));
-            sources.add(new StepBean("SD", 1));
-            sources.add(new StepBean("TP", 0));
-            sources.add(new StepBean("Win/Lose", -1));
-
-            horizontalsStepView.setStepViewTexts(sources)
-                    .setTextSize(10)
-                    .setStepsViewIndicatorCompletedLineColor(Color.parseColor("#FFFF00"))
-                    .setStepViewUnComplectedTextColor(ContextCompat.getColor(getActivity(), R.color.uncompleted_text_color))
-                    .setStepsViewIndicatorUnCompletedLineColor(Color.parseColor("#FFFFFF"))
-                    .setStepsViewIndicatorCompleteIcon(ContextCompat.getDrawable(getActivity(), R.drawable.complted))
-                    .setStepsViewIndicatorAttentionIcon(ContextCompat.getDrawable(getActivity(), R.drawable.attention))
-                    .setStepsViewIndicatorDefaultIcon(ContextCompat.getDrawable(getActivity(), R.drawable.default_icon));
-        } else if (lead.getResult().equals("WIN")) {
-            sources.add(new StepBean("Initial", 1));
-            sources.add(new StepBean("Open", 1));
-            sources.add(new StepBean("SD", 1));
-            sources.add(new StepBean("TP", 1));
-            sources.add(new StepBean("Win", 1));
-
-            horizontalsStepView.setStepViewTexts(sources)
-                    .setTextSize(10)
-                    .setStepsViewIndicatorCompletedLineColor(Color.parseColor("#FFFF00"))
-                    .setStepViewUnComplectedTextColor(ContextCompat.getColor(getActivity(), R.color.uncompleted_text_color))
-                    .setStepsViewIndicatorUnCompletedLineColor(Color.parseColor("#FFFFFF"))
-                    .setStepsViewIndicatorCompleteIcon(ContextCompat.getDrawable(getActivity(), R.drawable.complted))
-                    .setStepsViewIndicatorAttentionIcon(ContextCompat.getDrawable(getActivity(), R.drawable.attention))
-                    .setStepsViewIndicatorDefaultIcon(ContextCompat.getDrawable(getActivity(), R.drawable.default_icon));
-        } else if (lead.getResult().equals("LOSE")) {
-            sources.add(new StepBean("Initial", 1));
-            sources.add(new StepBean("Open", 1));
-            sources.add(new StepBean("SD", 1));
-            sources.add(new StepBean("TP", 1));
-            sources.add(new StepBean("Lose", 1));
-
-            horizontalsStepView.setStepViewTexts(sources)
-                    .setTextSize(10)
-                    .setStepsViewIndicatorCompletedLineColor(Color.parseColor("#FFFF00"))
-                    .setStepViewUnComplectedTextColor(ContextCompat.getColor(getActivity(), R.color.uncompleted_text_color))
-                    .setStepsViewIndicatorUnCompletedLineColor(Color.parseColor("#FFFFFF"))
-                    .setStepsViewIndicatorCompleteIcon(ContextCompat.getDrawable(getActivity(), R.drawable.complted))
-                    .setStepsViewIndicatorAttentionIcon(ContextCompat.getDrawable(getActivity(), R.drawable.attention))
-                    .setStepsViewIndicatorDefaultIcon(ContextCompat.getDrawable(getActivity(), R.drawable.default_icon));
-        }
-
-
-//        sources.add(new StepBean("Initial",1));
-//        sources.add(new StepBean("Open",1));
-//        sources.add(new StepBean("SD",1));
-//        sources.add(new StepBean("TP",0));
-//        sources.add(new StepBean("Win/Lose",-1));
-
-//        horizontalsStepView.setStepViewTexts(sources)
-//                .setTextSize(10)
-//                .setStepsViewIndicatorCompletedLineColor(Color.parseColor("#FFFF00"))
-//                .setStepViewComplectedTextColor(Color.parseColor("#FFFF00"))
-//                .setStepViewUnComplectedTextColor(ContextCompat.getColor(getActivity(), R.color.uncompleted_text_color))
-//                .setStepsViewIndicatorUnCompletedLineColor(Color.parseColor("#FFFFFF"))
-//                .setStepsViewIndicatorCompleteIcon(ContextCompat.getDrawable(getActivity(), R.drawable.complted))
-//                .setStepsViewIndicatorAttentionIcon(ContextCompat.getDrawable(getActivity(), R.drawable.attention))
-//                .setStepsViewIndicatorDefaultIcon(ContextCompat.getDrawable(getActivity(), R.drawable.default_icon));
 
         return view;
     }
 
-    private void tampilsd() {
+    private void raise_to_tender() {
         final JSONObject jobj = new JSONObject();
-        final String presales = "null";
         try {
+            jobj.put("etLead", etLead2);
 
-            jobj.put("spinnerProjectSize", etproject_size);
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
-        final JsonObjectRequest strReq = new JsonObjectRequest(Request.Method.POST, Server.URL_update_sd, jobj, new Response.Listener<JSONObject>() {
+        final JsonObjectRequest strReq = new JsonObjectRequest(Request.Method.POST, Server.URL_raise_to_tender, jobj, new Response.Listener<JSONObject>() {
 
             @Override
             public void onResponse(JSONObject response) {
                 Log.i("response", response.toString());
-                JSONObject jObj = response;
-                String success = null;
-                try {
-                    success = jObj.getString("success");
 
-                    if (success.equals("1")) {
-                        Toast.makeText(getActivity(), "Solution Design Updated Successfully :)", Toast.LENGTH_LONG).show();
-
-                    } else {
-                        Toast.makeText(getActivity(), "salah!", Toast.LENGTH_LONG).show();
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-
-                    Toast.makeText(getActivity(), "Ora oleh data", Toast.LENGTH_SHORT).show();
-                }
+                Intent intent = new Intent(getActivity(), LeadRegister.class);
+                Toast.makeText(getActivity(), "Raise to Tender Successfully :)", Toast.LENGTH_LONG).show();
+                startActivity(intent);
 
             }
         },
@@ -311,12 +182,30 @@ public class DetailSalesFragment extends Fragment {
         final String presales = "null";
         try {
             jobj.put("etLead", etLead2);
+            jobj.put("ettimeasses_before", ettimeasses_before2);
+            jobj.put("ettimepro_before", ettimepro_before2);
+            jobj.put("ettimeproof_before", ettimeproof_before2);
+            jobj.put("etassess_before", etassess_before2);
+            jobj.put("etpro_before", etpro_before2);
+            jobj.put("etproof_before", etproof_before2);
+            jobj.put("etpb_before", etpb_before2);
+            jobj.put("etprio_before", etprio_before2);
+            jobj.put("etpj_before2", etpj_before2);
+            jobj.put("etassesment", etassesment2);
+            jobj.put("etproposed", etproposed2);
+            jobj.put("etproof", etproof2);
+            jobj.put("etproject_budget", etproject_budget2);
+            jobj.put("tvproposed", tvproposed2);
+            jobj.put("tvassessment", tvassessment2);
+            jobj.put("tvproof", tvproof2);
+            jobj.put("tvpriority", tvpriority2);
+            jobj.put("tvproject_size", tvproject_size2);
 
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
-        final JsonObjectRequest strReq = new JsonObjectRequest(Request.Method.POST, Server.URL_detail_lead, jobj, new Response.Listener<JSONObject>() {
+        final JsonObjectRequest strReq = new JsonObjectRequest(Request.Method.POST, Server.URL_tampil_sd, jobj, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 try {
@@ -325,7 +214,34 @@ public class DetailSalesFragment extends Fragment {
                     String success = jObj.getString("success");
                     if (success.equals("1")) {
                         JSONObject presales = jObj.getJSONObject("presales_detail");
-                        tvpresales.setText(presales.getString("name"));
+                        etassesment.setText(presales.getString("assessments"));
+                        etproposed.setText(presales.getString("pds"));
+                        etproof.setText(presales.getString("povs"));
+                        etproject_budget.setText(presales.getString("pbs"));
+                        tvassessment.setText(presales.getString("assessment_dates"));
+                        tvproposed.setText(presales.getString("pd_dates"));
+                        tvproof.setText(presales.getString("pov_dates"));
+                        tvpriority.setText(presales.getString("prioritys"));
+                        tvproject_size.setText(presales.getString("project_sizes"));
+                        etassess_before.setText(presales.getString("assessments"));
+                        etpro_before.setText(presales.getString("pds"));
+                        etproof_before.setText(presales.getString("povs"));
+                        etpb_before.setText(presales.getString("pbs"));
+                        etprio_before.setText(presales.getString("prioritys"));
+                        etpj_before.setText(presales.getString("project_sizes"));
+                        ettimeasses_before.setText(presales.getString("assessment_dates"));
+                        ettimepro_before.setText(presales.getString("pd_dates"));
+                        ettimeproof_before.setText(presales.getString("pov_dates"));
+                        etassess_before.setVisibility(View.GONE);
+                        etpro_before.setVisibility(View.GONE);
+                        etproof_before.setVisibility(View.GONE);
+                        etpb_before.setVisibility(View.GONE);
+                        etprio_before.setVisibility(View.GONE);
+                        etpj_before.setVisibility(View.GONE);
+                        ettimeproof_before.setVisibility(View.GONE);
+                        ettimepro_before.setVisibility(View.GONE);
+                        ettimeasses_before.setVisibility(View.GONE);
+
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -376,7 +292,9 @@ public class DetailSalesFragment extends Fragment {
                     success = jObj.getString("success");
 
                     if (success.equals("1")) {
+                        Intent intent = new Intent(getActivity(), LeadRegister.class);
                         Toast.makeText(getActivity(), "Solution Design Updated Successfully :)", Toast.LENGTH_LONG).show();
+                        startActivity(intent);
 
                     } else {
                         Toast.makeText(getActivity(), "salah!", Toast.LENGTH_LONG).show();

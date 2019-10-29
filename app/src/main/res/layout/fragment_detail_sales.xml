@@ -1,361 +1,283 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
-    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     android:gravity="center"
-    tools:context=".DetailSalesFragment">
+    android:orientation="vertical">
+
+    <!-- TODO: Update blank fragment layout -->
 
     <ScrollView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/bg_detail">
-
-            <ImageView
-                android:layout_width="500dp"
-                android:layout_height="850dp"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentBottom="true"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="100dp"
-                android:layout_marginEnd="0dp"
-                android:layout_marginBottom="-13dp"
-                app:srcCompat="@drawable/rectangle_33" />
-
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="178dp"
-                android:layout_marginTop="70dp"
-                android:background="#333639" />
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            tools:ignore="MissingConstraints">
 
             <EditText
                 android:id="@+id/edit_lead_id_fragment"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-            <EditText
-                android:id="@+id/edit_nik_fragment"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
             <TextView
+                android:id="@+id/textview_assesment"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="23dp"
-                android:text="Detail - "
-                android:textColor="@android:color/white"
-                android:textSize="20dp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/edit_lead_fragment"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="80dp"
-                android:layout_marginTop="23dp"
-                android:textColor="@android:color/white"
-                android:textSize="20dp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="23dp"
-                android:layout_marginTop="78dp"
-                android:text="Status"
-                android:textColor="@android:color/black"
-                android:textSize="10dp" />
-
-            <com.baoyachi.stepview.HorizontalStepView
-                android:id="@+id/horizontalStepview"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="0dp"
-                android:layout_width="wrap_content"
-                android:layout_marginTop="100dp" />
-
-            <TextView
-                android:layout_marginLeft="170dp"
-                android:id="@+id/lead_detail"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="180dp"
-                android:text="lead"
-                android:textColor="@android:color/white"
-                android:textSize="13dp" />
-
-            <TextView
-                android:layout_marginLeft="170dp"
-                android:layout_marginTop="195dp"
-                android:id="@+id/edit_opp_name_fragment"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:maxLines="1"
-                android:text="opti"
-                android:textColor="@android:color/white"
-                android:textSize="12dp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="170dp"
-                android:layout_marginTop="210dp"
-                android:text="Current presales: "
-                android:textColor="@android:color/white"
-                android:textSize="12dp" />
-
-            <TextView
-                android:layout_marginLeft="265dp"
-                android:maxLines="1"
-                android:id="@+id/presales_detail_lead"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="coba"
-                android:layout_marginTop="210dp"
-                android:textColor="@android:color/white"
-                android:textSize="12dp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="100dp"
-                android:layout_marginTop="260dp"
-                android:text="Solution Design"
-                android:textColor="@android:color/black"
-                android:textSize="12dp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="220dp"
-                android:layout_marginTop="260dp"
-                android:text="Tender Process"
-                android:textColor="@android:color/black"
-                android:textSize="12dp" />
-
-            <ImageView
-                android:layout_width="203dp"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_marginLeft="100dp"
-                android:layout_marginTop="280dp"
-                android:layout_marginEnd="108dp"
-                app:srcCompat="@drawable/line" />
-
-
-            <ImageView
-                android:layout_width="102dp"
-                android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginStart="101dp"
-                android:layout_marginLeft="100dp"
-                android:layout_marginTop="279dp"
-                android:layout_marginEnd="208dp"
-                app:srcCompat="@drawable/rectangle_3" />
-
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginStart="120dp"
-                android:layout_marginLeft="160dp"
-                android:layout_marginTop="308dp"
-                android:layout_marginEnd="118dp"
-                android:text="Solution Design"
-                android:textColor="@android:color/black"
-                android:textSize="13dp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="30dp"
-                android:layout_marginTop="345dp"
                 android:text="Assesment"
+                android:layout_marginTop="295dp"
                 android:textColor="#60CEFF"
                 android:textSize="9dp" />
 
             <EditText
+                android:id="@+id/edit_assesment"
                 android:layout_width="350dp"
-                android:layout_height="50dp"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginStart="30dp"
-                android:layout_marginLeft="30dp"
-                android:layout_marginTop="360dp"
-                android:layout_marginEnd="31dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="310dp"
                 android:background="@drawable/border"
                 android:hint="Enter assesment"
-                android:inputType="text"
                 android:padding="10dp"
                 android:textColor="#A1A1A1"
-                android:id="@+id/edit_assesment"
+                android:inputType="text"
                 android:textSize="12dp" />
 
-            <TextView
+            <EditText
+                android:id="@+id/tv_assessment_before"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="30dp"
-                android:layout_marginTop="410dp"
-                android:text="Last updated on.........."
+                android:layout_marginTop="310dp" />
+
+            <TextView
+                android:id="@+id/textview_update_assesment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="350dp"
+                android:text="Last updated on: "
                 android:textColor="#A1A1A1"
                 android:textSize="9dp" />
 
-
             <TextView
+                android:id="@+id/tvtimeassessment"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="30dp"
-                android:layout_marginTop="428dp"
+                android:layout_marginLeft="73dp"
+                android:layout_marginTop="350dp"
+                android:textColor="#A1A1A1"
+                android:textSize="9dp" />
+
+            <EditText
+                android:id="@+id/ettimeasses_before"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="150dp"
+                android:layout_marginTop="350dp"
+                android:textColor="#A1A1A1"
+                android:textSize="9dp" />
+
+            <TextView
+                android:id="@+id/textview_proposed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:text="Proposed Design"
+                android:layout_marginTop="370dp"
                 android:textColor="#60CEFF"
                 android:textSize="9dp" />
 
             <EditText
+                android:id="@+id/edit_proposed"
                 android:layout_width="350dp"
-                android:layout_height="50dp"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginStart="30dp"
-                android:layout_marginLeft="30dp"
-                android:layout_marginTop="443dp"
-                android:layout_marginEnd="31dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="385dp"
                 android:background="@drawable/border"
                 android:hint="Enter proposed design"
-                android:inputType="text"
                 android:padding="10dp"
                 android:textColor="#A1A1A1"
-                android:id="@+id/edit_proposed"
+                android:inputType="text"
                 android:textSize="12dp" />
 
             <TextView
+                android:id="@+id/textview_update_proposed"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="30dp"
-                android:layout_marginTop="493dp"
-                android:text="Last updated on.........."
+                android:layout_marginTop="425dp"
+                android:text="Last updated on: "
                 android:textColor="#A1A1A1"
                 android:textSize="9dp" />
 
-
             <TextView
+                android:id="@+id/tvtimeproposed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="73dp"
+                android:layout_marginTop="425dp"
+                android:textColor="#A1A1A1"
+                android:textSize="9dp" />
+
+            <EditText
+                android:id="@+id/tv_propoosed_before"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="30dp"
-                android:layout_marginTop="510dp"
+                android:layout_marginTop="385dp" />
+
+            <EditText
+                android:id="@+id/ettimepropose_before"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="150dp"
+                android:layout_marginTop="425dp"
+                android:textColor="#A1A1A1"
+                android:textSize="9dp" />
+
+            <TextView
+                android:id="@+id/textview_proof"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:text="Proof of Value"
+                android:layout_marginTop="445dp"
                 android:textColor="#60CEFF"
                 android:textSize="9dp" />
 
             <EditText
-                android:layout_width="350dp"
-                android:layout_height="50dp"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginStart="30dp"
-                android:layout_marginLeft="30dp"
-                android:layout_marginTop="523dp"
-                android:layout_marginEnd="31dp"
-                android:background="@drawable/border"
-                android:hint="Enter proof of value"
-                android:inputType="text"
-                android:padding="10dp"
-                android:textColor="#A1A1A1"
                 android:id="@+id/edit_proof"
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="460dp"
+                android:hint="Enter proof of value"
+                android:padding="10dp"
+                android:background="@drawable/border"
+                android:textColor="#A1A1A1"
+                android:inputType="text"
                 android:textSize="12dp" />
 
-            <TextView
+            <EditText
+                android:id="@+id/tv_proof_before"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="30dp"
-                android:layout_marginTop="572dp"
-                android:text="Last updated on.........."
+                android:layout_marginTop="460dp" />
+
+            <TextView
+                android:id="@+id/textview_update_proof"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="500dp"
+                android:text="Last updated on: "
                 android:textColor="#A1A1A1"
                 android:textSize="9dp" />
 
-
             <TextView
+                android:id="@+id/tvtimeproof"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="30dp"
-                android:layout_marginTop="588dp"
+                android:layout_marginLeft="73dp"
+                android:layout_marginTop="500dp"
+                android:textColor="#A1A1A1"
+                android:textSize="9dp" />
+
+            <EditText
+                android:id="@+id/ettimeproof_before"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="150dp"
+                android:layout_marginTop="500dp"
+                android:textColor="#A1A1A1"
+                android:textSize="9dp" />
+
+            <TextView
+                android:id="@+id/textview_budget"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:text="Project Budget"
+                android:layout_marginTop="520dp"
                 android:textColor="#60CEFF"
                 android:textSize="9dp" />
 
             <EditText
+                android:id="@+id/edit_project_budget"
                 android:layout_width="350dp"
-                android:layout_height="50dp"
-                android:layout_marginLeft="70dp"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginStart="30dp"
-                android:layout_marginTop="602dp"
-                android:layout_marginEnd="31dp"
-                android:hint="Enter amount"
-                android:background="@drawable/back"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="535dp"
+                android:hint="Enter project budget"
+                android:padding="10dp"
+                android:background="@drawable/border"
                 android:drawableLeft="@drawable/rp"
+                android:paddingLeft="10dp"
                 android:inputType="numberDecimal"
                 android:textColor="#A1A1A1"
-                android:paddingLeft="8dp"
-                android:id="@+id/edit_project_budget"
                 android:textSize="12dp" />
 
-
-            <TextView
+            <EditText
+                android:id="@+id/tv_pb_before"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="30dp"
-                android:layout_marginTop="657dp"
+                android:layout_marginTop="535dp" />
+
+            <TextView
+                android:id="@+id/textview_priority"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:text="Priority"
+                android:layout_marginTop="580dp"
                 android:textColor="#60CEFF"
                 android:textSize="9dp" />
 
+
             <Spinner
-                android:id="@+id/spinner_priority"
                 android:layout_width="350dp"
                 android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginStart="30dp"
-                android:layout_marginLeft="30dp"
-                android:layout_marginTop="670dp"
-                android:layout_marginEnd="31dp"
-                android:entries="@array/priority"
+                android:id="@+id/spinner_priority"
                 android:background="@drawable/border"
+                android:entries="@array/priority"
                 android:inputType="text"
                 android:padding="10dp"
                 android:textColor="#A1A1A1"
+                android:layout_marginTop="595dp"
                 android:textSize="12dp" />
+
+            <EditText
+                android:id="@+id/tv_prio_before"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="595dp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="30dp"
-                android:layout_marginTop="715dp"
+                android:layout_marginTop="635dp"
+                android:text="Current Priority:"
+                android:textColor="#A1A1A1"
+                android:textSize="9dp" />
+
+            <TextView
+                android:id="@+id/tvpriority"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="70dp"
+                android:layout_marginTop="635dp"
+                android:textColor="#A1A1A1"
+                android:textSize="9dp" />
+
+            <TextView
+                android:id="@+id/textview_size"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:text="Project Size"
+                android:layout_marginTop="653dp"
                 android:textColor="#60CEFF"
                 android:textSize="9dp" />
 
             <Spinner
-                android:id="@+id/spinner_project_size"
                 android:layout_width="350dp"
                 android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginStart="30dp"
-                android:layout_marginLeft="30dp"
-                android:layout_marginTop="730dp"
-                android:layout_marginEnd="31dp"
+                android:id="@+id/spinner_project_size"
+                android:layout_marginTop="665dp"
                 android:entries="@array/project_size"
                 android:background="@drawable/border"
                 android:inputType="text"
@@ -363,52 +285,55 @@
                 android:textColor="#A1A1A1"
                 android:textSize="10dp" />
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="706dp"
+                android:text="Current Project Size:"
+                android:textColor="#A1A1A1"
+                android:textSize="9dp" />
+
+
+            <TextView
+                android:id="@+id/tvproject_size"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="88dp"
+                android:layout_marginTop="706dp"
+                android:textColor="#A1A1A1"
+                android:textSize="9dp" />
+
+            <EditText
+                android:id="@+id/tv_pj_before"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="665dp" />
+
 
             <Button
                 android:layout_width="67dp"
                 android:layout_height="25dp"
-                android:layout_marginLeft="30dp"
-                android:layout_marginTop="785dp"
-                android:background="@color/colorAccent"
+                android:layout_marginTop="740dp"
                 android:hint="Submit"
                 android:id="@+id/btn_submit_sd"
+                android:background="@color/colorAccent"
                 android:textColorHint="@android:color/white" />
-
 
             <Button
-                android:layout_width="127dp"
+                android:layout_width="130dp"
                 android:layout_height="25dp"
-                android:layout_alignParentEnd="true"
-                android:layout_marginLeft="253dp"
-                android:layout_marginTop="785dp"
-                android:layout_marginEnd="31dp"
+                android:layout_marginLeft="218dp"
+                android:layout_marginTop="740dp"
                 android:background="@color/colorPrimary"
-                android:hint="Tender Process"
                 android:id="@+id/btn_tp"
+                android:hint="Raise to Tender"
                 android:textColorHint="@android:color/white" />
 
 
-            <!--<ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_marginTop="790dp"
-                android:layout_marginEnd="27dp"
-                app:srcCompat="@drawable/bg_log" />-->
-
-
-            <!--<TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="165dp"
-                android:layout_marginTop="800dp"
-                android:text="Change Log"
-                android:textColor="@android:color/black"
-                android:textSize="13dp"
-                android:textStyle="bold" />-->
 
         </RelativeLayout>
 
     </ScrollView>
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

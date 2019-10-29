@@ -15,7 +15,8 @@
         <activity android:name=".DashboardActivity"></activity>
         <activity android:name=".AddLeadActivity" />
         <activity android:name=".DetailActivity" />
-        <activity android:name=".LeadRegister" />
+        <activity android:name=".LeadRegister">
+        </activity>
         <activity android:name=".LoginMain">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

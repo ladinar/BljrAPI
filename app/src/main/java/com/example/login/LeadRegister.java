@@ -8,6 +8,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -73,8 +74,8 @@ public class LeadRegister extends AppCompatActivity implements LeadRegisterAdapt
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lead_register);
-
-        mopp = findViewById(R.id.opty_name);
+        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
+        mopp = findViewById(R.id.mopty);
         mstatus = findViewById(R.id.mStatus);
         searchText = findViewById(R.id.search_view);
         mAmount = findViewById(R.id.maamount);
@@ -258,7 +259,7 @@ public class LeadRegister extends AppCompatActivity implements LeadRegisterAdapt
 
     @Override
     public void doClick(int pos) {
-        Intent intent = new Intent(this, AddLeadActivity.class);
+        Intent intent = new Intent(this, DetailActivity.class);
         intent.putExtra(LEADS1, leadsAdapter.getItem(pos));
         intent.putExtra("detail_lead", "coba");
         startActivity(intent);
