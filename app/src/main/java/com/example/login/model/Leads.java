@@ -18,6 +18,16 @@ public class Leads implements Serializable {
     private String priority;
     private String project_size;
 
+    private Integer status_value;
+
+    public Integer getStatus_value() {
+        return status_value;
+    }
+
+    public void setStatus_value(Integer status_value) {
+        this.status_value = status_value;
+    }
+
     public String getResult() {
         return results;
     }

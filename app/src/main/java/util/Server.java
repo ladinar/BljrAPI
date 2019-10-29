@@ -8,4 +8,5 @@ public class Server {
     public static final String URL_assign = "http://192.168.2.142/api/assign";
     public static final String URL_detail_lead = "http://192.168.2.142/api/tampil_presales";
     public static final String URL_update_sd = "http://192.168.2.142/api/update_sd";
+    public static final String URL_pie_chart = "http://192.168.2.142/api/dashboard";
 }

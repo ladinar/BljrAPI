@@ -119,36 +119,119 @@ public class DetailSalesFragment extends Fragment {
             sources.add(new StepBean("SD", -1));
             sources.add(new StepBean("TP", -1));
             sources.add(new StepBean("Win/Lose", -1));
+
+            horizontalsStepView.setStepViewTexts(sources)
+                    .setTextSize(10)
+                    .setStepsViewIndicatorCompletedLineColor(Color.parseColor("#FFFF00"))
+                    .setStepViewUnComplectedTextColor(ContextCompat.getColor(getActivity(), R.color.uncompleted_text_color))
+                    .setStepsViewIndicatorUnCompletedLineColor(Color.parseColor("#FFFFFF"))
+                    .setStepsViewIndicatorCompleteIcon(ContextCompat.getDrawable(getActivity(), R.drawable.complted))
+                    .setStepsViewIndicatorAttentionIcon(ContextCompat.getDrawable(getActivity(), R.drawable.attention))
+                    .setStepsViewIndicatorDefaultIcon(ContextCompat.getDrawable(getActivity(), R.drawable.default_icon));
         } else if (lead.getResult().equals("OPEN")) {
             sources.add(new StepBean("Initial", 1));
             sources.add(new StepBean("Open", 0));
-            sources.add(new StepBean("SD", -1));
-            sources.add(new StepBean("TP", -1));
-            sources.add(new StepBean("Win/Lose", -1));
+            sources.add(new StepBean("SD", 1));
+//            Log.i(String.valueOf(sources.add(new StepBean("Initial", 1))), "onCreateView: ");
+            if (sources.add(new StepBean("Initial", 1))) {
+                horizontalsStepView.setStepViewTexts(sources)
+                        .setStepsViewIndicatorCompleteIcon(ContextCompat.getDrawable(getActivity(), R.drawable.bg_amount));
+            } else if (sources.add(new StepBean("Open", 1))) {
+                horizontalsStepView.setStepViewTexts(sources)
+                        .setStepsViewIndicatorCompleteIcon(ContextCompat.getDrawable(getActivity(), R.drawable.complted));
+            } else if (sources.add(new StepBean("SD", 0))) {
+                horizontalsStepView.setStepViewTexts(sources);
+//                        .setStepsViewIndicatorAttentionIcon(ContextCompat.getDrawable(getActivity(), R.drawable.default_icon));
+            }
+
+//            if (sources.add(new StepBean("Initial", 1))){
+//
+//            }
+//            sources.add(new StepBean("Initial", 1));
+//            sources.add(new StepBean("Open", 0));
+//            sources.add(new StepBean("SD", -1));
+//            sources.add(new StepBean("TP", -1));
+//            sources.add(new StepBean("Win/Lose", -1));
+//
+//            horizontalsStepView.setStepViewTexts(sources)
+//                    .setTextSize(10)
+//                    .setStepsViewIndicatorCompletedLineColor(Color.parseColor("#FFFF00"))
+//                    .setStepViewUnComplectedTextColor(ContextCompat.getColor(getActivity(), R.color.uncompleted_text_color))
+//                    .setStepsViewIndicatorUnCompletedLineColor(Color.parseColor("#FFFFFF"))
+//                    .setStepsViewIndicatorCompleteIcon(ContextCompat.getDrawable(getActivity(), R.drawable.complted))
+//                    .setStepsViewIndicatorAttentionIcon(ContextCompat.getDrawable(getActivity(), R.drawable.attention))
+//                    .setStepsViewIndicatorDefaultIcon(ContextCompat.getDrawable(getActivity(), R.drawable.default_icon));
         } else if (lead.getResult().equals("SOLUTION DESIGN")) {
-            sources.add(new StepBean("Initial", 1));
-            sources.add(new StepBean("Open", 1));
-            sources.add(new StepBean("SD", 0));
-            sources.add(new StepBean("TP", -1));
-            sources.add(new StepBean("Win/Lose", -1));
+//            sources.add(new StepBean("Initial", 1));
+//            sources.add(new StepBean("Open", 1));
+//            sources.add(new StepBean("SD", 0));
+//            sources.add(new StepBean("TP", -1));
+//            sources.add(new StepBean("Win/Lose", -1));
+
+            if (sources.add(new StepBean("Initial", 1))) {
+                sources.add(new StepBean("Initial", 1));
+                horizontalsStepView.setStepViewTexts(sources)
+                        .setTextSize(10)
+                        .setStepsViewIndicatorCompletedLineColor(Color.parseColor("#FFFF00"))
+                        .setStepViewUnComplectedTextColor(ContextCompat.getColor(getActivity(), R.color.uncompleted_text_color))
+                        .setStepsViewIndicatorUnCompletedLineColor(Color.parseColor("#FFFFFF"))
+                        .setStepsViewIndicatorCompleteIcon(ContextCompat.getDrawable(getActivity(), R.drawable.complted))
+                        .setStepsViewIndicatorAttentionIcon(ContextCompat.getDrawable(getActivity(), R.drawable.attention))
+                        .setStepsViewIndicatorDefaultIcon(ContextCompat.getDrawable(getActivity(), R.drawable.default_icon));
+            }
+//            horizontalsStepView.setStepViewTexts(sources)
+//                    .setTextSize(10)
+//                    .setStepsViewIndicatorCompletedLineColor(Color.parseColor("#FFFF00"))
+//                    .setStepViewUnComplectedTextColor(ContextCompat.getColor(getActivity(), R.color.uncompleted_text_color))
+//                    .setStepsViewIndicatorUnCompletedLineColor(Color.parseColor("#FFFFFF"))
+//                    .setStepsViewIndicatorCompleteIcon(ContextCompat.getDrawable(getActivity(), R.drawable.complted))
+//                    .setStepsViewIndicatorAttentionIcon(ContextCompat.getDrawable(getActivity(), R.drawable.attention))
+//                    .setStepsViewIndicatorDefaultIcon(ContextCompat.getDrawable(getActivity(), R.drawable.default_icon));
         } else if (lead.getResult().equals("TENDER PROCESS")) {
             sources.add(new StepBean("Initial", 1));
             sources.add(new StepBean("Open", 1));
             sources.add(new StepBean("SD", 1));
             sources.add(new StepBean("TP", 0));
             sources.add(new StepBean("Win/Lose", -1));
+
+            horizontalsStepView.setStepViewTexts(sources)
+                    .setTextSize(10)
+                    .setStepsViewIndicatorCompletedLineColor(Color.parseColor("#FFFF00"))
+                    .setStepViewUnComplectedTextColor(ContextCompat.getColor(getActivity(), R.color.uncompleted_text_color))
+                    .setStepsViewIndicatorUnCompletedLineColor(Color.parseColor("#FFFFFF"))
+                    .setStepsViewIndicatorCompleteIcon(ContextCompat.getDrawable(getActivity(), R.drawable.complted))
+                    .setStepsViewIndicatorAttentionIcon(ContextCompat.getDrawable(getActivity(), R.drawable.attention))
+                    .setStepsViewIndicatorDefaultIcon(ContextCompat.getDrawable(getActivity(), R.drawable.default_icon));
         } else if (lead.getResult().equals("WIN")) {
             sources.add(new StepBean("Initial", 1));
             sources.add(new StepBean("Open", 1));
             sources.add(new StepBean("SD", 1));
             sources.add(new StepBean("TP", 1));
             sources.add(new StepBean("Win", 1));
+
+            horizontalsStepView.setStepViewTexts(sources)
+                    .setTextSize(10)
+                    .setStepsViewIndicatorCompletedLineColor(Color.parseColor("#FFFF00"))
+                    .setStepViewUnComplectedTextColor(ContextCompat.getColor(getActivity(), R.color.uncompleted_text_color))
+                    .setStepsViewIndicatorUnCompletedLineColor(Color.parseColor("#FFFFFF"))
+                    .setStepsViewIndicatorCompleteIcon(ContextCompat.getDrawable(getActivity(), R.drawable.complted))
+                    .setStepsViewIndicatorAttentionIcon(ContextCompat.getDrawable(getActivity(), R.drawable.attention))
+                    .setStepsViewIndicatorDefaultIcon(ContextCompat.getDrawable(getActivity(), R.drawable.default_icon));
         } else if (lead.getResult().equals("LOSE")) {
             sources.add(new StepBean("Initial", 1));
             sources.add(new StepBean("Open", 1));
             sources.add(new StepBean("SD", 1));
             sources.add(new StepBean("TP", 1));
             sources.add(new StepBean("Lose", 1));
+
+            horizontalsStepView.setStepViewTexts(sources)
+                    .setTextSize(10)
+                    .setStepsViewIndicatorCompletedLineColor(Color.parseColor("#FFFF00"))
+                    .setStepViewUnComplectedTextColor(ContextCompat.getColor(getActivity(), R.color.uncompleted_text_color))
+                    .setStepsViewIndicatorUnCompletedLineColor(Color.parseColor("#FFFFFF"))
+                    .setStepsViewIndicatorCompleteIcon(ContextCompat.getDrawable(getActivity(), R.drawable.complted))
+                    .setStepsViewIndicatorAttentionIcon(ContextCompat.getDrawable(getActivity(), R.drawable.attention))
+                    .setStepsViewIndicatorDefaultIcon(ContextCompat.getDrawable(getActivity(), R.drawable.default_icon));
         }
 
 
@@ -158,15 +241,15 @@ public class DetailSalesFragment extends Fragment {
 //        sources.add(new StepBean("TP",0));
 //        sources.add(new StepBean("Win/Lose",-1));
 
-        horizontalsStepView.setStepViewTexts(sources)
-                .setTextSize(10)
-                .setStepsViewIndicatorCompletedLineColor(Color.parseColor("#FFFF00"))
-                .setStepViewComplectedTextColor(Color.parseColor("#FFFF00"))
-                .setStepViewUnComplectedTextColor(ContextCompat.getColor(getActivity(), R.color.uncompleted_text_color))
-                .setStepsViewIndicatorUnCompletedLineColor(Color.parseColor("#FFFFFF"))
-                .setStepsViewIndicatorCompleteIcon(ContextCompat.getDrawable(getActivity(), R.drawable.complted))
-                .setStepsViewIndicatorAttentionIcon(ContextCompat.getDrawable(getActivity(), R.drawable.attention))
-                .setStepsViewIndicatorDefaultIcon(ContextCompat.getDrawable(getActivity(), R.drawable.default_icon));
+//        horizontalsStepView.setStepViewTexts(sources)
+//                .setTextSize(10)
+//                .setStepsViewIndicatorCompletedLineColor(Color.parseColor("#FFFF00"))
+//                .setStepViewComplectedTextColor(Color.parseColor("#FFFF00"))
+//                .setStepViewUnComplectedTextColor(ContextCompat.getColor(getActivity(), R.color.uncompleted_text_color))
+//                .setStepsViewIndicatorUnCompletedLineColor(Color.parseColor("#FFFFFF"))
+//                .setStepsViewIndicatorCompleteIcon(ContextCompat.getDrawable(getActivity(), R.drawable.complted))
+//                .setStepsViewIndicatorAttentionIcon(ContextCompat.getDrawable(getActivity(), R.drawable.attention))
+//                .setStepsViewIndicatorDefaultIcon(ContextCompat.getDrawable(getActivity(), R.drawable.default_icon));
 
         return view;
     }
