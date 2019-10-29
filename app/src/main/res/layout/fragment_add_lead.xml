@@ -11,7 +11,7 @@
 
     <LinearLayout
         android:layout_gravity="center_vertical"
-        android:background="@drawable/bg_lead"
+        android:background="@drawable/bg_lead_dash"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"

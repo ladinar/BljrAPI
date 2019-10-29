@@ -62,7 +62,7 @@ public class LeadRegisterAdapter extends RecyclerView.Adapter<LeadRegisterAdapte
         if (lead.getResult().equals("INITIAL")) {
             holder.ivAssign.setVisibility(View.VISIBLE);
         } else {
-
+            holder.ivAssign.setVisibility(View.GONE);
         }
 
     }

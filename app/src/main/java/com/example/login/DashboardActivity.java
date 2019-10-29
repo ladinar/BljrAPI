@@ -3,6 +3,7 @@ package com.example.login;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
@@ -61,6 +62,8 @@ public class DashboardActivity extends AppCompatActivity {
     Integer[] bulan = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12};
     Integer[] warna = {Color.parseColor("#fcba03"), Color.rgb(242, 86, 43), Color.rgb(4, 221, 163), Color.rgb(247, 225, 39), Color.rgb(36, 109, 24), Color.rgb(229, 20, 13)};
     private LineChart lineChart;
+
+    TextView TvLead = findViewById(R.id.lead_register);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -160,6 +163,7 @@ public class DashboardActivity extends AppCompatActivity {
                     JSONArray coba = jObj.getJSONArray("total");
                     JSONArray amount_lead = jObj.getJSONArray("total_amount");
                     JSONArray total_lead = jObj.getJSONArray("total_leads");
+                    JSONArray total_lead_all = jObj.getJSONArray("totals");
                     Log.i(String.valueOf(coba), "onResponse: ");
 
                     PieChart pieChart = findViewById(R.id.pieChart);
@@ -316,6 +320,19 @@ public class DashboardActivity extends AppCompatActivity {
                         barChart.getDescription().setEnabled(false);
                         barChart.setData(barData);
                         barChart.animateXY(5000, 5000);
+
+                        //gae papan atas
+//                        for (int i = 0; i < total_lead_all.length(); i++){
+//                            JSONObject totals = total_lead_all.getJSONObject(i);
+//                            String result = totals.getString("result");
+////                            String count_lead = totals.getString("leads_id");
+////                            String result = totals.getString("result");
+//                        }
+                        JSONObject totals = jObj.getJSONObject("totals");
+                        String count_lead = totals.getString("leads_id");
+                        String result = totals.getString("result");
+
+                        TvLead.setText("woy");
 
 
                     }

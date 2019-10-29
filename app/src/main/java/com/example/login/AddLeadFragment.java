@@ -159,7 +159,7 @@ public class AddLeadFragment extends Fragment {
     private void fillData() {
         title.setText("Edit " + lead.getLead_id());
         opp_name.setText(lead.getOpp_name());
-        amount.setText(Integer.toString(lead.getAmount()));
+        amount.setText(lead.getAmount());
         closingdate.setText(lead.getClosing_date());
         lead_edit.setText(lead.getLead_id());
 

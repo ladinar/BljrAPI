@@ -9,7 +9,7 @@ public class Leads implements Serializable {
     private String id_customer;
     private String closing_dates;
     private String results;
-    private Integer amounts;
+    private String amounts;
     private String info;
 
     private Integer status_value;
@@ -70,11 +70,11 @@ public class Leads implements Serializable {
         this.id_customer = id_customer;
     }
 
-    public Integer getAmount() {
+    public String getAmount() {
         return amounts;
     }
 
-    public void setAmount(Integer amount) {
+    public void setAmount(String amount) {
         this.amounts = amount;
     }
 
