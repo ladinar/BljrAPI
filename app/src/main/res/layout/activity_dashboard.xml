@@ -93,6 +93,7 @@
                             app:srcCompat="@drawable/bg_open_dashboard" />
 
                         <TextView
+                            android:id="@+id/open"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="20dp"
@@ -139,6 +140,7 @@
                             app:srcCompat="@drawable/win" />
 
                         <TextView
+                            android:id="@+id/win"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="20dp"
@@ -184,6 +186,7 @@
                             app:srcCompat="@drawable/lose" />
 
                         <TextView
+                            android:id="@+id/lose"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="20dp"

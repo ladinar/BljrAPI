@@ -33,7 +33,6 @@ import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.formatter.IAxisValueFormatter;
-import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 import com.github.mikephil.charting.formatter.PercentFormatter;
 
 import org.json.JSONArray;
@@ -62,87 +61,24 @@ public class DashboardActivity extends AppCompatActivity {
     Integer[] bulan = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12};
     Integer[] warna = {Color.parseColor("#fcba03"), Color.rgb(242, 86, 43), Color.rgb(4, 221, 163), Color.rgb(247, 225, 39), Color.rgb(36, 109, 24), Color.rgb(229, 20, 13)};
     private LineChart lineChart;
+    TextView tvLeadRegister, tvOpen, tvWin, tvLose;
 
-    TextView TvLead = findViewById(R.id.lead_register);
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
 
+        tvLeadRegister = findViewById(R.id.lead_register);
+        tvOpen = findViewById(R.id.open);
+        tvWin = findViewById(R.id.win);
+        tvLose = findViewById(R.id.lose);
+
         loadData();
-        barChart();
 
     }
 
-    private void barChart() {
-        barChart = findViewById(R.id.barChart);
-        BarDataSet barDataSet = new BarDataSet(getData(), "Inducesmile");
-        barDataSet.setBarBorderWidth(0.9f);
-        barDataSet.setColors(Color.BLUE);
-        BarData barData = new BarData(barDataSet);
-        XAxis xAxis = barChart.getXAxis();
-        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
-        final String[] months = new String[]{"Jan", "Feb", "Mar", "Apr", "May", "Jun"};
-        IndexAxisValueFormatter formatter = new IndexAxisValueFormatter(months);
-        xAxis.setGranularity(1f);
-        xAxis.setValueFormatter(formatter);
-        barChart.setData(barData);
-        barChart.setFitBars(true);
-        barChart.animateXY(5000, 5000);
-        barChart.invalidate();
-    }
-
-    private ArrayList getData() {
-        ArrayList<BarEntry> entries = new ArrayList<>();
-        entries.add(new BarEntry(0f, 30f));
-        entries.add(new BarEntry(1f, 80f));
-        entries.add(new BarEntry(2f, 60f));
-        entries.add(new BarEntry(3f, 50f));
-        entries.add(new BarEntry(4f, 70f));
-        entries.add(new BarEntry(5f, 60f));
-        return entries;
-    }
-
-//    private void drawLineChart() {
-//        lineChart = (LineChart)findViewById(R.id.lineChart);
-//        LineDataSet lineDataSet = new LineDataSet(getData(), "Inducesmile");
-//        lineDataSet.setColor(ContextCompat.getColor(this, R.color.colorPrimary));
-//        lineDataSet.setValueTextColor(ContextCompat.getColor(this, R.color.colorPrimaryDark));
-//        XAxis xAxis = lineChart.getXAxis();
-//        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
-//        final String[] months = new String[]{"Jan", "Feb", "Mar", "Apr"};
-//        ValueFormatter formatter = new ValueFormatter() {
-//            @Override
-//            public String getAxisLabel(float value, AxisBase axis) {
-//                return months[(int) value];
-//            }
-//        };
-//        xAxis.setGranularity(1f);
-//        xAxis.setValueFormatter(formatter);
-//
-//        YAxis yAxisRight = lineChart.getAxisRight();
-//        yAxisRight.setEnabled(false);
-//
-//        YAxis yAxisLeft = lineChart.getAxisLeft();
-//        yAxisLeft.setGranularity(1f);
-//
-//        LineData data = new LineData(lineDataSet);
-//        lineChart.setData(data);
-//        lineChart.animateX(2500);
-//        lineChart.invalidate();
-//
-//
-//
-//    }
-//    private ArrayList getData(){
-//        ArrayList<Entry> entries = new ArrayList<>();
-//        entries.add(new Entry(0f, 119000f));
-//        entries.add(new Entry(1f, 20000f));
-//        entries.add(new Entry(2f, 15000f));
-//        entries.add(new Entry(3f, 125000f));
-//        return entries;
-//    }
 
     private void loadData() {
         final JSONObject jobj = new JSONObject();
@@ -164,6 +100,7 @@ public class DashboardActivity extends AppCompatActivity {
                     JSONArray amount_lead = jObj.getJSONArray("total_amount");
                     JSONArray total_lead = jObj.getJSONArray("total_leads");
                     JSONArray total_lead_all = jObj.getJSONArray("totals");
+                    JSONArray result_lead_total = jObj.getJSONArray("results_total");
                     Log.i(String.valueOf(coba), "onResponse: ");
 
                     PieChart pieChart = findViewById(R.id.pieChart);
@@ -321,18 +258,19 @@ public class DashboardActivity extends AppCompatActivity {
                         barChart.setData(barData);
                         barChart.animateXY(5000, 5000);
 
-                        //gae papan atas
-//                        for (int i = 0; i < total_lead_all.length(); i++){
-//                            JSONObject totals = total_lead_all.getJSONObject(i);
-//                            String result = totals.getString("result");
-////                            String count_lead = totals.getString("leads_id");
-////                            String result = totals.getString("result");
-//                        }
-                        JSONObject totals = jObj.getJSONObject("totals");
-                        String count_lead = totals.getString("leads_id");
-                        String result = totals.getString("result");
+                        Log.i(String.valueOf(total_lead_all.length()), "total lead: ");
 
-                        TvLead.setText("woy");
+                        JSONObject lead_total = result_lead_total.getJSONObject(0);
+                        Integer initial = lead_total.getInt("INITIAL");
+                        Integer open = lead_total.getInt("OPEN");
+                        Integer sd = lead_total.getInt("SD");
+                        Integer tp = lead_total.getInt("TP");
+                        Integer win = lead_total.getInt("WIN");
+                        Integer lose = lead_total.getInt("LOSE");
+                        tvLeadRegister.setText(String.valueOf(initial));
+                        tvOpen.setText(String.valueOf(open + sd + tp));
+                        tvWin.setText(String.valueOf(win));
+                        tvLose.setText(String.valueOf(lose));
 
 
                     }
